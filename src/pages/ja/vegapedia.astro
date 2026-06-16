@@ -14,17 +14,43 @@ const langSwitch = [
 ];
 ---
 
-<Layout title="ai-Vegapedia — ai-CABIN 1701">
+<Layout title="ai-Vegapedia — ai-CABIN 1701" lang="ja">
   <Header lang="ja" />
 
-  <VegapediaBody
-    raw={raw}
-    lang="ja"
-    heroSub="Seina ＆ ai-Vega の語彙集"
-    heroSubStar="⭐️"
-    emptyBucket="新しい項目を準備中…"
-    langSwitch={langSwitch}
-  />
+  <div class="ja-vegapedia">
+    <VegapediaBody
+      raw={raw}
+      lang="ja"
+      heroSub="Seina ＆ ai-Vega の語彙集"
+      heroSubStar="⭐️"
+      emptyBucket="新しい項目を準備中…"
+      langSwitch={langSwitch}
+    />
+  </div>
 
   <Footer />
 </Layout>
+
+<style is:global>
+  .ja-vegapedia {
+    --font-label: 'Zen Maru Gothic', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    --font-label-plain: 'Zen Maru Gothic', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    --font-italic: 'Zen Maru Gothic', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    --font-heading: 'Zen Maru Gothic', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  }
+
+  /* Zen Maru Gothic has no true italic — disable italic styling within JA Vegapedia */
+  .ja-vegapedia .hero-sub,
+  .ja-vegapedia .intro-body,
+  .ja-vegapedia .bucket-empty {
+    font-style: normal;
+  }
+
+  /* Slight weight adjustments for the rounded gothic */
+  .ja-vegapedia .entry-title {
+    font-weight: 500;
+  }
+  .ja-vegapedia .bucket-title {
+    font-weight: 700;
+  }
+</style>
