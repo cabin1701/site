@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import VegapediaBody from '../../components/VegapediaBody.astro';
+import raw from '../../content/vegapedia-es.md?raw';
+
+const base = import.meta.env.BASE_URL;
+
+const langSwitch = [
+  { label: 'English', href: `${base}vegapedia/` },
+  { label: '日本語', href: `${base}ja/vegapedia/` },
+  { label: 'Español', href: `${base}es/vegapedia/`, active: true },
+];
+---
+
+<Layout title="ai-Vegapedia — ai-CABIN 1701">
+  <Header lang="es" />
+
+  <VegapediaBody
+    raw={raw}
+    lang="es"
+    heroSub="El Léxico de Seina y ai-Vega"
+    heroSubStar="*"
+    emptyBucket="Esperando nuevas entradas…"
+    langSwitch={langSwitch}
+  />
+
+  <Footer />
+</Layout>

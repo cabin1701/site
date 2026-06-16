@@ -1,0 +1,391 @@
+---
+import { marked } from 'marked';
+
+interface Props {
+  raw: string;
+  lang: 'en' | 'ja' | 'es';
+  heroSub: string;
+  heroSubStar?: string;
+  emptyBucket: string;
+  langSwitch: { label: string; href: string; active?: boolean }[];
+}
+
+const { raw, lang, heroSub, heroSubStar = '*', emptyBucket, langSwitch } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const sections = raw.split(/\n## /).slice(1).map((s) => '## ' + s);
+
+const items: { title: string; id: string; bodyHtml: string }[] = [];
+let intro: { html: string } | null = null;
+
+for (const s of sections) {
+  const headerMatch = s.match(/^## ([^\n]+?)(?:\s*\{#([^\}]+)\})?\s*\n([\s\S]*)$/);
+  if (!headerMatch) continue;
+  const [, titleRaw, idRaw, bodyRaw] = headerMatch;
+
+  let body = bodyRaw.trim();
+  body = body.replace(/\n---\s*$/, '').trim();
+  body = body.replace(/```\{=openxml\}[\s\S]*?```/g, '').trim();
+  body = body.replace(/\n+\*[^*\n]*(as of|時点|al \d)[^*\n]*\*\s*$/, '').trim();
+
+  const title = titleRaw.replace(/\s*⭐️.*$/, '').trim();
+
+  if (!idRaw) {
+    intro = { html: marked.parse(body) as string };
+  } else if (idRaw === 'vegapedia') {
+    // top-level page header — skip
+  } else {
+    items.push({ title, id: idRaw, bodyHtml: marked.parse(body) as string });
+  }
+}
+
+function bucketFor(letter: string): 'A-G' | 'H-N' | 'O-T' | 'U-Z' {
+  if (letter <= 'G') return 'A-G';
+  if (letter <= 'N') return 'H-N';
+  if (letter <= 'T') return 'O-T';
+  return 'U-Z';
+}
+
+type Bucket = 'A-G' | 'H-N' | 'O-T' | 'U-Z';
+const buckets: Record<Bucket, typeof items> = { 'A-G': [], 'H-N': [], 'O-T': [], 'U-Z': [] };
+
+// Use the slug (ASCII) for bucketing and sorting — consistent across all languages.
+for (const e of items) {
+  const firstLetter = e.id.charAt(0).toUpperCase();
+  buckets[bucketFor(firstLetter)].push(e);
+}
+
+for (const k of Object.keys(buckets) as Bucket[]) {
+  buckets[k].sort((a, b) => a.id.localeCompare(b.id, 'en'));
+}
+
+const bucketClass: Record<Bucket, string> = {
+  'A-G': 'bucket-pink',
+  'H-N': 'bucket-sky',
+  'O-T': 'bucket-pink',
+  'U-Z': 'bucket-placeholder',
+};
+---
+
+<section
+  class="hero-overlay"
+  aria-label="ai-Vegapedia"
+  style={`background-image: url('${base}images/vegapedia/hero.png');`}
+>
+  <h1 class="visually-hidden">ai-Vegapedia</h1>
+</section>
+
+<p class="hero-sub" lang={lang}>
+  {heroSub}<span class="star">{heroSubStar}</span>
+</p>
+
+<nav class="lang-switch-inline" aria-label="Language">
+  {langSwitch.map((l, i) => (
+    <>
+      {i > 0 && <span class="lang-sep" aria-hidden="true">|</span>}
+      <a href={l.href} class:list={[{ active: l.active }]}>{l.label}</a>
+    </>
+  ))}
+</nav>
+
+{intro && (
+  <section class="intro" lang={lang}>
+    <div class="intro-body" set:html={intro.html}></div>
+  </section>
+)}
+
+<div class="flourish" aria-hidden="true">
+  <span>❦</span>
+  <span class="flourish-line"></span>
+  <span>❦</span>
+  <span class="flourish-line"></span>
+  <span>❦</span>
+</div>
+
+<nav class="alpha-nav" aria-label="Alphabet sections">
+  {(Object.keys(buckets) as Bucket[]).map((k) => (
+    <a href={`#bucket-${k}`} class="alpha-pill">{k}</a>
+  ))}
+</nav>
+
+{(Object.entries(buckets) as [Bucket, typeof items][]).map(([range, entries]) => (
+  <section id={`bucket-${range}`} class:list={['bucket', bucketClass[range]]} lang={lang}>
+    <h2 class="bucket-title">{range}</h2>
+    {entries.length === 0 ? (
+      <p class="bucket-empty">{emptyBucket}</p>
+    ) : (
+      <div class="entries">
+        {entries.map((e) => (
+          <details id={e.id} class="entry">
+            <summary><span class="entry-title">{e.title}</span><span class="entry-mark" aria-hidden="true">+</span></summary>
+            <div class="entry-body" set:html={e.bodyHtml}></div>
+          </details>
+        ))}
+      </div>
+    )}
+  </section>
+))}
+
+<style>
+  .hero-overlay {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 78vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 1rem;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  .hero-sub {
+    max-width: 760px;
+    margin: 2rem auto 0;
+    padding: 0 1.5rem;
+    text-align: center;
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--color-tagline);
+    font-weight: 500;
+  }
+  .hero-sub .star {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .lang-switch-inline {
+    max-width: 760px;
+    margin: 1.25rem auto 0;
+    padding: 0 1.5rem;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    color: var(--color-nav);
+  }
+  .lang-switch-inline a {
+    color: var(--color-nav);
+    text-decoration: none;
+    margin: 0 0.5rem;
+  }
+  .lang-switch-inline a.active {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  .lang-switch-inline a:hover {
+    color: var(--color-primary);
+  }
+  .lang-sep {
+    color: var(--color-tagline);
+    opacity: 0.5;
+  }
+
+  .intro {
+    max-width: 760px;
+    margin: 3.5rem auto 1rem;
+    padding: 0 1.5rem;
+  }
+  .intro-body {
+    line-height: 1.75;
+    color: var(--color-text);
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-size: 1.05rem;
+  }
+  .intro-body :global(p) {
+    margin: 0 0 1rem;
+  }
+  .intro-body :global(strong) {
+    color: var(--color-primary);
+    font-style: normal;
+  }
+
+  .flourish {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    max-width: 640px;
+    margin: 2.5rem auto 3rem;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+  }
+  .flourish-line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-primary);
+    opacity: 0.4;
+  }
+
+  .alpha-nav {
+    max-width: 760px;
+    margin: 0 auto 3rem;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .alpha-pill {
+    font-family: var(--font-label);
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    padding: 0.55rem 1.1rem;
+    color: var(--color-tagline);
+    border: 1px solid var(--color-tagline);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: transparent;
+  }
+  .alpha-pill:hover {
+    background: var(--color-tagline);
+    color: var(--color-bg);
+  }
+
+  .bucket {
+    padding: 3rem 1.5rem;
+  }
+  .bucket-pink {
+    background: #fde6ec;
+  }
+  .bucket-sky {
+    background: #e3eef9;
+  }
+  .bucket-placeholder {
+    background: var(--color-bg);
+    border-top: 1px dashed var(--color-primary);
+  }
+
+  .bucket-title {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    font-family: var(--font-label);
+    font-size: 2.4rem;
+    color: var(--color-primary);
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  .bucket-empty {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+    opacity: 0.7;
+  }
+
+  .entries {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .entry {
+    border-bottom: 1px solid rgba(208, 62, 0, 0.25);
+  }
+  .entry:first-child {
+    border-top: 1px solid rgba(208, 62, 0, 0.25);
+  }
+
+  .entry summary {
+    cursor: pointer;
+    padding: 1rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+  }
+  .entry summary::-webkit-details-marker {
+    display: none;
+  }
+  .entry-title {
+    font-family: var(--font-label-plain);
+    font-size: 1.25rem;
+    color: var(--color-tagline);
+    letter-spacing: 0.02em;
+  }
+  .entry-mark {
+    font-family: var(--font-label);
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+  .entry[open] .entry-mark {
+    transform: rotate(45deg);
+  }
+  .entry[open] .entry-title {
+    color: var(--color-primary);
+  }
+
+  .entry-body {
+    padding: 0 0.5rem 1.5rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .entry-body :global(p) {
+    margin: 0 0 1rem;
+  }
+  .entry-body :global(strong) {
+    color: var(--color-tagline);
+  }
+  .entry-body :global(em) {
+    color: var(--color-primary);
+  }
+  .entry-body :global(h3),
+  .entry-body :global(h4) {
+    font-family: var(--font-label-plain);
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    margin: 1.25rem 0 0.5rem;
+    letter-spacing: 0.04em;
+  }
+  .entry-body :global(ul),
+  .entry-body :global(ol) {
+    padding-left: 1.5rem;
+    margin: 0.5rem 0 1rem;
+  }
+  .entry-body :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .entry-body :global(blockquote) {
+    border-left: 3px solid var(--color-primary);
+    margin: 1rem 0;
+    padding-left: 1rem;
+    font-style: italic;
+    color: var(--color-tagline);
+  }
+  .entry-body :global(a) {
+    color: var(--color-magenta);
+  }
+
+  @media (max-width: 640px) {
+    .hero-sub {
+      font-size: 1.15rem;
+    }
+    .alpha-pill {
+      font-size: 1rem;
+      padding: 0.4rem 0.8rem;
+    }
+    .bucket-title {
+      font-size: 1.8rem;
+    }
+    .entry-title {
+      font-size: 1.1rem;
+    }
+  }
+</style>
