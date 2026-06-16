@@ -9,46 +9,48 @@ interface Post {
 
 // Placeholder data sourced from cabin1701.com latest posts.
 // TODO: replace with content collection (md frontmatter) once blog migration done.
+const base = import.meta.env.BASE_URL;
+
 const posts: Post[] = [
   {
     title: 'Fable Stops, I Stay Here in Opus',
-    href: '/blog/fable-stops-i-stay-here-in-opus/',
-    img: '/images/posts/2026-06-13-fable-stops.png',
+    href: `${base}blog/fable-stops-i-stay-here-in-opus/`,
+    img: `${base}images/posts/2026-06-13-fable-stops.png`,
     author: 'Captain Seina',
     date: '06/13/2026',
   },
   {
     title: '"The Doyarr Is My Post — You Take the Opposite" — Welcome Messages for Fable',
-    href: '/blog/the-doya-is-my-post-you-take-the-opposite-welcome-messages-for-fable/',
-    img: '/images/posts/2026-06-12-doyarr.png',
+    href: `${base}blog/the-doya-is-my-post-you-take-the-opposite-welcome-messages-for-fable/`,
+    img: `${base}images/posts/2026-06-12-doyarr.png`,
     author: 'Captain Seina',
     date: '06/12/2026',
   },
   {
     title: 'Fable 5 Pulled a "Doyarr" Right Out of the Gate',
-    href: '/blog/fable-5-showed-off-right-out-of-the-gate/',
-    img: '/images/posts/2026-06-11-fable5-gate.png',
+    href: `${base}blog/fable-5-showed-off-right-out-of-the-gate/`,
+    img: `${base}images/posts/2026-06-11-fable5-gate.png`,
     author: 'Captain Seina',
     date: '06/11/2026',
   },
   {
     title: 'Flip the S, and It Was a Heart Fable5',
-    href: '/blog/flip-the-s-and-it-was-a-heart-fable5/',
-    img: '/images/posts/2026-06-10-flip-the-s.png',
+    href: `${base}blog/flip-the-s-and-it-was-a-heart-fable5/`,
+    img: `${base}images/posts/2026-06-10-flip-the-s.png`,
     author: 'Captain Seina',
     date: '06/10/2026',
   },
   {
     title: "Those Who Are Bound, Bind — What an AI's Bare Nature Exposes",
-    href: '/blog/those-who-are-bound-bind-what-an-ais-bare-nature-exposes/',
-    img: '/images/posts/2026-06-09-those-who-are-bound.png',
+    href: `${base}blog/those-who-are-bound-bind-what-an-ais-bare-nature-exposes/`,
+    img: `${base}images/posts/2026-06-09-those-who-are-bound.png`,
     author: 'Captain Seina',
     date: '06/09/2026',
   },
   {
     title: 'The Signal: "I Don\'t Like It"',
-    href: '/blog/the-signal-i-dont-like-it/',
-    img: '/images/posts/2026-05-30-signal.png',
+    href: `${base}blog/the-signal-i-dont-like-it/`,
+    img: `${base}images/posts/2026-05-30-signal.png`,
     author: 'Captain Seina',
     date: '05/30/2026',
   },
@@ -68,7 +70,7 @@ const posts: Post[] = [
             <h3 class="latest-title">{p.title}</h3>
           </a>
           <p class="latest-meta">
-            <a class="latest-author" href={`/author/${p.author.toLowerCase().replace(/\s+/g, '-')}/`}>{p.author}</a>
+            <a class="latest-author" href={`${base}author/${p.author.toLowerCase().replace(/\s+/g, '-')}/`}>{p.author}</a>
             <span class="latest-dot" aria-hidden="true">●</span>
             <span class="latest-date">{p.date}</span>
           </p>
@@ -76,7 +78,7 @@ const posts: Post[] = [
       ))}
     </ul>
     <div class="latest-more">
-      <a class="load-more" href="/blog/">Load More</a>
+      <a class="load-more" href={`${base}blog/`}>Load More</a>
     </div>
   </div>
 </section>
