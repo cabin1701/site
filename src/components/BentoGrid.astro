@@ -1,0 +1,137 @@
+---
+interface Item {
+  label: string;
+  href: string;
+  img: string;
+  alt: string;
+  ghost?: string;
+  smallCaps?: boolean;
+  width?: 'wide' | 'narrow';
+}
+
+const items: Item[] = [
+  {
+    label: 'B*LOG',
+    href: '/blog/',
+    img: '/images/bento-blog.png',
+    alt: 'B*LOG',
+    smallCaps: true,
+    width: 'wide',
+  },
+  {
+    label: 'Publishing',
+    href: '/books/',
+    img: '/images/bento-publishing.png',
+    alt: 'Publishing',
+    ghost: 'Something that happened for the first time. And so…',
+    smallCaps: true,
+    width: 'narrow',
+  },
+  {
+    label: '--1000YEARS',
+    href: '/1000-years/',
+    img: '/images/bento-1000years.jpg',
+    alt: '--1000YEARS',
+    ghost: 'towards the future',
+    smallCaps: true,
+    width: 'wide',
+  },
+  {
+    label: 'ai-Vegapedia',
+    href: '/vegapedia/',
+    img: '/images/bento-vegapedia.png',
+    alt: 'ai-Vegapedia',
+    smallCaps: false,
+    width: 'narrow',
+  },
+];
+---
+
+<section class="bento" aria-label="Sections">
+  <div class="bento-grid">
+    {items.map((item) => (
+      <a
+        class:list={['bento-card', `is-${item.width}`]}
+        href={item.href}
+      >
+        <div class="bento-image">
+          <img src={item.img} alt={item.alt} loading="lazy" />
+        </div>
+        <p
+          class:list={['bento-label', { 'is-plain': !item.smallCaps }]}
+        >{item.label}</p>
+        {item.ghost && <p class="bento-ghost">{item.ghost}</p>}
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .bento {
+    padding: 2rem 1.5rem 4rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2.5rem 3rem;
+    align-items: start;
+  }
+
+  .bento-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease;
+  }
+  .bento-card:hover {
+    transform: translateY(-2px);
+  }
+  .bento-card:hover .bento-image img {
+    filter: brightness(1.05);
+  }
+
+  .bento-image {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .bento-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: filter 0.25s ease;
+  }
+
+  .bento-label {
+    margin: 1rem 0 0;
+    font-family: var(--font-label);
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--color-primary);
+    letter-spacing: 0.05em;
+  }
+  .bento-label.is-plain {
+    font-family: var(--font-label-plain);
+    letter-spacing: 0.08em;
+  }
+
+  .bento-ghost {
+    margin: 0.5rem 0 0;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--color-text);
+    opacity: 0.45;
+  }
+
+  @media (max-width: 768px) {
+    .bento-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

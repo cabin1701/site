@@ -8,6 +8,8 @@
   --font-heading: 'Alice', Georgia, serif;
   --font-tagline: 'Asap', sans-serif;
   --font-nav: 'Pathway Gothic One', sans-serif;
+  --font-label: 'Marcellus SC', 'Marcellus', serif;
+  --font-label-plain: 'Marcellus', serif;
   --font-body: -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
   --container-max: 1280px;
