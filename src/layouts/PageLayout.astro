@@ -1,0 +1,57 @@
+---
+import Layout from './Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  pageTitle?: string;
+}
+const { title, pageTitle } = Astro.props;
+---
+
+<Layout title={title}>
+  <Header lang="en" />
+  <main class="page-main">
+    {pageTitle && <h1 class="page-title">{pageTitle}</h1>}
+    <div class="page-content">
+      <slot />
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style is:global>
+  .page-main {
+    max-width: 900px;
+    margin: 3rem auto 4rem;
+    padding: 0 1.5rem;
+  }
+  .page-title {
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 0 1.5rem;
+  }
+  .page-content {
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .page-content p {
+    margin: 0 0 1.1rem;
+  }
+  .page-content a {
+    color: var(--color-magenta);
+  }
+  .page-content ul {
+    margin: 0 0 1.1rem;
+    padding-left: 1.5rem;
+  }
+  .page-content li {
+    margin-bottom: 0.4rem;
+  }
+  .page-content strong {
+    font-weight: 700;
+  }
+</style>
