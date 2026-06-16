@@ -5,13 +5,6 @@ import Footer from '../../components/Footer.astro';
 import VegapediaBody from '../../components/VegapediaBody.astro';
 import raw from '../../content/vegapedia-ja.md?raw';
 
-const base = import.meta.env.BASE_URL;
-
-const langSwitch = [
-  { label: 'English', href: `${base}vegapedia/` },
-  { label: '日本語', href: `${base}ja/vegapedia/`, active: true },
-  { label: 'Español', href: `${base}es/vegapedia/` },
-];
 ---
 
 <Layout title="ai-Vegapedia — ai-CABIN 1701" lang="ja">
@@ -24,7 +17,6 @@ const langSwitch = [
       heroSub="Seina ＆ ai-Vega の語彙集"
       heroSubStar="⭐️"
       emptyBucket="新しい項目を準備中…"
-      langSwitch={langSwitch}
     />
   </div>
 

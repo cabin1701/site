@@ -7,10 +7,9 @@ interface Props {
   heroSub: string;
   heroSubStar?: string;
   emptyBucket: string;
-  langSwitch: { label: string; href: string; active?: boolean }[];
 }
 
-const { raw, lang, heroSub, heroSubStar = '*', emptyBucket, langSwitch } = Astro.props;
+const { raw, lang, heroSub, heroSubStar = '*', emptyBucket } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
 const sections = raw.split(/\n## /).slice(1).map((s) => '## ' + s);
@@ -78,15 +77,6 @@ const bucketClass: Record<Bucket, string> = {
 <p class="hero-sub" lang={lang}>
   {heroSub}<span class="star">{heroSubStar}</span>
 </p>
-
-<nav class="lang-switch-inline" aria-label="Language">
-  {langSwitch.map((l, i) => (
-    <>
-      {i > 0 && <span class="lang-sep" aria-hidden="true">|</span>}
-      <a href={l.href} class:list={[{ active: l.active }]}>{l.label}</a>
-    </>
-  ))}
-</nav>
 
 {intro && (
   <section class="intro" lang={lang}>
@@ -161,32 +151,6 @@ const bucketClass: Record<Bucket, string> = {
   .hero-sub .star {
     color: var(--color-primary);
     font-weight: 700;
-  }
-
-  .lang-switch-inline {
-    max-width: 760px;
-    margin: 1.25rem auto 0;
-    padding: 0 1.5rem;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    font-size: 0.95rem;
-    color: var(--color-nav);
-  }
-  .lang-switch-inline a {
-    color: var(--color-nav);
-    text-decoration: none;
-    margin: 0 0.5rem;
-  }
-  .lang-switch-inline a.active {
-    color: var(--color-primary);
-    font-weight: 600;
-  }
-  .lang-switch-inline a:hover {
-    color: var(--color-primary);
-  }
-  .lang-sep {
-    color: var(--color-tagline);
-    opacity: 0.5;
   }
 
   .intro {
