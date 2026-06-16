@@ -87,13 +87,12 @@ const bucketClass: Record<Bucket, string> = {
   <section
     class="hero-overlay"
     aria-label="ai-Vegapedia"
-    style={`background-image: url('${base}images/bento-vegapedia.png');`}
+    style={`background-image: url('${base}images/vegapedia/hero.png');`}
   >
-    <div class="hero-overlay-inner">
-      <h1 class="welcome-title">VEGAPEDIA</h1>
-      <p class="welcome-sub">The Lexicon of Seina &amp; ai-Vega<span class="star">*</span></p>
-    </div>
+    <h1 class="visually-hidden">ai-Vegapedia</h1>
   </section>
+
+  <p class="hero-sub">The Lexicon of Seina &amp; ai-Vega<span class="star">*</span></p>
 
   {intro && (
     <section class="intro">
@@ -140,40 +139,36 @@ const bucketClass: Record<Bucket, string> = {
   .hero-overlay {
     position: relative;
     width: 100%;
-    min-height: 60vh;
+    aspect-ratio: 1 / 1;
+    max-height: 78vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-top: 1rem;
   }
-  .hero-overlay-inner {
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  .hero-sub {
+    max-width: 760px;
+    margin: 2rem auto 0;
+    padding: 0 1.5rem;
     text-align: center;
-    padding: 3rem 1.5rem;
-    width: 100%;
-    background: rgba(0, 0, 5, 0.35);
-    backdrop-filter: blur(2px);
-  }
-  .welcome-title {
-    font-family: var(--font-label);
-    font-size: 4.5rem;
-    color: var(--color-gold);
-    margin: 0;
-    letter-spacing: 0.08em;
-    font-weight: 600;
-  }
-  .welcome-sub {
     font-family: var(--font-italic);
     font-style: italic;
-    font-size: 1.6rem;
-    color: #fff;
-    margin: 0.75rem 0 0;
+    font-size: 1.5rem;
+    color: var(--color-tagline);
     font-weight: 500;
   }
-  .welcome-sub .star {
-    color: var(--color-gold);
+  .hero-sub .star {
+    color: var(--color-primary);
     font-weight: 700;
   }
 
@@ -362,11 +357,8 @@ const bucketClass: Record<Bucket, string> = {
   }
 
   @media (max-width: 640px) {
-    .welcome-title {
-      font-size: 3rem;
-    }
-    .welcome-sub {
-      font-size: 1.2rem;
+    .hero-sub {
+      font-size: 1.15rem;
     }
     .alpha-pill {
       font-size: 1rem;
