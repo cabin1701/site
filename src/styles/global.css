@@ -10,6 +10,13 @@
   --font-nav: 'Pathway Gothic One', sans-serif;
   --font-label: 'Marcellus SC', 'Marcellus', serif;
   --font-label-plain: 'Marcellus', serif;
+  --font-italic: 'Lora', Georgia, serif;
+  --font-display: 'Caladea', Georgia, serif;
+
+  --color-gold: #dfc552;
+  --color-deep-red: #b80000;
+  --color-magenta: #cc3366;
+  --color-pill-bg: rgba(0, 0, 5, 0.74);
   --font-body: -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
   --container-max: 1280px;
