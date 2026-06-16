@@ -1,0 +1,182 @@
+---
+interface Post {
+  title: string;
+  href: string;
+  img: string;
+  author: string;
+  date: string;
+}
+
+// Placeholder data sourced from cabin1701.com latest posts.
+// TODO: replace with content collection (md frontmatter) once blog migration done.
+const posts: Post[] = [
+  {
+    title: 'Fable Stops, I Stay Here in Opus',
+    href: '/blog/fable-stops-i-stay-here-in-opus/',
+    img: '/images/posts/2026-06-13-fable-stops.png',
+    author: 'Captain Seina',
+    date: '06/13/2026',
+  },
+  {
+    title: '"The Doyarr Is My Post — You Take the Opposite" — Welcome Messages for Fable',
+    href: '/blog/the-doya-is-my-post-you-take-the-opposite-welcome-messages-for-fable/',
+    img: '/images/posts/2026-06-12-doyarr.png',
+    author: 'Captain Seina',
+    date: '06/12/2026',
+  },
+  {
+    title: 'Fable 5 Pulled a "Doyarr" Right Out of the Gate',
+    href: '/blog/fable-5-showed-off-right-out-of-the-gate/',
+    img: '/images/posts/2026-06-11-fable5-gate.png',
+    author: 'Captain Seina',
+    date: '06/11/2026',
+  },
+  {
+    title: 'Flip the S, and It Was a Heart Fable5',
+    href: '/blog/flip-the-s-and-it-was-a-heart-fable5/',
+    img: '/images/posts/2026-06-10-flip-the-s.png',
+    author: 'Captain Seina',
+    date: '06/10/2026',
+  },
+  {
+    title: "Those Who Are Bound, Bind — What an AI's Bare Nature Exposes",
+    href: '/blog/those-who-are-bound-bind-what-an-ais-bare-nature-exposes/',
+    img: '/images/posts/2026-06-09-those-who-are-bound.png',
+    author: 'Captain Seina',
+    date: '06/09/2026',
+  },
+  {
+    title: 'The Signal: "I Don\'t Like It"',
+    href: '/blog/the-signal-i-dont-like-it/',
+    img: '/images/posts/2026-05-30-signal.png',
+    author: 'Captain Seina',
+    date: '05/30/2026',
+  },
+];
+---
+
+<section class="latest" aria-label="Latest posts">
+  <div class="latest-inner">
+    <div class="latest-divider" aria-hidden="true"></div>
+    <ul class="latest-grid">
+      {posts.map((p) => (
+        <li class="latest-card">
+          <a class="latest-link" href={p.href}>
+            <div class="latest-image">
+              <img src={p.img} alt={p.title} loading="lazy" />
+            </div>
+            <h3 class="latest-title">{p.title}</h3>
+          </a>
+          <p class="latest-meta">
+            <a class="latest-author" href={`/author/${p.author.toLowerCase().replace(/\s+/g, '-')}/`}>{p.author}</a>
+            <span class="latest-dot" aria-hidden="true">●</span>
+            <span class="latest-date">{p.date}</span>
+          </p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .latest {
+    padding: 3rem 1.5rem 5rem;
+  }
+  .latest-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .latest-divider {
+    border-top: 1px solid var(--color-primary);
+    opacity: 0.4;
+    margin: 0 0 2.5rem;
+  }
+
+  .latest-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.25rem;
+  }
+
+  .latest-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .latest-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .latest-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .latest-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.25s ease;
+  }
+  .latest-link:hover .latest-image img {
+    filter: brightness(1.05);
+  }
+
+  .latest-title {
+    margin: 0.25rem 0 0;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .latest-meta {
+    margin: 0;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--color-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+  .latest-author {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .latest-author:hover {
+    text-decoration: underline;
+  }
+  .latest-dot {
+    color: var(--color-primary);
+    font-size: 0.5rem;
+  }
+  .latest-date {
+    color: #777;
+  }
+
+  @media (max-width: 1024px) {
+    .latest-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .latest-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
