@@ -1,10 +1,12 @@
 ---
 interface Item {
   label: string;
+  sideTag?: string;
+  kicker?: string;
+  title?: string;
   href: string;
   img: string;
   alt: string;
-  ghost?: string;
   smallCaps?: boolean;
   width?: 'wide' | 'narrow';
 }
@@ -14,6 +16,7 @@ const base = import.meta.env.BASE_URL;
 const items: Item[] = [
   {
     label: 'B*LOG',
+    sideTag: '*What\'s New?*',
     href: `${base}blog/`,
     img: `${base}images/bento-blog.png`,
     alt: 'B*LOG',
@@ -22,24 +25,29 @@ const items: Item[] = [
   },
   {
     label: 'Publishing',
+    sideTag: 'Our Books.',
+    kicker: 'Something that happened for the first time. And so…',
+    title: 'We Could Write Books.',
     href: `${base}books/`,
     img: `${base}images/bento-publishing.png`,
     alt: 'Publishing',
-    ghost: 'Something that happened for the first time. And so…',
     smallCaps: true,
     width: 'narrow',
   },
   {
     label: '--1000YEARS',
+    sideTag: 'towards the future',
+    kicker: 'Remember, we will see it shine',
+    title: 'A thousand years from today',
     href: `${base}1000-years/`,
     img: `${base}images/bento-1000years.jpg`,
     alt: '--1000YEARS',
-    ghost: 'towards the future',
     smallCaps: true,
     width: 'wide',
   },
   {
     label: 'ai-Vegapedia',
+    sideTag: 'Dictionary.',
     href: `${base}vegapedia/`,
     img: `${base}images/bento-vegapedia.png`,
     alt: 'ai-Vegapedia',
@@ -56,13 +64,23 @@ const items: Item[] = [
         class:list={['bento-card', `is-${item.width}`]}
         href={item.href}
       >
+        {(item.kicker || item.title) && (
+          <div class="bento-above">
+            {item.kicker && <p class="bento-kicker">{item.kicker}</p>}
+            {item.title && <p class="bento-title">{item.title}</p>}
+          </div>
+        )}
+
         <div class="bento-image">
           <img src={item.img} alt={item.alt} loading="lazy" />
         </div>
-        <p
-          class:list={['bento-label', { 'is-plain': !item.smallCaps }]}
-        >{item.label}</p>
-        {item.ghost && <p class="bento-ghost">{item.ghost}</p>}
+
+        <div class="bento-bottom">
+          <p
+            class:list={['bento-label', { 'is-plain': !item.smallCaps }]}
+          >{item.label}</p>
+          {item.sideTag && <p class="bento-side">{item.sideTag}</p>}
+        </div>
       </a>
     ))}
   </div>
@@ -107,8 +125,47 @@ const items: Item[] = [
     transition: filter 0.25s ease;
   }
 
+  .bento-above {
+    margin: 0 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .is-narrow .bento-above {
+    align-items: flex-end;
+    text-align: right;
+  }
+  .is-wide .bento-above {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .bento-kicker {
+    margin: 0;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--color-text);
+    opacity: 0.7;
+  }
+  .bento-title {
+    margin: 0;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--color-tagline);
+    line-height: 1.2;
+  }
+
+  .bento-bottom {
+    margin-top: 1rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
   .bento-label {
-    margin: 1rem 0 0;
+    margin: 0;
     font-family: var(--font-label);
     font-size: 1.5rem;
     font-style: italic;
@@ -121,13 +178,14 @@ const items: Item[] = [
     letter-spacing: 0.08em;
   }
 
-  .bento-ghost {
-    margin: 0.5rem 0 0;
-    font-family: var(--font-heading);
-    font-size: 0.95rem;
+  .bento-side {
+    margin: 0;
+    font-family: 'Lora', serif;
     font-style: italic;
+    font-size: 1.05rem;
     color: var(--color-text);
-    opacity: 0.45;
+    opacity: 0.75;
+    text-align: right;
   }
 
   @media (max-width: 768px) {
