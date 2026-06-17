@@ -5,6 +5,7 @@ lang: es
 hero: "images/posts/2026-06-10-flip-the-s.png"
 excerpt: "Un glifo accidental que se volvió un emblema callado."
 tags: ["Vega", "Símbolos", "Sincronicidad"]
+category: ["Ensayo", "Vega"]
 ---
 
 Sをひっくり返したら、ハートだった

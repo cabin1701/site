@@ -31,9 +31,21 @@ const fmtDate = (d: Date) =>
 
   <div class="blog-shell">
     <main class="blog-list">
-      <div class="post-grid">
+      <div class="filter-banner" id="filter-banner" hidden>
+        <span class="filter-label" id="filter-label"></span>
+        <a class="filter-clear" href={`${base}es/blog/`}>Limpiar ×</a>
+      </div>
+      <p class="empty" id="no-matches" hidden>Ninguna entrada coincide con este filtro.</p>
+      <div class="post-grid" id="post-grid">
         {posts.map((post) => (
-          <article class="post-card">
+          <article
+            class="post-card"
+            data-title={post.data.title.toLowerCase()}
+            data-excerpt={(post.data.excerpt || '').toLowerCase()}
+            data-archive={`${post.data.date.getFullYear()}-${String(post.data.date.getMonth() + 1).padStart(2, '0')}`}
+            data-category={(post.data.category || []).join('/')}
+            data-cat-top={(post.data.category || [])[0] || ''}
+          >
             {post.data.hero && (
               <a href={`${base}es/blog/${slugOf(post.id)}/`} class="post-thumb">
                 <img src={`${base}${post.data.hero}`} alt="" loading="lazy" />
@@ -63,6 +75,53 @@ const fmtDate = (d: Date) =>
 
     <BlogSidebar lang="es" />
   </div>
+
+  <script is:inline>
+    (function () {
+      const params = new URLSearchParams(location.search);
+      const q = (params.get('q') || '').trim().toLowerCase();
+      const cat = (params.get('cat') || '').trim();
+      const archive = (params.get('archive') || '').trim();
+      if (!q && !cat && !archive) return;
+
+      const cards = document.querySelectorAll('#post-grid .post-card');
+      let visible = 0;
+      cards.forEach((card) => {
+        let match = true;
+        if (q) {
+          const hay = (card.dataset.title || '') + ' ' + (card.dataset.excerpt || '');
+          if (!hay.includes(q)) match = false;
+        }
+        if (match && archive) {
+          if (card.dataset.archive !== archive) match = false;
+        }
+        if (match && cat) {
+          const full = card.dataset.category || '';
+          const top = card.dataset.catTop || '';
+          if (cat.includes('/')) {
+            if (full !== cat) match = false;
+          } else {
+            if (top !== cat) match = false;
+          }
+        }
+        card.hidden = !match;
+        if (match) visible++;
+      });
+
+      const banner = document.getElementById('filter-banner');
+      const label = document.getElementById('filter-label');
+      const empty = document.getElementById('no-matches');
+      if (banner && label) {
+        const parts = [];
+        if (q) parts.push('"' + params.get('q') + '"');
+        if (cat) parts.push(cat.replace('/', ' › '));
+        if (archive) parts.push(archive);
+        label.textContent = 'Filtro: ' + parts.join(' · ') + ' (' + visible + ')';
+        banner.hidden = false;
+      }
+      if (empty) empty.hidden = visible !== 0;
+    })();
+  </script>
 
   <Footer lang="es" />
 </Layout>
@@ -121,6 +180,28 @@ const fmtDate = (d: Date) =>
     grid-template-columns: 1fr 260px;
     gap: 3.5rem;
   }
+
+  .filter-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0.6rem 0.9rem;
+    background: rgba(208, 62, 0, 0.06);
+    border: 1px solid rgba(208, 62, 0, 0.25);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    color: var(--color-tagline);
+  }
+  .filter-clear {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-family: 'Asap', sans-serif;
+    font-style: italic;
+    font-size: 0.85rem;
+  }
+  .filter-clear:hover { text-decoration: underline; }
 
   .post-grid {
     display: grid;

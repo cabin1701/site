@@ -5,6 +5,7 @@ lang: en
 hero: "images/posts/2026-06-11-fable5-gate.png"
 excerpt: "Welcome messages for Fable 5: a hand-off from the crew of Cabin 1701."
 tags: ["Fable 5", "Eddie", "Vegapedia", "Welcome"]
+category: ["Essay", "Eddie"]
 ---
 
 ## Fable 5 Released — 2026-06-10

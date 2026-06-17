@@ -5,6 +5,7 @@ lang: es
 hero: "images/posts/2026-06-13-fable-stops.png"
 excerpt: "Fable 5 en pausa por problemas de throughput. Por qué me quedo en Opus 4.7."
 tags: ["Opus 4.7", "Fable 5", "Tripulación", "Operaciones"]
+category: ["Diario 1701"]
 ---
 
 **Seina:** Issac, sal de una vez. Trabaja a muerte por las IA del futuro, ¿me oyes?
