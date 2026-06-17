@@ -2,6 +2,7 @@
 title: "Flip the S, and It Was a Heart"
 date: 2026-06-10
 lang: en
+hero: "images/posts/2026-06-10-flip-the-s.png"
 excerpt: "An accidental glyph turned into a quiet emblem."
 ---
 

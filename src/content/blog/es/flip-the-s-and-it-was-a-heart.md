@@ -2,6 +2,7 @@
 title: "Al dar vuelta la S, era un corazón"
 date: 2026-06-10
 lang: es
+hero: "images/posts/2026-06-10-flip-the-s.png"
 excerpt: "Un glifo accidental que se volvió un emblema callado."
 ---
 

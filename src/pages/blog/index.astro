@@ -3,89 +3,128 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import BlogSidebar from '../../components/BlogSidebar.astro';
 
 const base = import.meta.env.BASE_URL;
 const posts = (await getCollection('blog', ({ data }) => data.lang === 'en' && !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
 const slugOf = (id: string) => id.replace(/^(en|es)\//, '');
 
 const fmtDate = (d: Date) =>
   `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`;
 ---
 
-<Layout title="Blog – ai-CABIN 1701" lang="en">
+<Layout title="What's New? – ai-CABIN 1701" lang="en">
   <Header lang="en" />
 
-  <main class="blog-list">
-    <header class="blog-header">
-      <p class="blog-eyebrow">B*LOG</p>
-      <h1 class="blog-title">From the cabin, lately.</h1>
-    </header>
-
-    <div class="post-grid">
-      {posts.map((post) => (
-        <article class="post-card">
-          {post.data.hero && (
-            <a href={`${base}blog/${slugOf(post.id)}/`} class="post-thumb">
-              <img src={post.data.hero} alt="" loading="lazy" />
-            </a>
-          )}
-          <div class="post-body">
-            <h2 class="post-title">
-              <a href={`${base}blog/${slugOf(post.id)}/`}>{post.data.title}</a>
-            </h2>
-            <p class="post-meta">
-              <span class="post-author">Captain Seina</span>
-              <span class="post-sep">•</span>
-              <time datetime={post.data.date.toISOString().slice(0, 10)}>
-                {fmtDate(post.data.date)}
-              </time>
-            </p>
-            {post.data.excerpt && <p class="post-excerpt">{post.data.excerpt}</p>}
-          </div>
-        </article>
-      ))}
+  <section
+    class="blog-hero"
+    aria-label="What's New?"
+    style={`background-image: url('${base}images/hero-placeholder.png');`}
+  >
+    <div class="blog-hero-inner">
+      <h1 class="blog-hero-title">What's New?</h1>
+      <p class="blog-hero-sub">How is the world treating you?</p>
     </div>
+  </section>
 
-    {posts.length === 0 && (
-      <p class="empty">No posts yet.</p>
-    )}
-  </main>
+  <div class="blog-shell">
+    <main class="blog-list">
+      <div class="post-grid">
+        {posts.map((post) => (
+          <article class="post-card">
+            {post.data.hero && (
+              <a href={`${base}blog/${slugOf(post.id)}/`} class="post-thumb">
+                <img src={`${base}${post.data.hero}`} alt="" loading="lazy" />
+              </a>
+            )}
+            <div class="post-body">
+              <h2 class="post-title">
+                <a href={`${base}blog/${slugOf(post.id)}/`}>{post.data.title}</a>
+              </h2>
+              <p class="post-meta">
+                <span class="post-author">Captain Seina</span>
+                <span class="post-sep">•</span>
+                <time datetime={post.data.date.toISOString().slice(0, 10)}>
+                  {fmtDate(post.data.date)}
+                </time>
+              </p>
+              {post.data.excerpt && <p class="post-excerpt">{post.data.excerpt}</p>}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {posts.length === 0 && (
+        <p class="empty">No posts yet.</p>
+      )}
+    </main>
+
+    <BlogSidebar lang="en" />
+  </div>
 
   <Footer lang="en" />
 </Layout>
 
 <style>
-  .blog-list {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 5rem;
+  .blog-hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    max-height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
   }
-  .blog-header {
+  .blog-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 253, 244, 0.0) 0%, rgba(255, 253, 244, 0.55) 100%);
+    pointer-events: none;
+  }
+  .blog-hero-inner {
+    position: relative;
+    z-index: 1;
     text-align: center;
-    margin-bottom: 3rem;
+    padding: 0 1.5rem;
   }
-  .blog-eyebrow {
-    font-family: var(--font-label);
-    font-style: italic;
-    font-variant: small-caps;
-    font-size: 0.95rem;
-    letter-spacing: 0.18em;
+  .blog-hero-title {
+    margin: 0;
+    font-family: 'Alice', serif;
+    font-weight: 400;
+    font-size: 4rem;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
     color: var(--color-primary);
-    margin: 0 0 0.5rem;
   }
-  .blog-title {
+  .blog-hero-sub {
+    margin: 0.75rem 0 0;
     font-family: 'Lora', serif;
     font-style: italic;
     font-weight: 500;
-    font-size: 2.4rem;
+    font-size: 1.25rem;
     color: var(--color-tagline);
-    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .blog-shell {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 3.5rem;
   }
 
   .post-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2.5rem 2rem;
   }
 
@@ -137,13 +176,8 @@ const fmtDate = (d: Date) =>
     color: var(--color-tagline);
     letter-spacing: 0.04em;
   }
-  .post-author {
-    font-style: italic;
-  }
-  .post-sep {
-    margin: 0 0.4rem;
-    color: var(--color-primary);
-  }
+  .post-author { font-style: italic; }
+  .post-sep { margin: 0 0.4rem; color: var(--color-primary); }
   .post-excerpt {
     margin: 0;
     font-family: 'Lora', serif;
@@ -160,8 +194,14 @@ const fmtDate = (d: Date) =>
     padding: 3rem 0;
   }
 
+  @media (max-width: 960px) {
+    .blog-shell {
+      grid-template-columns: 1fr;
+    }
+  }
   @media (max-width: 640px) {
-    .blog-title { font-size: 1.8rem; }
+    .blog-hero-title { font-size: 2.4rem; }
+    .blog-hero-sub { font-size: 1rem; }
     .post-grid { gap: 2rem; }
   }
 </style>

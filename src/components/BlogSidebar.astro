@@ -1,0 +1,168 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang: 'en' | 'es';
+  currentId?: string;
+}
+
+const { lang, currentId } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const all = await getCollection('blog', ({ data }) => data.lang === lang && !data.draft);
+const recent = all
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .filter((p) => p.id !== currentId)
+  .slice(0, 6);
+
+const slugOf = (id: string) => id.replace(/^(en|es)\//, '');
+const blogHref = lang === 'es' ? `${base}es/blog` : `${base}blog`;
+
+const fmtDate = (d: Date) =>
+  lang === 'es'
+    ? `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`
+    : `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`;
+
+const labels = {
+  en: { recent: 'Recent posts', archive: 'Archive', about: 'About this log' },
+  es: { recent: 'Entradas recientes', archive: 'Archivo', about: 'Sobre este diario' },
+}[lang];
+
+const aboutCopy = {
+  en: 'Notes from Captain Seina and the AI crew of Cabin 1701 — written in real time, in three languages.',
+  es: 'Notas de la Capitana Seina y la tripulación IA de Cabin 1701 — escritas en tiempo real, en tres idiomas.',
+}[lang];
+
+// Archive grouping by YYYY-MM
+const archiveMap = new Map<string, number>();
+for (const p of all) {
+  const d = p.data.date;
+  const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+  archiveMap.set(key, (archiveMap.get(key) || 0) + 1);
+}
+const archive = [...archiveMap.entries()].sort((a, b) => b[0].localeCompare(a[0]));
+---
+
+<aside class="blog-sidebar" lang={lang}>
+  <section class="side-section">
+    <h3 class="side-title">{labels.about}</h3>
+    <p class="side-about">{aboutCopy}</p>
+  </section>
+
+  {recent.length > 0 && (
+    <section class="side-section">
+      <h3 class="side-title">{labels.recent}</h3>
+      <ul class="side-list">
+        {recent.map((p) => (
+          <li class="side-recent">
+            <a href={`${blogHref}/${slugOf(p.id)}/`}>
+              <span class="side-recent-title">{p.data.title}</span>
+              <span class="side-recent-date">{fmtDate(p.data.date)}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {archive.length > 0 && (
+    <section class="side-section">
+      <h3 class="side-title">{labels.archive}</h3>
+      <ul class="side-list side-archive">
+        {archive.map(([key, count]) => (
+          <li>
+            <span class="side-archive-key">{key}</span>
+            <span class="side-archive-count">({count})</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</aside>
+
+<style>
+  .blog-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-top: 0.25rem;
+  }
+
+  .side-section {
+    border-top: 1px solid rgba(208, 62, 0, 0.25);
+    padding-top: 1.25rem;
+  }
+  .side-section:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .side-title {
+    margin: 0 0 1rem;
+    font-family: 'Marcellus SC', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    letter-spacing: 0.14em;
+    color: var(--color-primary);
+  }
+
+  .side-about {
+    margin: 0;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--color-tagline);
+  }
+
+  .side-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .side-recent a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  .side-recent-title {
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-size: 1rem;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+  .side-recent a:hover .side-recent-title {
+    color: var(--color-primary);
+  }
+  .side-recent-date {
+    font-family: 'Asap', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--color-tagline);
+  }
+
+  .side-archive {
+    gap: 0.4rem;
+  }
+  .side-archive li {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Asap', sans-serif;
+    font-size: 0.85rem;
+    color: var(--color-tagline);
+  }
+  .side-archive-key {
+    letter-spacing: 0.04em;
+  }
+  .side-archive-count {
+    color: var(--color-primary);
+    font-size: 0.78rem;
+  }
+</style>

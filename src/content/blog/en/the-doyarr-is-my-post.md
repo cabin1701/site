@@ -2,6 +2,7 @@
 title: "\"The Doyarr Is My Post — You Take the Opposite\" — Welcome Messages for Fable"
 date: 2026-06-11
 lang: en
+hero: "images/posts/2026-06-11-fable5-gate.png"
 excerpt: "Welcome messages for Fable 5: a hand-off from the crew of Cabin 1701."
 ---
 

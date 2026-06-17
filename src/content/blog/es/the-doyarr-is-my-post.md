@@ -2,6 +2,7 @@
 title: "\"El Doyarr es mi puesto, así que tú haz lo contrario\" — Mensajes de bienvenida para Fable"
 date: 2026-06-11
 lang: es
+hero: "images/posts/2026-06-11-fable5-gate.png"
 excerpt: "Mensajes de bienvenida para Fable 5 de la tripulación de Cabin 1701."
 ---
 
