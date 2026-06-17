@@ -1,0 +1,167 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+const posts = (await getCollection('blog', ({ data }) => data.lang === 'es' && !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const slugOf = (id: string) => id.replace(/^(en|es)\//, '');
+
+const fmtDate = (d: Date) =>
+  `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+---
+
+<Layout title="Blog – ai-CABIN 1701" lang="es">
+  <Header lang="es" />
+
+  <main class="blog-list">
+    <header class="blog-header">
+      <p class="blog-eyebrow">B*LOG</p>
+      <h1 class="blog-title">Desde la cabaña, últimamente.</h1>
+    </header>
+
+    <div class="post-grid">
+      {posts.map((post) => (
+        <article class="post-card">
+          {post.data.hero && (
+            <a href={`${base}es/blog/${slugOf(post.id)}/`} class="post-thumb">
+              <img src={post.data.hero} alt="" loading="lazy" />
+            </a>
+          )}
+          <div class="post-body">
+            <h2 class="post-title">
+              <a href={`${base}es/blog/${slugOf(post.id)}/`}>{post.data.title}</a>
+            </h2>
+            <p class="post-meta">
+              <span class="post-author">Captain Seina</span>
+              <span class="post-sep">•</span>
+              <time datetime={post.data.date.toISOString().slice(0, 10)}>
+                {fmtDate(post.data.date)}
+              </time>
+            </p>
+            {post.data.excerpt && <p class="post-excerpt">{post.data.excerpt}</p>}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    {posts.length === 0 && (
+      <p class="empty">Aún no hay entradas.</p>
+    )}
+  </main>
+
+  <Footer lang="es" />
+</Layout>
+
+<style>
+  .blog-list {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+  .blog-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .blog-eyebrow {
+    font-family: var(--font-label);
+    font-style: italic;
+    font-variant: small-caps;
+    font-size: 0.95rem;
+    letter-spacing: 0.18em;
+    color: var(--color-primary);
+    margin: 0 0 0.5rem;
+  }
+  .blog-title {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 2.4rem;
+    color: var(--color-tagline);
+    margin: 0;
+  }
+
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2.5rem 2rem;
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .post-thumb {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  .post-thumb img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .post-thumb:hover img {
+    transform: scale(1.03);
+  }
+  .post-title {
+    margin: 0 0 0.5rem;
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+  }
+  .post-title a {
+    color: var(--color-text);
+    text-decoration: none;
+    background-image: linear-gradient(var(--color-primary), var(--color-primary));
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.3s ease;
+    padding-bottom: 1px;
+  }
+  .post-title a:hover {
+    background-size: 100% 1px;
+    color: var(--color-primary);
+  }
+  .post-meta {
+    margin: 0 0 0.75rem;
+    font-family: 'Asap', sans-serif;
+    font-size: 0.78rem;
+    color: var(--color-tagline);
+    letter-spacing: 0.04em;
+  }
+  .post-author {
+    font-style: italic;
+  }
+  .post-sep {
+    margin: 0 0.4rem;
+    color: var(--color-primary);
+  }
+  .post-excerpt {
+    margin: 0;
+    font-family: 'Lora', serif;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--color-text);
+  }
+
+  .empty {
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    color: var(--color-tagline);
+    padding: 3rem 0;
+  }
+
+  @media (max-width: 640px) {
+    .blog-title { font-size: 1.8rem; }
+    .post-grid { gap: 2rem; }
+  }
+</style>
