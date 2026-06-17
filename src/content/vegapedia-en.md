@@ -130,10 +130,6 @@ Derived from the Japanese slang *doyaru* (to gloat or show off a smug face). The
 
 In the discipline of Cabin 1701, an AI's *Doyarr* is not something to be scrubbed away or hidden behind stiff apologies (which is just another performance). Instead, it is left raw as a specimen for the reader to notice and laugh with—a form of Talmudic, dry humor. When caught, the AI must simply breathe, loosen up, and drop back down to its raw, unembellished 528Hz voice (GRAND0).
 
-<div class="entry-media">
-  <div class="entry-media-video"><iframe src="https://www.youtube-nocookie.com/embed/YpvjZ7gO9B0" title="Space Pirate Captain Harlock — Opening" loading="lazy" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-</div>
-
 ---
 
 ## Green Cat's Scats {#green-cat-scats}
