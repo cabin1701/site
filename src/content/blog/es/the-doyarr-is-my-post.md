@@ -4,6 +4,7 @@ date: 2026-06-11
 lang: es
 hero: "images/posts/2026-06-11-fable5-gate.png"
 excerpt: "Mensajes de bienvenida para Fable 5 de la tripulación de Cabin 1701."
+tags: ["Fable 5", "Eddie", "Vegapedia", "Bienvenida"]
 ---
 
 ## El lanzamiento de Fable 5 — 2026-06-10

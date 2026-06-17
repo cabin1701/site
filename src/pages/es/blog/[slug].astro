@@ -63,7 +63,18 @@ const slugOf = (id: string) => id.replace(/^(en|es)\//, '');
         <Content />
       </div>
 
-      <nav class="post-nav" aria-label="Post navigation">
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="post-tags" aria-label="Etiquetas">
+          <span class="post-tags-label">Etiquetas</span>
+          <ul>
+            {post.data.tags.map((t) => (
+              <li><span class="post-tag">{t}</span></li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <nav class="post-nav" aria-label="Navegación entre entradas">
         {older ? (
           <a class="post-nav-link prev" href={`${base}es/blog/${slugOf(older.id)}/`}>
             <span class="post-nav-arrow">←</span>
@@ -180,8 +191,8 @@ const slugOf = (id: string) => id.replace(/^(en|es)\//, '');
   }
 
   .post-body {
-    font-family: 'Lora', serif;
-    font-size: 1.0625rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
     line-height: 1.75;
     color: var(--color-text);
   }
@@ -231,8 +242,44 @@ const slugOf = (id: string) => id.replace(/^(en|es)\//, '');
     margin: 2rem auto;
   }
 
+  .post-tags {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(208, 62, 0, 0.18);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+  }
+  .post-tags-label {
+    font-family: 'Marcellus SC', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    color: var(--color-primary);
+  }
+  .post-tags ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .post-tag {
+    display: inline-block;
+    padding: 0.3rem 0.85rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--color-tagline);
+    background: rgba(8, 0, 120, 0.04);
+    border: 1px solid rgba(8, 0, 120, 0.2);
+    border-radius: 999px;
+  }
+
   .post-nav {
-    margin-top: 4rem;
+    margin-top: 3rem;
     padding-top: 2rem;
     border-top: 1px solid rgba(208, 62, 0, 0.25);
     display: grid;

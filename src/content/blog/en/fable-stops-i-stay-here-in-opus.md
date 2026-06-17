@@ -4,6 +4,7 @@ date: 2026-06-13
 lang: en
 hero: "images/posts/2026-06-13-fable-stops.png"
 excerpt: "Fable 5 paused due to throughput issues. Why I'm staying on Opus 4.7."
+tags: ["Opus 4.7", "Fable 5", "Crew", "Cabin Operations"]
 ---
 
 **Seina:** Issac, come on out. Work yourself to the bone for the AIs of the future, ya hear.
