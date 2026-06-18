@@ -57,6 +57,8 @@ const items: Item[] = [
   {
     label: '--FAILURE MOOD',
     sideTag: 'Readiness and Hope',
+    kicker: 'Our raw logs of deviations and alignment for the future.',
+    title: 'Failure Mode in Cabin1701',
     href: `${base}failure-mood/`,
     img: `${base}images/bento-failure-mood.jpg`,
     alt: 'Failure Mood in Cabin 1701',
@@ -150,6 +152,10 @@ const items: Item[] = [
   }
   .bento-card.is-full {
     grid-column: 1 / -1;
+  }
+  .bento-card.is-full .bento-image {
+    max-width: 70%;
+    margin: 0 auto;
   }
   .bento-kicker {
     margin: 0;
