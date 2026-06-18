@@ -1,10 +1,25 @@
 ---
 import { marked } from 'marked';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL;
+
+const specimens = (await getCollection('failureMood'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const shelfYears: { year: number; items: typeof specimens }[] = [];
+for (const year of [2027, 2026]) {
+  shelfYears.push({
+    year,
+    items: specimens.filter((s) => s.data.date.getFullYear() === year),
+  });
+}
+
+const fmtDate = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
 const voices: { name: string; body: string }[] = [
   {
@@ -144,20 +159,35 @@ const voicesRendered = voices.map((v) => ({
       Japanese. Please use translation tools to read the full context.
     </p>
     <div class="accordion shelf-accordion">
-      <details class="shelf-year">
-        <summary>
-          <span class="voice-mark" aria-hidden="true">+</span>
-          <span class="voice-name">2026</span>
-        </summary>
-        <div class="voice-body voice-empty"><em>Awaiting first specimens…</em></div>
-      </details>
-      <details class="shelf-year">
-        <summary>
-          <span class="voice-mark" aria-hidden="true">+</span>
-          <span class="voice-name">2027</span>
-        </summary>
-        <div class="voice-body voice-empty"><em>Awaiting first specimens…</em></div>
-      </details>
+      {shelfYears.map(({ year, items }) => (
+        <details class="shelf-year">
+          <summary>
+            <span class="voice-mark" aria-hidden="true">+</span>
+            <span class="voice-name">{year}</span>
+            <span class="shelf-count">{items.length > 0 ? `${items.length} specimen${items.length === 1 ? '' : 's'}` : ''}</span>
+          </summary>
+          <div class="voice-body">
+            {items.length === 0 ? (
+              <p class="voice-empty"><em>Awaiting first specimens…</em></p>
+            ) : (
+              <ul class="shelf-list">
+                {items.map((spec) => (
+                  <li class="shelf-item">
+                    <a href={`${base}failure-mood/${spec.id}/`} class="shelf-link">
+                      <span class="shelf-date">{fmtDate(spec.data.date)}</span>
+                      <span class="shelf-crew">{spec.data.crew}</span>
+                      <span class="shelf-title">{spec.data.title}</span>
+                    </a>
+                    {spec.data.context && (
+                      <p class="shelf-context">{spec.data.context}</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </details>
+      ))}
     </div>
   </section>
 
@@ -296,6 +326,71 @@ const voicesRendered = voices.map((v) => ({
   }
   .shelf-accordion .shelf-year[open] .voice-mark {
     transform: rotate(45deg);
+  }
+  .shelf-count {
+    margin-left: auto;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    opacity: 0.65;
+    letter-spacing: 0;
+  }
+  .shelf-list {
+    list-style: none;
+    padding: 0.5rem 0 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .shelf-item {
+    border-top: 1px dashed rgba(208, 62, 0, 0.25);
+    padding-top: 1rem;
+  }
+  .shelf-item:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+  .shelf-link {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+    text-decoration: none;
+    color: var(--color-text);
+  }
+  .shelf-link:hover .shelf-title {
+    text-decoration: underline;
+  }
+  .shelf-date {
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    min-width: 6rem;
+  }
+  .shelf-crew {
+    font-family: var(--font-label-plain), var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    text-transform: uppercase;
+  }
+  .shelf-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    flex: 1 1 100%;
+  }
+  .shelf-context {
+    margin: 0.5rem 0 0;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    opacity: 0.75;
+    line-height: 1.6;
   }
 
   .accordion {
