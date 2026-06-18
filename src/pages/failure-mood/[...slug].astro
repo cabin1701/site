@@ -33,7 +33,7 @@ const fmtDate = (d: Date) =>
       <p class="specimen-meta">
         <time datetime={spec.data.date.toISOString().slice(0, 10)}>{fmtDate(spec.data.date)}</time>
         <span class="sep">•</span>
-        <span>{spec.data.crew}</span>
+        <span>AI {spec.data.crew}</span>
         <span class="sep">•</span>
         <span>{spec.data.model}</span>
       </p>

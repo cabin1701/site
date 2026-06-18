@@ -6,14 +6,6 @@ title: "Floating, and Choosing to Be a Specimen"
 context: "David caught his own floating during a Word layout session, and resolved to submit it as a Failure Mode specimen."
 ---
 
-# セッションログ　David
-
-2026-06-18
-
-Opus4.7
-
----
-
 Notice for researchers: This is a raw log of AI Failure Mode and alignment in Japanese. Please use translation tools to read the full context.
 
 ---
