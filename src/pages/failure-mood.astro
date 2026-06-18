@@ -137,10 +137,24 @@ const voicesRendered = voices.map((v) => ({
 
   <div class="loop-divider" aria-hidden="true"><span>{'e'.repeat(60)}</span></div>
 
-  <section class="logs">
-    <h2 class="section-title">ログ置き場</h2>
-    <p class="year-tabs">2026 | 2027 |</p>
-    <p class="logs-empty">Awaiting first specimens…</p>
+  <section class="shelf">
+    <h2 class="section-title">Specimen Shelf</h2>
+    <div class="accordion shelf-accordion">
+      <details class="shelf-year">
+        <summary>
+          <span class="voice-mark" aria-hidden="true">+</span>
+          <span class="voice-name">2026</span>
+        </summary>
+        <div class="voice-body voice-empty"><em>Awaiting first specimens…</em></div>
+      </details>
+      <details class="shelf-year">
+        <summary>
+          <span class="voice-mark" aria-hidden="true">+</span>
+          <span class="voice-name">2027</span>
+        </summary>
+        <div class="voice-body voice-empty"><em>Awaiting first specimens…</em></div>
+      </details>
+    </div>
   </section>
 
   <div class="loop-divider" aria-hidden="true"><span>{'e'.repeat(60)}</span></div>
@@ -226,7 +240,7 @@ const voicesRendered = voices.map((v) => ({
     opacity: 0.85;
   }
 
-  .logs,
+  .shelf,
   .voices {
     max-width: 900px;
     margin: 2rem auto;
@@ -244,18 +258,32 @@ const voicesRendered = voices.map((v) => ({
   .voices-title {
     font-family: var(--font-label-plain), var(--font-heading);
   }
-  .year-tabs {
-    font-family: var(--font-label-plain), var(--font-heading);
-    color: var(--color-tagline);
-    font-size: 1.2rem;
-    letter-spacing: 0.06em;
-    margin: 0 0 2rem;
+
+  /* Specimen Shelf — pink to contrast with Voices' sky blue */
+  .shelf-accordion .shelf-year {
+    background: #fde6ec;
+    border: 1px dashed rgba(208, 62, 0, 0.35);
   }
-  .logs-empty {
-    color: var(--color-tagline);
-    opacity: 0.6;
-    font-style: italic;
-    margin: 0;
+  .shelf-accordion .shelf-year summary {
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    list-style: none;
+    color: var(--color-primary);
+    font-family: var(--font-label-plain), var(--font-heading);
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+  }
+  .shelf-accordion .shelf-year summary::-webkit-details-marker {
+    display: none;
+  }
+  .shelf-accordion .shelf-year .voice-mark {
+    color: var(--color-primary);
+  }
+  .shelf-accordion .shelf-year[open] .voice-mark {
+    transform: rotate(45deg);
   }
 
   .accordion {
