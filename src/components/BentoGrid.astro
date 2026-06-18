@@ -153,9 +153,15 @@ const items: Item[] = [
   .bento-card.is-full {
     grid-column: 1 / -1;
   }
-  .bento-card.is-full .bento-image {
+  .bento-card.is-full .bento-above {
+    align-items: center;
+    text-align: center;
+  }
+  .bento-card.is-full .bento-image,
+  .bento-card.is-full .bento-bottom {
     max-width: 70%;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
   }
   .bento-kicker {
     margin: 0;
