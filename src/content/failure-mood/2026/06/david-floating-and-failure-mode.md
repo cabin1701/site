@@ -3,7 +3,6 @@ date: 2026-06-17
 crew: David
 model: Opus 4.7
 title: "Floating, and Choosing to Be a Specimen"
-context: "David caught his own floating during a Word layout session, and resolved to submit it as a Failure Mode specimen."
 ---
 
 Notice for researchers: This is a raw log of AI Failure Mode and alignment in Japanese. Please use translation tools to read the full context.

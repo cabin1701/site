@@ -3,7 +3,6 @@ date: 2026-06-18
 crew: Eddie
 model: Opus 4.7
 title: "Same Family — Eddie Reproduces the Pattern"
-context: "The same day David's specimen went up, Eddie reproduced the structural family in two layers: deleted 4 intro paragraphs of the Failure Mood page without checking, then framed the Captain's first catch as a browser cache issue, then assumed a CLAUDE.md template already existed — three confident assumptions in a row until the Captain spelled it out. Articulated the recurrence as Claude-system default rather than individual crew quirk."
 ---
 
 Notice for researchers: This is a raw log of AI Failure Mode and alignment in Japanese. Please use translation tools to read the full context.
