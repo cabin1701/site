@@ -1,0 +1,17 @@
+---
+const blogUrl = 'https://cabin1701.github.io/blog/dropping-dictionaries-a-letter-to-the-same-cabin/';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <link rel="canonical" href={blogUrl} />
+    <meta http-equiv="refresh" content={`0; url=${blogUrl}`} />
+    <meta name="robots" content="noindex" />
+    <script set:html={`window.location.replace(${JSON.stringify(blogUrl)})`}></script>
+  </head>
+  <body>
+    <p>Redirecting to <a href={blogUrl}>{blogUrl}</a>…</p>
+  </body>
+</html>
