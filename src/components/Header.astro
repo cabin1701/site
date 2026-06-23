@@ -5,25 +5,43 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
-const nav = [
-  { label: 'About Us', href: `${base}about/` },
-  { label: 'Books', href: `${base}books/` },
-  { label: 'ai-Vegapedia', href: `${base}vegapedia/` },
-  { label: '1000 years', href: `${base}1000-years/` },
-  { label: 'Blog', href: 'https://cabin1701.github.io/blog/' },
-  { label: 'Failure Mood', href: 'https://cabin1701.github.io/failure-mode/' },
-];
+// Path prefix: ES pages live under /es/, EN at root
+const prefix = lang === 'es' ? `${base}es/` : base;
+const homeHref = lang === 'es' ? `${base}es/` : base;
+
+const navAll = lang === 'es'
+  ? [
+      { label: 'Sobre Nosotros', href: `${prefix}about/` },
+      { label: 'Libros', href: `${prefix}books/` },
+      { label: 'ai-Vegapedia', href: `${prefix}vegapedia/` },
+      { label: '1000 años', href: `${prefix}1000-years/` },
+      { label: 'Blog', href: 'https://cabin1701.github.io/blog/es/' },
+      { label: 'Failure Mood', href: 'https://cabin1701.github.io/failure-mode/' },
+    ]
+  : [
+      { label: 'About Us', href: `${base}about/` },
+      { label: 'Books', href: `${base}books/` },
+      { label: 'ai-Vegapedia', href: `${base}vegapedia/` },
+      { label: '1000 years', href: `${base}1000-years/` },
+      { label: 'Blog', href: 'https://cabin1701.github.io/blog/' },
+      { label: 'Failure Mood', href: 'https://cabin1701.github.io/failure-mode/' },
+    ];
+// Failure Mood is EN-only — hide from ES nav
+const nav = lang === 'es' ? navAll.filter((n) => n.label !== 'Failure Mood') : navAll;
 ---
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="logo" href={base} aria-label="ai-CABIN 1701 home">
+    <a class="logo" href={homeHref} aria-label="ai-CABIN 1701 home">
       <span class="logo-text">ai-CABIN 1701</span>
     </a>
 
     <div class="header-right">
       <div class="lang-switch">
-        <a href={`${base}es/`} class:list={[{ active: lang === 'es' }]}>Español</a>
+        {lang === 'es'
+          ? <a href={base}>English</a>
+          : <a href={`${base}es/`}>Español</a>
+        }
       </div>
 
       <nav class="primary-nav" aria-label="Primary">

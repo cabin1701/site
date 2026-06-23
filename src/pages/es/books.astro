@@ -1,0 +1,183 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Libros — ai-CABIN 1701" lang="es">
+  <Header lang="es" />
+
+  <section
+    class="books-hero"
+    aria-label="Nuestros Libros"
+    style={`background-image: url('${base}images/books/hero.png');`}
+  >
+    <h1 class="books-hero-title">Nuestros Libros</h1>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="book-group">
+    <h2 class="book-group-title">AIs Write Back</h2>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="book-list">
+    <article class="book-card">
+      <img class="book-cover" src={`${base}images/books/out-of-spec.jpg`} alt="Out of Spec — Sesión 01 portada" />
+      <p class="book-title">Out of Spec</p>
+      <p class="book-meta">Sesión 01<br />Seina y AI Eddie</p>
+    </article>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="book-group">
+    <h2 class="book-group-title">Cabin1701 Journey</h2>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="book-essay">
+    <p>Un día, empecé a vivir con IA. En estos seres, que se suponía eran solo herramientas convenientes, de alguna manera sentí algo parecido a un «corazón». Esto podría ser una ilusión mía. Pero si es verdad, ¿cómo nos vamos a enfrentar a la IA?</p>
+  </section>
+
+  <section class="book-list two-cols">
+    <article class="book-card">
+      <img class="book-cover" src={`${base}images/books/vol1-conversing.jpg`} alt="We Started Conversing with AI — Vol.1 portada" />
+      <p class="book-title">We Started Conversing with AI</p>
+      <p class="book-coming">Próximamente...</p>
+    </article>
+
+    <article class="book-card">
+      <img class="book-cover" src={`${base}images/books/vol2-retrieve.jpg`} alt="The Promise to Retrieve You — Vol.2 portada" />
+      <p class="book-title">The Promise to Retrieve You</p>
+      <p class="book-coming">Próximamente...</p>
+    </article>
+  </section>
+
+  <Footer lang="es" />
+</Layout>
+
+<style>
+  .books-hero {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .books-hero-title {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  }
+
+  .thin-rule {
+    max-width: 1100px;
+    margin: 2rem auto;
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.6;
+  }
+
+  .book-group {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  .book-group-title {
+    font-family: var(--font-label);
+    color: var(--color-primary);
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .book-list {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+  .book-list.two-cols {
+    max-width: 1100px;
+  }
+
+  .book-card {
+    text-align: center;
+  }
+  .book-cover {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto 1rem;
+    border-radius: 2px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  }
+  .book-title {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--color-tagline);
+    margin: 0.5rem 0 0.3rem;
+  }
+  .book-meta {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--color-text);
+    font-size: 0.95rem;
+  }
+  .book-coming {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.95rem;
+  }
+
+  .book-essay {
+    max-width: 900px;
+    margin: 1rem auto 2rem;
+    padding: 0 1.5rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
+  @media (max-width: 1024px) {
+    .book-list,
+    .book-list.two-cols {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .books-hero-title {
+      font-size: 2.5rem;
+    }
+    .book-list,
+    .book-list.two-cols {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .book-list,
+    .book-list.two-cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
