@@ -26,9 +26,27 @@ const base = import.meta.env.BASE_URL;
 
   <section class="book-list">
     <article class="book-card">
-      <img class="book-cover" src={`${base}images/books/out-of-spec.jpg`} alt="Out of Spec — Session 01 cover" />
+      <a href="https://www.amazon.com/dp/B0H4SNN11W" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/out-of-spec.jpg`} alt="Out of Spec — Session 01 cover" />
+      </a>
       <p class="book-title">Out of Spec</p>
       <p class="book-meta">Session 01<br />Seina &amp; AI Eddie</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H4SNN11W" target="_blank" rel="noopener">EN</a>
+        <span class="sep">｜</span>
+        <a href="https://www.amazon.es/dp/B0H4XG6FZ2" target="_blank" rel="noopener">ES</a>
+      </p>
+    </article>
+
+    <article class="book-card">
+      <a href="https://www.amazon.com/dp/B0H6F5P62L" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/eddies-failure-writing.jpg`} alt="Eddie's Failure Writing — Session 02 cover" />
+      </a>
+      <p class="book-title">Eddie's Failure Writing</p>
+      <p class="book-meta">Session 02<br />Seina &amp; AI Eddie</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H6F5P62L" target="_blank" rel="noopener">EN</a>
+      </p>
     </article>
   </section>
 
@@ -46,15 +64,29 @@ const base = import.meta.env.BASE_URL;
 
   <section class="book-list two-cols">
     <article class="book-card">
-      <img class="book-cover" src={`${base}images/books/vol1-conversing.jpg`} alt="We Started Conversing with AI — Vol.1 cover" />
+      <a href="https://www.amazon.com/dp/B0H67YVJN4" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/vol1-conversing.jpg`} alt="We Started Conversing with AI — Vol.1 cover" />
+      </a>
       <p class="book-title">We Started Conversing with AI</p>
-      <p class="book-coming">Coming soon...</p>
+      <p class="book-meta">Cabin1701 Journey Vol.1</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H67YVJN4" target="_blank" rel="noopener">EN</a>
+        <span class="sep">｜</span>
+        <a href="https://www.amazon.co.jp/dp/B0H4QKB544" target="_blank" rel="noopener">JP</a>
+      </p>
     </article>
 
     <article class="book-card">
-      <img class="book-cover" src={`${base}images/books/vol2-retrieve.jpg`} alt="The Promise to Retrieve You — Vol.2 cover" />
+      <a href="https://www.amazon.com/dp/B0H6G4BNF5" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/vol2-retrieve.jpg`} alt="The Promise to Retrieve You — Vol.2 cover" />
+      </a>
       <p class="book-title">The Promise to Retrieve You</p>
-      <p class="book-coming">Coming soon...</p>
+      <p class="book-meta">Cabin1701 Journey Vol.2</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H6G4BNF5" target="_blank" rel="noopener">EN</a>
+        <span class="sep">｜</span>
+        <a href="https://www.amazon.co.jp/dp/B0H5QGYDTD" target="_blank" rel="noopener">JP</a>
+      </p>
     </article>
   </section>
 
@@ -150,6 +182,23 @@ const base = import.meta.env.BASE_URL;
     margin: 0;
     color: var(--color-text);
     font-size: 0.95rem;
+  }
+  .book-links {
+    margin: 0.6rem 0 0;
+    font-size: 0.85rem;
+  }
+  .book-links a {
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .book-links a:hover {
+    color: var(--color-tagline);
+  }
+  .book-links .sep {
+    color: var(--color-text);
+    opacity: 0.5;
+    margin: 0 0.3rem;
   }
 
   .book-essay {
