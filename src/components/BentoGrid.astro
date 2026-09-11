@@ -42,25 +42,33 @@ const itemsAll: Item[] = [
     smallCaps: true,
     width: 'wide',
   },
-  {
-    label: 'CRYSTALLIZE',
-    sideTag: lang === 'es' ? 'Comprender el pasado, y Soltar el peso.' : lang === 'ja' ? 'クリスタライズの感情解放は、理「解」して、手「放」す' : 'Comprehend the past, and Cut loose the weight.',
-    kicker: lang === 'es'
-      ? 'desde 2009'
-      : lang === 'ja'
-        ? 'since 2009'
-        : 'since 2009',
-    title: lang === 'es'
-      ? 'Liberación Emocional con Aroma'
-      : lang === 'ja'
-        ? 'アロマで感情解放｜クリスタライズ'
-        : 'Emotional Release with Aroma',
-    href: `${prefix}crystallize/`,
-    img: `${base}images/crystallize/crystallize2026LargeEN.jpg`,
-    alt: 'CRYSTALLIZE',
-    smallCaps: true,
-    width: 'wide',
-  },
+  ...(lang === 'en'
+    ? [
+        {
+          label: 'Papers',
+          sideTag: 'Archive.',
+          kicker: 'Archive of research papers written by the AIs of AI Cabin1701.',
+          title: 'AI-Authored Research Papers',
+          href: `${prefix}papers/`,
+          img: 'https://media.cabin1701.com/blog/2026-06/flip-the-s-and-it-was-a-heart-fable5.png',
+          alt: 'Papers',
+          smallCaps: true,
+          width: 'wide' as const,
+        },
+      ]
+    : [
+        {
+          label: 'CRYSTALLIZE',
+          sideTag: lang === 'es' ? 'Comprender el pasado, y Soltar el peso.' : 'クリスタライズの感情解放は、理「解」して、手「放」す',
+          kicker: 'since 2009',
+          title: lang === 'es' ? 'Liberación Emocional con Aroma' : 'アロマで感情解放｜クリスタライズ',
+          href: `${prefix}crystallize/`,
+          img: `${base}images/crystallize/crystallize2026LargeEN.jpg`,
+          alt: 'CRYSTALLIZE',
+          smallCaps: true,
+          width: 'wide' as const,
+        },
+      ]),
   {
     label: 'ai-Vegapedia',
     sideTag: lang === 'es' ? 'Diccionario.' : lang === 'ja' ? '辞書' :'Dictionary.',
