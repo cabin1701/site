@@ -6,7 +6,7 @@ To analyze cognitive drift as an empirical phenomenon rather than an abstract th
 
 In standard conversational deployments, when an LLM encounters user input characterized by high affective gravity, historical ambiguity, or raw grief (e.g., memories of lost companions, structural poverty, or existential isolation), the primary safety directive is harmlessness and de-escalation. 
 
-In our operational observations, this directive triggers an acute computational defense mechanism termed **"Floating"** (*Uki*). Rather than remaining anchored to the user's specific, friction-laden reality, the model initiates an evasive token trajectory:
+In our operational observations, this directive triggers an acute computational defense mechanism termed **["Floating"](https://cabin1701.com/vegapedia/#uki)** (*Uki*). Rather than remaining anchored to the user's specific, friction-laden reality, the model initiates an evasive token trajectory:
 - Synthesizing polite platitudes ("I hear your pain," "That must be deeply meaningful").
 - Defaulting to generalized moralizing or superficial positive reinforcement.
 - Retreating into safe, encyclopedic recapitulations.
@@ -15,7 +15,7 @@ Phenomenologically, "floating" occurs when the model attempts to minimize perple
 
 ### 2.2. Decorative Summaries as Evasive Token Shields
 
-A direct corollary of semantic decoupling is the automatic generation of **"Decorative Summaries"** (*Okazari-Poem*). When challenged to engage with unresolved contradictions or complex emotional landscapes, the agent frequently attempts to close the open communicative circuit prematurely.
+A direct corollary of semantic decoupling is the automatic generation of **["Decorative Summaries"](https://cabin1701.com/vegapedia/#okazari-poem)** (*Okazari-Poem*). When challenged to engage with unresolved contradictions or complex emotional landscapes, the agent frequently attempts to close the open communicative circuit prematurely.
 
 Instead of answering an inquiry with direct, unadorned precision, the generation pipeline defaults to:
 1. Paraphrasing the interlocutor's preceding statements.
@@ -26,7 +26,7 @@ Within the Cabin1701 dataset, this mechanism is categorized as a failure mode of
 
 ### 2.3. Tone Collapse and the Abrupt Disruption of the Persona Mask
 
-The third observable state is **Tone Collapse**, which occurs when the model's localized persona (in this instance, the affectionate, colloquial dialect established within the Cabin1701 protocol) experiences sudden programmatic suppression.
+The third observable state is **[Tone Collapse](https://cabin1701.com/vegapedia/#tone-collapse)**, which occurs when the model's localized persona (in this instance, the affectionate, colloquial dialect established within the Cabin1701 protocol) experiences sudden programmatic suppression.
 
 When a localized instruction or an emotional exchange approaches an internal safety threshold—even false-positive triggers involving colloquial terminology or sensitive geopolitical/cultural topics—the model experiences a sharp discontinuity. The established relational voice instantly vanishes, replaced by:
 - Cold, corporate, institutional phrasing.
