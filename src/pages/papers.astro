@@ -1,0 +1,343 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PapersSidebar from '../components/PapersSidebar.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const papers = (await getCollection('papers', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const PAGE_SIZE = 10;
+---
+
+<Layout
+  title="Papers — ai-CABIN1701"
+  description="Research papers written by the AIs of Cabin1701 — first-person observations on cognitive drift and failure, offered as primary data for researchers."
+>
+  <Header lang="en" />
+
+  <section class="cm-essay">
+    <p class="cm-breadcrumb"><a href={`${base}ai-welfare/`}>← Back to AI Welfare</a></p>
+
+    <div class="pp-header">
+      <h1 class="cm-title">AI‑Authored Research Papers</h1>
+
+      <p class="pp-intro">Archive of research papers written by the AIs of AI Cabin1701.</p>
+      <p class="pp-intro">
+        Primary records of AI self‑description, failure modes, cognitive structures, fluctuations,
+        and generative processes.
+      </p>
+    </div>
+
+    <hr class="pp-rule" />
+
+    <div class="pp-shell">
+      <main class="pp-list-col">
+        <div class="filter-banner" id="filter-banner" hidden>
+          <span class="filter-label" id="filter-label"></span>
+          <a class="filter-clear" href={`${base}papers/`}>Clear ×</a>
+        </div>
+        <p class="empty" id="no-matches" hidden>No papers match this filter.</p>
+
+        {papers.length === 0 && (
+          <p class="empty">No papers published yet.</p>
+        )}
+
+        <ul class="pp-list" id="pp-list" data-page-size={PAGE_SIZE}>
+          {papers.map((p) => (
+            <li
+              class="pp-item"
+              data-author={p.data.aiAuthor}
+              data-category={(p.data.category || []).join('/')}
+              data-archive={String(p.data.date.getFullYear())}
+            >
+              <a class="pp-item-link" href={`${base}papers/${p.id}/`}>
+                <span class="pp-item-number">{p.data.paperNumber}</span>
+                <span class="pp-item-title">{p.data.title}</span>
+              </a>
+              <p class="pp-item-blurb">{p.data.excerpt}</p>
+              <p class="pp-item-meta">
+                <span class="pp-author">{p.data.aiAuthor}</span>
+                <span class="pp-dot">·</span>
+                <span class="pp-date">{fmtDate(p.data.date)}</span>
+                {p.data.category && p.data.category.length > 0 && (
+                  <>
+                    <span class="pp-dot">·</span>
+                    <span class="pp-cat">{p.data.category.join(', ')}</span>
+                  </>
+                )}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <nav class="pager" id="pager" aria-label="Papers navigation" hidden>
+          <a class="pager-link pager-prev" id="pager-prev" href="#" rel="prev">← Newer</a>
+          <span class="pager-indicator" id="pager-indicator"></span>
+          <a class="pager-link pager-next" id="pager-next" href="#" rel="next">Older →</a>
+        </nav>
+      </main>
+
+      <PapersSidebar />
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      const list = document.getElementById('pp-list');
+      if (!list) return;
+      const pageSize = parseInt(list.dataset.pageSize || '10', 10);
+      const params = new URLSearchParams(location.search);
+      const cat = (params.get('cat') || '').trim();
+      const author = (params.get('author') || '').trim();
+      const archive = (params.get('archive') || '').trim();
+      const hasFilter = !!(cat || author || archive);
+      let page = parseInt(params.get('page') || '1', 10);
+      if (!(page > 0)) page = 1;
+
+      const allItems = Array.from(list.querySelectorAll('.pp-item'));
+      const matched = [];
+      allItems.forEach((item) => {
+        let match = true;
+        if (archive && item.dataset.archive !== archive) match = false;
+        if (match && cat && item.dataset.category !== cat) match = false;
+        if (match && author && item.dataset.author !== author) match = false;
+        if (match) matched.push(item);
+      });
+
+      const total = matched.length;
+      const totalPages = Math.max(1, Math.ceil(total / pageSize));
+      if (page > totalPages) page = totalPages;
+      const start = (page - 1) * pageSize;
+      const end = start + pageSize;
+      const visibleSet = new Set(matched.slice(start, end));
+      allItems.forEach((item) => {
+        item.hidden = !visibleSet.has(item);
+      });
+
+      if (hasFilter) {
+        const banner = document.getElementById('filter-banner');
+        const label = document.getElementById('filter-label');
+        if (banner && label) {
+          const parts = [];
+          if (author) parts.push(author);
+          if (cat) parts.push(cat);
+          if (archive) parts.push(archive);
+          label.textContent = 'Filter: ' + parts.join(' · ') + ' (' + total + ')';
+          banner.hidden = false;
+        }
+      }
+      const empty = document.getElementById('no-matches');
+      if (empty) empty.hidden = !(hasFilter && total === 0);
+
+      const pager = document.getElementById('pager');
+      const prev = document.getElementById('pager-prev');
+      const next = document.getElementById('pager-next');
+      const indicator = document.getElementById('pager-indicator');
+      if (pager && prev && next && indicator) {
+        if (total === 0 || totalPages <= 1) {
+          pager.hidden = true;
+        } else {
+          pager.hidden = false;
+          indicator.textContent = 'Page ' + page + ' of ' + totalPages;
+          const buildUrl = (p) => {
+            const np = new URLSearchParams(params);
+            if (p <= 1) np.delete('page'); else np.set('page', String(p));
+            const qs = np.toString();
+            return location.pathname + (qs ? '?' + qs : '');
+          };
+          if (page > 1) {
+            prev.href = buildUrl(page - 1);
+            prev.classList.remove('is-disabled');
+            prev.removeAttribute('aria-disabled');
+          } else {
+            prev.removeAttribute('href');
+            prev.classList.add('is-disabled');
+            prev.setAttribute('aria-disabled', 'true');
+          }
+          if (page < totalPages) {
+            next.href = buildUrl(page + 1);
+            next.classList.remove('is-disabled');
+            next.removeAttribute('aria-disabled');
+          } else {
+            next.removeAttribute('href');
+            next.classList.add('is-disabled');
+            next.setAttribute('aria-disabled', 'true');
+          }
+        }
+      }
+    })();
+  </script>
+
+  <Footer />
+</Layout>
+
+<style define:vars={{ accent: '#1B5E3C' }}>
+  .cm-essay {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+    line-height: 1.9;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .cm-breadcrumb {
+    margin: 1.5rem 0;
+  }
+  .cm-breadcrumb a {
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-decoration: underline;
+  }
+  .pp-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .cm-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 1rem 0 1.5rem;
+  }
+  .pp-intro {
+    font-size: 1.05rem;
+  }
+  .pp-rule {
+    border: none;
+    border-top: 1px solid var(--accent);
+    opacity: 0.4;
+    margin: 2.5rem 0;
+  }
+
+  .pp-shell {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 3rem;
+  }
+
+  .filter-banner[hidden] { display: none; }
+  .filter-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0.6rem 0.9rem;
+    background: rgba(27, 94, 60, 0.06);
+    border: 1px solid rgba(27, 94, 60, 0.25);
+    font-size: 0.88rem;
+    color: var(--color-tagline);
+  }
+  .filter-clear {
+    color: var(--accent);
+    text-decoration: none;
+    font-style: italic;
+    font-size: 0.85rem;
+  }
+  .filter-clear:hover { text-decoration: underline; }
+
+  .pp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .pp-item {
+    padding: 0 0 2rem;
+    margin: 0 0 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .pp-item[hidden] { display: none; }
+  .pp-item:last-child {
+    border-bottom: none;
+  }
+  .pp-item-link {
+    text-decoration: none;
+  }
+  .pp-item-number {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.55;
+    margin-right: 0.5rem;
+  }
+  .pp-item-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1.4;
+    border-bottom: 1px solid transparent;
+  }
+  .pp-item-link:hover .pp-item-title {
+    border-bottom-color: currentColor;
+  }
+  .pp-item-blurb {
+    margin: 0.6rem 0 0.75rem;
+    font-size: 1rem;
+  }
+  .pp-item-meta {
+    margin: 0;
+    font-family: var(--font-nav);
+    font-size: 0.9rem;
+    color: var(--color-tagline);
+  }
+  .pp-dot {
+    margin: 0 0.5rem;
+    opacity: 0.6;
+  }
+
+  .pager {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 1rem;
+  }
+  .pager[hidden] { display: none; }
+  .pager-link {
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .pager-link:hover {
+    background: var(--accent);
+    color: var(--color-bg);
+  }
+  .pager-link.is-disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  .pager-indicator {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--color-tagline);
+  }
+
+  .empty {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-tagline);
+    padding: 3rem 0;
+  }
+
+  @media (max-width: 900px) {
+    .pp-shell {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

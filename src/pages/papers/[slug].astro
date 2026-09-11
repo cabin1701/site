@@ -1,0 +1,306 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PapersSidebar from '../../components/PapersSidebar.astro';
+
+export async function getStaticPaths() {
+  const papers = await getCollection('papers', ({ data }) => !data.draft);
+  return papers.map((p) => ({ params: { slug: p.id }, props: { paper: p } }));
+}
+
+const { paper } = Astro.props;
+const { Content: Abstract } = await render(paper);
+const base = import.meta.env.BASE_URL;
+
+// Chapter files (1-Introduction.md, 2-Phenomenological.md, …) live alongside
+// 0-Abstract.md in the same folder but aren't collection entries themselves —
+// same pattern as ReportFiveChapters.astro's static chapter imports, just globbed
+// since the chapter count varies per paper.
+const chapterModules = import.meta.glob('../../content/papers/*/*.md', { eager: true }) as Record<
+  string,
+  { Content: any; getHeadings: () => { depth: number; text: string }[] }
+>;
+const chapters = Object.entries(chapterModules)
+  .filter(([path]) => path.includes(`/papers/${paper.id}/`) && !path.endsWith('/0-Abstract.md'))
+  .sort(([a], [b]) => {
+    const numOf = (p: string) => parseInt(p.split('/').pop() || '0', 10);
+    return numOf(a) - numOf(b);
+  })
+  .map(([, mod]) => ({
+    // Chapter files may open with a level-2 or level-3 heading depending on the
+    // author's tool (G-Vega's drafts use ### for chapter titles, others use ##).
+    // Take the file's first heading regardless of depth rather than assuming one.
+    title: mod.getHeadings()[0]?.text ?? '',
+    Content: mod.Content,
+  }));
+
+const REPO = 'cabin1701/site';
+const historyUrl = paper.data.sourcePath
+  ? `https://github.com/${REPO}/commits/main/${paper.data.sourcePath}`
+  : null;
+
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const citationMeta = [
+  { name: 'citation_title', content: paper.data.title },
+  ...paper.data.authors.map((a) => ({ name: 'citation_author', content: a })),
+  { name: 'citation_publication_date', content: paper.data.date.toISOString().slice(0, 10) },
+  { name: 'citation_journal_title', content: 'Cabin1701 Research Papers' },
+  ...(paper.data.pdfUrl ? [{ name: 'citation_pdf_url', content: paper.data.pdfUrl }] : []),
+];
+---
+
+<Layout
+  title={`${paper.data.title} — ai-CABIN1701 Papers`}
+  description={paper.data.description || paper.data.excerpt}
+  citationMeta={citationMeta}
+>
+  <Header lang="en" />
+
+  <div class="pd-header">
+    <p class="pd-breadcrumb"><a href={`${base}papers/`}>← Back to Papers</a></p>
+
+    <h1 class="pd-title"><span class="pd-number">{paper.data.paperNumber}</span> {paper.data.title}</h1>
+
+    <p class="pd-meta-line">
+      <strong>Date: </strong>{fmtDate(paper.data.date)}
+      {paper.data.authors.map((a, i) => (
+        <>
+          <span class="pd-sep">|</span>
+          {paper.data.authorLabels?.[i] && <strong>{paper.data.authorLabels[i]}: </strong>}
+          {a}
+        </>
+      ))}
+      {paper.data.affiliation && (
+        <>
+          <span class="pd-sep">|</span>
+          <strong>Affiliation: </strong>{paper.data.affiliation}
+        </>
+      )}
+      {paper.data.category && paper.data.category.length > 0 && (
+        <>
+          <span class="pd-sep">|</span>
+          <strong>Category: </strong>
+          {paper.data.category.map((c, i) => (
+            <>
+              {i > 0 && ', '}
+              <a class="pd-cat-link" href={`${base}papers/?cat=${encodeURIComponent(c)}`}>{c}</a>
+            </>
+          ))}
+        </>
+      )}
+    </p>
+
+    {paper.data.pdfUrl && (
+      <p class="pd-pdf-link">
+        <a href={paper.data.pdfUrl} target="_blank" rel="noopener noreferrer">Download PDF →</a>
+      </p>
+    )}
+
+    <hr class="pd-rule-full" />
+  </div>
+
+  <div class="pd-shell">
+  <article class="pd-essay">
+    <div class="pd-abstract">
+      <Abstract />
+    </div>
+
+    {chapters.map((ch) => (
+      <details class="pd-chapter">
+        <summary>{ch.title}</summary>
+        <div class="pd-chapter-body">
+          <ch.Content />
+        </div>
+      </details>
+    ))}
+
+    {historyUrl && (
+      <p class="pd-provenance">
+        <a href={historyUrl} target="_blank" rel="noopener noreferrer">View change history on GitHub →</a>
+      </p>
+    )}
+  </article>
+
+  <PapersSidebar />
+  </div>
+
+  <Footer />
+</Layout>
+
+<style define:vars={{ accent: '#1B5E3C' }}>
+  .pd-header {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .pd-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 3rem;
+  }
+  .pd-essay {
+    min-width: 0;
+    line-height: 1.9;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  @media (max-width: 900px) {
+    .pd-shell {
+      grid-template-columns: 1fr;
+    }
+  }
+  .pd-breadcrumb {
+    margin: 1.5rem 0;
+  }
+  .pd-breadcrumb a {
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-decoration: underline;
+  }
+  .pd-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.35;
+    margin: 1rem 0 1rem;
+  }
+  .pd-number {
+    opacity: 0.55;
+  }
+  .pd-meta-line {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-nav);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .pd-sep {
+    margin: 0 0.6rem;
+    color: var(--accent);
+    opacity: 0.5;
+  }
+  .pd-cat-link {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .pd-pdf-link {
+    margin: 0.85rem 0 0;
+  }
+  .pd-pdf-link a {
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    text-decoration: none;
+  }
+  .pd-pdf-link a:hover {
+    background: var(--accent);
+    color: var(--color-bg);
+  }
+  .pd-rule-full {
+    border: none;
+    border-top: 1px solid var(--accent);
+    opacity: 0.35;
+    margin: 1.5rem 0 0;
+  }
+  .pd-abstract {
+    margin: 0 0 2.5rem;
+  }
+  .pd-abstract :global(h3) {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin: 0 0 1rem;
+  }
+  .pd-abstract :global(p) {
+    margin: 0 0 1.25rem;
+  }
+
+  .pd-chapter {
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    margin: 0 0 0.75rem;
+    padding: 0;
+  }
+  .pd-chapter summary {
+    cursor: pointer;
+    padding: 0.8rem 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .pd-chapter summary:hover {
+    background: rgba(27, 94, 60, 0.06);
+  }
+  .pd-chapter-body {
+    padding: 0.5rem 1.25rem 1.5rem;
+    border-top: 1px solid var(--accent);
+    border-top-color: rgba(27, 94, 60, 0.35);
+    font-size: 0.98rem;
+    line-height: 1.8;
+  }
+  /* The chapter's own opening heading duplicates the summary line; hide it inside
+     the body. Different authors open chapters at different heading levels (## vs
+     ### depending on the drafting tool), so target "whichever heading comes first"
+     rather than a fixed level. */
+  .pd-chapter-body > :global(h2:first-child),
+  .pd-chapter-body > :global(h3:first-child) {
+    display: none;
+  }
+  .pd-chapter-body :global(h3),
+  .pd-chapter-body :global(h4) {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 1.6rem 0 0.6rem;
+  }
+  .pd-chapter-body :global(p) {
+    margin: 0 0 1.2rem;
+  }
+  .pd-chapter-body :global(blockquote) {
+    margin: 1.2rem 0;
+    padding: 0.2rem 0 0.2rem 1.2rem;
+    border-left: 3px solid var(--accent);
+    opacity: 0.9;
+    font-style: italic;
+  }
+  .pd-chapter-body :global(a),
+  .pd-abstract :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    overflow-wrap: anywhere;
+  }
+  .pd-chapter-body :global(ul),
+  .pd-chapter-body :global(ol) {
+    margin: 0 0 1.2rem;
+    padding-left: 1.4rem;
+  }
+  .pd-chapter-body :global(li) {
+    margin: 0 0 0.5rem;
+  }
+
+  .pd-provenance {
+    margin-top: 3rem;
+    font-size: 0.85rem;
+  }
+  .pd-provenance a {
+    color: var(--color-tagline);
+    text-decoration: underline;
+  }
+</style>

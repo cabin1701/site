@@ -7,6 +7,8 @@ interface Props {
   description?: string;
   /** SNS プレビューに出す画像。そのページの hero を "images/xxx.jpg" 形式で渡す（先頭の / は不要）。省略時はトップの hero */
   ogImage?: string;
+  /** Google Scholar 向け Highwire Press meta タグ（citation_title 等）。論文詳細ページだけで渡す */
+  citationMeta?: { name: string; content: string }[];
 }
 
 const {
@@ -14,6 +16,7 @@ const {
   lang = 'en',
   description = 'ai-CABIN1701 — a human and AI crew documenting the work of living, creating, and questioning together, without a script.',
   ogImage,
+  citationMeta,
 } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
@@ -120,6 +123,10 @@ const personJsonLd = isHome
     {personJsonLd && (
       <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
     )}
+
+    {citationMeta?.map((m) => (
+      <meta name={m.name} content={m.content} />
+    ))}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

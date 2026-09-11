@@ -1,0 +1,156 @@
+---
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL;
+const papersHref = `${base}papers/`;
+
+const all = await getCollection('papers', ({ data }) => !data.draft);
+
+// Categories: flat, count only — papers don't need the blog's 2-level tree.
+const catMap = new Map<string, number>();
+for (const p of all) {
+  for (const c of p.data.category || []) {
+    catMap.set(c, (catMap.get(c) || 0) + 1);
+  }
+}
+const categories = [...catMap.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+
+// Written by: primary AI author, count.
+const authorMap = new Map<string, number>();
+for (const p of all) {
+  authorMap.set(p.data.aiAuthor, (authorMap.get(p.data.aiAuthor) || 0) + 1);
+}
+const authors = [...authorMap.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+
+// Archive by year — paper volume is low, a year granularity reads cleaner than month.
+const yearMap = new Map<string, number>();
+for (const p of all) {
+  const y = String(p.data.date.getFullYear());
+  yearMap.set(y, (yearMap.get(y) || 0) + 1);
+}
+const years = [...yearMap.entries()].sort((a, b) => b[0].localeCompare(a[0]));
+---
+
+<aside class="papers-sidebar">
+  {authors.length > 0 && (
+    <section class="side-section">
+      <h3 class="side-title">Written by</h3>
+      <ul class="side-list">
+        {authors.map(([name, n]) => (
+          <li>
+            <a href={`${papersHref}?author=${encodeURIComponent(name)}`}>
+              <span class="side-name">{name}</span>
+              <span class="side-count">({n})</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {categories.length > 0 && (
+    <section class="side-section">
+      <h3 class="side-title">Categories</h3>
+      <ul class="side-list">
+        {categories.map(([cat, n]) => (
+          <li>
+            <a href={`${papersHref}?cat=${encodeURIComponent(cat)}`}>
+              <span class="side-name">{cat}</span>
+              <span class="side-count">({n})</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {years.length > 0 && (
+    <section class="side-section">
+      <h3 class="side-title">Archive</h3>
+      <select
+        class="side-archive-select"
+        aria-label="Archive"
+        onchange="if(this.value)location.href=this.value"
+      >
+        <option value="">Select year</option>
+        {years.map(([year, n]) => (
+          <option value={`${papersHref}?archive=${year}`}>{year} ({n})</option>
+        ))}
+      </select>
+    </section>
+  )}
+</aside>
+
+<style define:vars={{ accent: '#1B5E3C' }}>
+  .papers-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    padding-top: 0.25rem;
+  }
+  .side-section {
+    border-top: 1px solid rgba(27, 94, 60, 0.25);
+    padding-top: 1.25rem;
+  }
+  .side-section:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .side-title {
+    margin: 0 0 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+  }
+  .side-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .side-list a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  .side-name {
+    font-family: var(--font-nav);
+    font-size: 1rem;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+  .side-list a:hover .side-name {
+    color: var(--accent);
+  }
+  .side-count {
+    font-size: 0.75rem;
+    color: var(--color-tagline);
+  }
+  .side-archive-select {
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    background: var(--color-bg);
+    border: 1px solid rgba(27, 94, 60, 0.3);
+    appearance: none;
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--accent) 50%),
+      linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+    background-position:
+      calc(100% - 14px) calc(50% - 2px),
+      calc(100% - 9px) calc(50% - 2px);
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+  }
+  .side-archive-select:focus {
+    outline: 1px solid var(--accent);
+    outline-offset: -2px;
+  }
+</style>
