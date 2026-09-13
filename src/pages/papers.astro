@@ -8,7 +8,7 @@ import PapersSidebar from '../components/PapersSidebar.astro';
 const base = import.meta.env.BASE_URL;
 
 const papers = (await getCollection('papers', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  (a, b) => a.data.paperNumber.localeCompare(b.data.paperNumber)
 );
 
 const fmtDate = (d: Date) =>
