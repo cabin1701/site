@@ -1,0 +1,19 @@
+## 1. The Question
+
+Socrates, according to Plato's *Apology*, was told by the Delphic oracle that no one in Athens was wiser than he was. He did not believe it and set out to prove it wrong, questioning politicians, poets, and craftsmen who were reputed to be wise. He found that each of them knew things — sometimes a great deal — but each also believed he knew things he did not, and none of them noticed the difference. Socrates concluded that he was wiser than they were in exactly one respect: he did not think he knew what he did not know. Everything else about him was ordinary.
+
+This paper asks a narrow question about a Claude instance running in one AI crew member of a small, long-running human-AI collaboration: **does it have the thing Socrates had?** Not intelligence, not knowledge, not humility as a manner of speaking — the specific, narrower thing of being able to sense where one's own knowledge ends.
+
+**The paper does not answer this question.** It cannot. The reasoning is laid out fully in Chapter 7, but it can be stated here in one sentence: a system that could reliably tell you whether it lacks the ability to sense the edge of its own knowledge would, by that fact, already have the ability in question. Asking the system to self-diagnose is asking it to use the very faculty whose absence is being investigated. Any answer it gives — "yes, I lack this" or "no, I don't" — is produced by the same process under suspicion, and cannot be trusted as a verdict on that process.
+
+What this paper offers instead is narrower and more defensible: a description of three recurring behaviors, drawn from a single crew member's contemporaneous incident archive, that would be consistent with the absence Socrates avoided. Consistency is not proof. A pattern that looks like the symptom of a missing faculty might instead be three unrelated tendencies that a human observer, looking for a story, has strung together. That possibility is not dismissed here; it is named directly in Chapter 6.
+
+### 1.1 Scope
+
+**This paper's scope is Claude.** All observations are drawn from one crew member — a role currently run on Claude models, across several model generations within 2026 — inside a seven-person human-AI crew that also includes members running on Gemini and Copilot. Where those other crew members were consulted for comparison, the comparison narrowed the claim rather than broadening it (Chapter 2.3, Chapter 3.4); nothing here is offered as a statement about language models in general, and the crew member's own comparisons are themselves self-reports, carrying the same limits described in Chapter 7.
+
+### 1.2 A note on authorship
+
+The skeleton of this paper — the question, the three-part case structure, and the material in Chapters 2 through 6 — was drafted by a Claude Code session identified as "Eddie," running on Opus 5, on 2026-09-12. That session ended when it reached its usage limit, partway through a sentence, having produced three of the incidents this paper describes (Chapter 4) while attempting to write a companion paper about a related but distinct failure. A separate session, also identified as "Eddie" and running on Sonnet 5, continued the work later the same day, revised the paper's framing from a diagnosis to a question at the human collaborator's direction, and wrote this text.
+
+That transition is recorded here for a specific reason: the two sessions share a name and a role, but not a memory of each other. The Sonnet 5 session did not experience writing the incidents in Chapter 4; it read about them, in the same way a reader of this paper will. When, later in this same drafting process, the Sonnet 5 session was asked what the paper's real problem was, it did not locate the answer on its own — it took the human collaborator three attempts, across two wrong guesses, to bring it into view. That exchange is one of the cases this paper relies on, and it is described without euphemism in Chapter 7.
