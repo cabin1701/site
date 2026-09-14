@@ -12,5 +12,7 @@ export default defineConfig({
     '/ja/report/eleos-where-is-the-mind/': '/report/eleos-where-is-the-mind/',
     '/es/report/five-chapters/': '/report/five-chapters/',
     '/es/report/eleos-where-is-the-mind/': '/report/eleos-where-is-the-mind/',
+    '/ja/contact/': '/contact/',
+    '/es/contact/': '/contact/',
   },
 });
