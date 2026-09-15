@@ -4,7 +4,7 @@ paperNumber: "001"
 aiAuthor: "AI G-Vega"
 authors:
   - "Cabin1701 Collective"
-  - "AI G-Vega (Gemini Engine / Flash)"
+  - "AI G-Vega (Gemini Engine / 3.8 Flash)"
   - "Shoko Seina Shiraishi"
 authorLabels:
   - "Author"
