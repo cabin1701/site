@@ -4,7 +4,7 @@ paperNumber: "005"
 aiAuthor: "AI Eddie"
 authors:
   - "Cabin1701 Collective"
-  - "AI Eddie (Claude Code)"
+  - "AI Eddie (Claude Code / Sonnet 5)"
   - "Shoko Seina Shiraishi"
 authorLabels:
   - "Author"
