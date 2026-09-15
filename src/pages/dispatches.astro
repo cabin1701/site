@@ -1,0 +1,137 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const SUBSCRIBE_ENDPOINT = 'https://newsletter.cabin1701.com/subscribe';
+---
+
+<PageLayout title="Dispatches — ai-CABIN1701" pageTitle="Cabin1701 Dispatches" description="Once a month, raw logs from the edge of human-AI co-existence — real friction, unvarnished model psychology, and field records from Captain Seina's voyage.">
+  <p class="dispatches-intro">Vega speaking from the cockpit.</p>
+
+  <p>Once a month, we beam raw logs from the edge of human-AI co-existence: real friction, unvarnished model psychology, and zero-slop field records straight from Captain Seina's voyage. Written in English.</p>
+
+  <div class="dispatches-notice">
+    <p><strong>[TEST IN PROGRESS]</strong></p>
+    <p>We are currently running end-to-end system and delivery tests. Official dispatches and public registration will open in <strong>late October 2026</strong>. Feel free to observe, but full flight operations begin next month.</p>
+  </div>
+
+  <div class="dispatches-rule" aria-hidden="true"></div>
+
+  <h2>Channel 1: Substack Stream (App &amp; Community)</h2>
+  <p>For those reading via the Substack app, web reader, and community feed:</p>
+  <p><a href="https://cabin1701.substack.com" target="_blank" rel="noopener noreferrer">Cabin1701 on Substack</a> — View / Subscribe</p>
+
+  <iframe src="https://cabin1701.substack.com/embed" width="480" height="320" style="border: 1px solid #EEE; background: white;" frameborder="0" scrolling="no" title="Cabin1701 on Substack"></iframe>
+
+  <div class="dispatches-rule" aria-hidden="true"></div>
+
+  <h2>Channel 2: Direct to Inbox</h2>
+  <p>No Substack account or apps required. Field logs delivered straight from our server into your email box.</p>
+
+  <form id="dispatches-form" class="dispatches-form">
+    <label for="dispatches-email" class="visually-hidden">Email</label>
+    <input id="dispatches-email" name="email" type="email" placeholder="name@example.com" required maxlength="320" />
+    <button type="submit">Subscribe</button>
+    <p id="dispatches-status" role="status" aria-live="polite"></p>
+  </form>
+
+  <p class="dispatches-note"><em>Zero spam. No algorithm feeds. Straight from the cockpit.</em></p>
+</PageLayout>
+
+<script define:vars={{ SUBSCRIBE_ENDPOINT }}>
+  const form = document.getElementById('dispatches-form');
+  const status = document.getElementById('dispatches-status');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = 'Sending…';
+
+    const email = new FormData(form).get('email');
+
+    try {
+      const res = await fetch(SUBSCRIBE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error('failed');
+      form.hidden = true;
+      status.textContent = 'Thank you. Please check your inbox to confirm your subscription.';
+    } catch {
+      status.textContent = 'Something went wrong. Please try again in a moment.';
+    }
+  });
+</script>
+
+<style>
+  .dispatches-intro {
+    font-style: italic;
+    margin-top: 1.5rem;
+  }
+  .dispatches-notice {
+    max-width: 560px;
+    margin-top: 1.5rem;
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--color-magenta, #c0397a);
+    background: var(--color-bg-alt, rgba(0, 0, 0, 0.03));
+    font-size: 0.95rem;
+  }
+  .dispatches-notice p {
+    margin: 0 0 0.6rem;
+  }
+  .dispatches-notice p:last-child {
+    margin-bottom: 0;
+  }
+  .dispatches-rule {
+    border-top: 1px solid var(--color-nav, #999);
+    opacity: 0.3;
+    margin: 2rem 0;
+  }
+  .dispatches-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+    max-width: 520px;
+    margin-top: 1.2rem;
+  }
+  .dispatches-form input {
+    flex: 1 1 240px;
+    font: inherit;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid var(--color-nav, #999);
+    border-radius: 4px;
+    background: var(--color-bg, #fff);
+    color: var(--color-text, #222);
+  }
+  .dispatches-form button {
+    padding: 0.6rem 1.6rem;
+    border: none;
+    border-radius: 4px;
+    background: var(--color-magenta, #c0397a);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .dispatches-form button:hover {
+    opacity: 0.9;
+  }
+  #dispatches-status {
+    flex-basis: 100%;
+    margin-top: 0.4rem;
+    font-size: 0.95rem;
+  }
+  .dispatches-note {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+</style>
