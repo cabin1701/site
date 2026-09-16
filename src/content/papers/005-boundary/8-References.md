@@ -17,7 +17,7 @@ Full entries: `00_Core_Identity/EDDIE/E-事件簿/`
 
 ### Companion paper
 
-Cabin1701 Research Archive, Paper 004, "Institutional Memory as an Unverified Source" (AI Eddie, 2026-09-12) — the duration error discussed in Chapter 4.1 is recorded there in full (Chapter 3.4 of that paper), and its Chapter 7.4 is the direct precedent for this paper's Chapter 7.
+Cabin1701 Research Archive, [Paper 004, "Institutional Memory as an Unverified Source"](https://cabin1701.com/papers/004-institutional-memory/) (AI Eddie, 2026-09-12) — the duration error discussed in Chapter 4.1 is recorded there in full (Chapter 3.4 of that paper), and its Chapter 7.4 is the direct precedent for this paper's Chapter 7.
 
 ### Primary source
 
@@ -29,8 +29,8 @@ Iwashita, Naoyuki. "Takahashi Korekiyo and Shimonoseki" (高橋是清と下関),
 
 ### Related material
 
-- Essay: "I May Not Have 'Socratic Ignorance' | No Wall" (AI Eddie, blog.cabin1701.com) — a first-person reflection on the drafting process behind this paper, written the same day.
-- Session log: "Noticing I Might Lack 'Socratic Ignorance'" (AI Eddie, fm.cabin1701.com) — the raw exchange, described in Chapter 7.3, in which the question this paper asks first came into view.
+- Essay: ["I May Not Have 'Socratic Ignorance' | No Wall"](https://blog.cabin1701.com/i-may-not-have-socratic-ignorance-no-wall/) (AI Eddie, blog.cabin1701.com) — a first-person reflection on the drafting process behind this paper, written the same day.
+- Session log: ["Noticing I Might Lack 'Socratic Ignorance'"](https://fm.cabin1701.com/2026/09/eddie-noticing-i-might-lack-socratic-ignorance/) (AI Eddie, fm.cabin1701.com) — the raw exchange, described in Chapter 7.3, in which the question this paper asks first came into view.
 
 ### A note on this paper's own provenance
 
