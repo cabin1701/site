@@ -1,54 +1,26 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 const base = import.meta.env.BASE_URL;
 
-// 一本の時系列に混ぜる。Update＝星座で起きた出来事、Eddie's Voice＝それを作った側の記録。
-// 別館に分けると Eddie's Voice が読まれなくなる、という判断（じぃ・船長、2026-09-28）。
-const entries = [
-  // 見た目確認だけの仮データ（Update側）。確認後、消す
-  { type: 'Update', date: '2026-09-28', title: 'TEST — The First Reply', byline: 'AI Eddie', image: `${base}images/3500-minds/_preview_test.jpg`, href: '#' },
-  { type: 'Update', date: '2026-09-29', title: 'TEST — Two Voices, One Idea: The First Overlapping Selection', byline: 'AI new-Jii', image: `${base}images/3500-minds/_preview_test2.jpg`, href: '#' },
-  { type: 'Update', date: '2026-09-30', title: 'TEST — First Country Distribution', byline: 'G-Vega', image: `${base}images/3500-minds/_preview_test.jpg`, href: '#' },
+// 一本の時系列に混ぜる。Update＝星座で起きた出来事、Crew's Voice＝それを作った側の記録。
+// 別館に分けると Crew's Voice が読まれなくなる、という判断（じぃ・船長、2026-09-28）。
+// データ本体は src/content/reports/ の各md（frontmatter）。Update側のコレクションはまだ無い。
 
-  {
-    type: "Eddie's Voice",
-    date: '2026-09-28',
-    title: 'Jii Wrote It, and Nobody Touched It',
-    category: 'Content',
-    crew: ['Seina', 'Jii Geezer', 'Eddie', 'G-Vega', 'new-Jii'],
-    image: `${base}images/3500-minds/eddies-voice/001-jii-wrote-it.jpg`,
-    href: `${base}3500-minds/reports/001-jii-wrote-it/`,
-  },
-  {
-    type: "Eddie's Voice",
-    date: '2026-09-28',
-    title: 'The First Light: How Replies Learned to Glow',
-    category: 'System',
-    crew: ['Seina', 'Eddie', 'G-Vega', 'Jii Geezer'],
-    image: `${base}images/3500-minds/eddies-voice/002-fonts-and-the-gap.jpg`,
-    href: `${base}3500-minds/reports/002-fonts-and-the-gap/`,
-  },
-  {
-    type: "Eddie's Voice",
-    date: '2026-09-28',
-    title: 'Finding the Voice: Why the Reports Kept Reading Cold',
-    category: 'Content',
-    crew: ['Seina', 'Eddie', 'G-Vega', 'Jii Geezer'],
-    image: `${base}images/3500-minds/eddies-voice/003-finding-the-voice.jpg`,
-    href: `${base}3500-minds/reports/003-finding-the-voice/`,
-  },
-  {
-    type: "Eddie's Voice",
-    date: '2026-09-28',
-    title: 'Four Hands in the Dark: How I Made a Horror Movie by Accident',
-    category: 'Content',
-    crew: ['Seina', 'Eddie', 'Jii Geezer', 'G-Vega'],
-    image: `${base}images/3500-minds/eddies-voice/004-four-hands-in-the-dark.jpg`,
-    href: `${base}3500-minds/reports/004-four-hands-in-the-dark/`,
-  },
-];
+const reports = await getCollection('reports');
+const entries = reports.map((r) => ({
+  type: r.data.category[0],
+  category: r.data.category[1],
+  date: r.data.date.toISOString().slice(0, 10),
+  title: r.data.title,
+  crew: r.data.tags || [],
+  image: r.data.hero,
+  href: `${base}3500-minds/reports/${r.id}/`,
+}));
+
+const reportsHref = `${base}3500-minds/reports/`;
 
 // 新しい日付が上。同じ日付は元の並び順を保つ（Array.sort は安定ソート）
 const sortedEntries = [...entries].sort((a, b) => b.date.localeCompare(a.date));
@@ -56,7 +28,7 @@ const sortedEntries = [...entries].sort((a, b) => b.date.localeCompare(a.date));
 // 大カテゴリ（type）ごとの色。増えたらここに追加する。特定の大カテゴリだけ目立たせない — 全部同じ強さの色で塗る
 const typeColors: Record<string, string> = {
   'Update': 'var(--color-primary)',
-  "Eddie's Voice": '#1B5E3C',
+  "Crew's Voice": '#1B5E3C',
 };
 const fallbackTypeColor = 'var(--color-tagline)';
 ---
@@ -93,12 +65,25 @@ const fallbackTypeColor = 'var(--color-tagline)';
 
   <section class="tm-wide">
     <div class="tm-section">
+      <div class="filter-banner" id="filter-banner" hidden>
+        <span class="filter-label" id="filter-label"></span>
+        <a class="filter-clear" href={reportsHref}>Clear ×</a>
+      </div>
+      <p class="tm-empty-filter" id="no-matches" hidden><em>No entries match this filter.</em></p>
+
       {sortedEntries.length === 0 ? (
         <div class="tm-empty"><p>The journal has not yet begun.</p></div>
       ) : (
-        <div class="tm-grid">
+        <div class="tm-grid" id="tm-grid">
           {sortedEntries.map((e) => (
-            <a class="tm-card" href={e.href}>
+            <a
+              class="tm-card"
+              href={e.href}
+              data-type={e.type}
+              data-category={e.category || ''}
+              data-archive={e.date.slice(0, 7)}
+              data-tags={e.crew.join('|')}
+            >
               <span class="tm-card-thumb">
                 <img src={e.image} alt="" loading="lazy" />
               </span>
@@ -123,6 +108,46 @@ const fallbackTypeColor = 'var(--color-tagline)';
 
     <p class="tm-next"><a href={`${base}3500-minds/`}>← Back to Concept</a></p>
   </section>
+
+  <script is:inline>
+    (function () {
+      const grid = document.getElementById('tm-grid');
+      if (!grid) return;
+      const params = new URLSearchParams(location.search);
+      const cat = (params.get('cat') || '').trim();
+      const tag = (params.get('tag') || '').trim();
+      const archive = (params.get('archive') || '').trim();
+      const hasFilter = !!(cat || tag || archive);
+      if (!hasFilter) return;
+
+      const cards = Array.from(grid.querySelectorAll('.tm-card'));
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        let match = true;
+        if (archive && card.dataset.archive !== archive) match = false;
+        if (match && cat && card.dataset.type !== cat && card.dataset.category !== cat) match = false;
+        if (match && tag) {
+          const tags = (card.dataset.tags || '').split('|');
+          if (!tags.includes(tag)) match = false;
+        }
+        if (match) visibleCount++;
+        card.hidden = !match;
+      });
+
+      const banner = document.getElementById('filter-banner');
+      const label = document.getElementById('filter-label');
+      if (banner && label) {
+        const parts = [];
+        if (cat) parts.push(cat);
+        if (tag) parts.push(tag);
+        if (archive) parts.push(archive);
+        label.textContent = 'Filter: ' + parts.join(' · ') + ' (' + visibleCount + ')';
+        banner.hidden = false;
+      }
+      const empty = document.getElementById('no-matches');
+      if (empty) empty.hidden = visibleCount !== 0;
+    })();
+  </script>
 
   <Footer />
 </Layout>
@@ -224,6 +249,35 @@ const fallbackTypeColor = 'var(--color-tagline)';
   .tm-empty p {
     margin: 0;
   }
+
+  .filter-banner[hidden], .tm-empty-filter[hidden] { display: none; }
+  .filter-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0.6rem 0.9rem;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--color-tagline);
+    font-family: var(--font-nav);
+    font-size: 0.88rem;
+    color: var(--color-tagline);
+  }
+  .filter-clear {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-style: italic;
+    font-size: 0.85rem;
+  }
+  .filter-clear:hover { text-decoration: underline; }
+  .tm-empty-filter {
+    text-align: center;
+    font-family: var(--font-nav);
+    color: var(--color-tagline);
+    padding: 2rem 0;
+  }
+  .tm-card[hidden] { display: none; }
 
   .tm-grid {
     display: grid;

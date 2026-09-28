@@ -47,4 +47,18 @@ const papers = defineCollection({
   }),
 });
 
-export const collections = { papers };
+const reports = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/reports' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    // Parent category only, for now: "Crew's Voice" or "Update".
+    category: z.array(z.string()).min(1).max(2),
+    // Crew names — who's credited on this entry.
+    tags: z.array(z.string()).optional(),
+    hero: z.string().optional(),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { papers, reports };
