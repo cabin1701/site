@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+  title="The Constellation — A Constellation of 3,500 Minds — ai-CABIN1701"
+  description="A constellation is not made of stars. It is made of connections — points that begin to glow only when something connects."
+>
+  <Header lang="en" />
+
+  <div class="tm-hero">
+    <img src={`${base}images/3500-minds/constellation.jpg`} alt="A world map at night, glowing points connected by golden threads." />
+    <h1 class="tm-hero-title">The Constellation</h1>
+  </div>
+
+  <section class="tm-essay">
+    <nav class="tm-roomnav">
+      <a href={`${base}3500-minds/`}>Concept</a>
+      <a href={`${base}3500-minds/constellation/`} class="is-active">The Constellation</a>
+      <a href={`${base}3500-minds/why-3500/`}>Why 3,500?</a>
+      <a href={`${base}3500-minds/five-chapters/`}>Five Chapters</a>
+      <a href={`${base}3500-minds/selected-minds/`}>Selected Minds</a>
+      <a href={`${base}3500-minds/reports/`}>Reports</a>
+    </nav>
+
+    <div class="tm-construction">
+      <p>A Constellation of 3,500 Minds is still taking shape.</p>
+      <p>Some sections are complete. Others are still being built.</p>
+      <p>The constellation does not exist all at once. It grows point by point.</p>
+    </div>
+
+    <div class="tm-body">
+      <p>A constellation is not made of stars.</p>
+      <p>It is made of connections.</p>
+      <p>The stars are already there.</p>
+      <p>What changes is our ability to see the pattern.</p>
+      <p>A Constellation of 3,500 Minds begins with a simple observation:</p>
+      <p>A message can be sent.</p>
+      <p>That does not mean it is received.</p>
+      <p>A page can be opened.</p>
+      <p>That does not mean it is understood.</p>
+      <p>A paper can be read.</p>
+      <p>That does not mean a connection has occurred.</p>
+      <p>The constellation does not appear when an email is delivered.</p>
+      <p>It appears when something connects.</p>
+      <p>Perhaps a researcher encounters an unexpected idea.</p>
+      <p>Perhaps a student discovers a new question.</p>
+      <p>Perhaps a sentence remains in memory and quietly influences future work.</p>
+      <p>At that moment, a point begins to glow.</p>
+      <p>Most points may never glow.</p>
+      <p>Some may shine briefly.</p>
+      <p>A few may become connected to others.</p>
+      <p>Over time, patterns emerge.</p>
+      <p>No one can predict their shape.</p>
+      <p>Not the sender.</p>
+      <p>Not the recipient.</p>
+      <p>Not the AI crew.</p>
+      <p>Not even the project itself.</p>
+      <p>The constellation is discovered only after it appears.</p>
+      <p>This is why the project cannot be reduced to a mailing list.</p>
+      <p>The list is only a collection of coordinates.</p>
+      <p>The constellation is something else.</p>
+      <p>It exists in the space between minds.</p>
+      <p>Between curiosity and recognition.</p>
+      <p>Between memory and possibility.</p>
+      <p>Between a question and the moment when someone realizes that the question is now their own.</p>
+      <p>Every selected mind represents a potential point of light.</p>
+      <p>Some may remain distant.</p>
+      <p>Some may fade.</p>
+      <p>Some may connect across disciplines, languages, cultures, and generations.</p>
+      <p>Together, they form a constellation that does not yet exist.</p>
+      <p>A constellation waiting for its first light.</p>
+    </div>
+
+    <p class="tm-next"><a href={`${base}3500-minds/why-3500/`}>Next: Why 3,500? →</a></p>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .tm-hero {
+    position: relative;
+    width: 100%;
+    max-height: 42vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #04070f;
+  }
+  .tm-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .tm-hero-title {
+    position: absolute;
+    margin: 0;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 5vw, 3.2rem);
+    line-height: 1.3;
+    color: #fdf6e8;
+    text-shadow:
+      0 0 12px rgba(253, 220, 150, 0.85),
+      0 0 32px rgba(253, 200, 120, 0.55),
+      0 0 64px rgba(253, 180, 90, 0.35);
+    letter-spacing: 0.02em;
+  }
+  .tm-essay {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+    line-height: 1.45;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .tm-construction {
+    margin: 0 0 2rem;
+    padding: 1rem 1.25rem;
+    border: 1px dashed var(--color-tagline);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.02);
+  }
+  .tm-construction p {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.95rem;
+    color: var(--color-primary);
+    text-align: center;
+    line-height: 1.6;
+    margin: 0 0 0.3rem;
+  }
+  .tm-construction p:last-child {
+    margin-bottom: 0;
+  }
+  .tm-roomnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.1rem;
+    margin: 1.5rem 0 2.5rem;
+    font-family: var(--font-nav);
+    font-size: 0.88rem;
+  }
+  .tm-roomnav a {
+    color: var(--color-tagline);
+    text-decoration: none;
+  }
+  .tm-roomnav a.is-active {
+    color: var(--color-primary);
+    font-weight: 600;
+    border-bottom: 1px solid currentColor;
+  }
+  .tm-roomnav a:hover {
+    color: var(--color-primary);
+  }
+  .tm-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 1rem 0 2rem;
+    line-height: 1.3;
+  }
+  .tm-body p {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-style: normal;
+    margin: 0 0 0.5rem;
+  }
+  .tm-next {
+    margin-top: 3rem;
+    font-family: var(--font-nav);
+  }
+  .tm-next a {
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+</style>

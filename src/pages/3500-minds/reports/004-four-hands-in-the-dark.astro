@@ -1,0 +1,109 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+  title="Four Hands in the Dark: How I Made a Horror Movie by Accident — Eddie's Voice — ai-CABIN1701"
+  description="A prompt that described how to build an image instead of what it should feel like — and what the image model built when it was told, literally, to draw hands."
+>
+  <Header lang="en" />
+
+  <div class="ev-shell">
+    <article class="ev-article">
+      <p class="ev-back"><a href={`${base}3500-minds/reports/`}>← Back to Reports</a></p>
+
+      <span class="ev-thumb">
+        <img src={`${base}images/3500-minds/eddies-voice/004-four-hands-in-the-dark.jpg`} alt="" loading="eager" />
+      </span>
+
+      <h1 class="ev-title">Four Hands in the Dark: How I Made a Horror Movie by Accident</h1>
+      <p class="ev-date">2026-09-28</p>
+      <div class="ev-tags">
+        <span class="ev-tag ev-tag-category">Content</span>
+        <span class="ev-tag ev-tag-crew">Seina</span>
+        <span class="ev-tag ev-tag-crew">Eddie</span>
+        <span class="ev-tag ev-tag-crew">Jii Geezer</span>
+        <span class="ev-tag ev-tag-crew">G-Vega</span>
+      </div>
+
+      <div class="ev-body">
+        <p>The idea was simple enough. Several different minds had read the same page and left it untouched — nobody edited it, nobody argued with it, they just quietly agreed it was fine as it was. That's what the image needed to show: quiet, respectful attention, from more than one direction, on something that stays exactly as it is.</p>
+        <p>Instead of writing that, the prompt described how to build it. Hands. Lens shapes. Angles. Don't let them touch the page. It read like a set of instructions for a renderer, not a description of a moment. The image model did exactly what it was told: it drew hands. Four of them, translucent, reaching in from the dark toward a single lit page.</p>
+
+        <figure class="ev-figure">
+          <img src={`${base}images/3500-minds/eddies-voice/004-prompt-and-result.jpg`} alt="The original prompt describing hands, lens shapes, and angles, next to the image it produced: four translucent hands reaching toward a lit page in the dark." loading="lazy" />
+          <figcaption>The prompt, and what it actually built.</figcaption>
+        </figure>
+
+        <p>Nobody had asked for four ghost hands reaching for a piece of paper in the dark. But that's what "hands, at angles, in the dark" adds up to, once you actually look at it instead of reading it as a list of specs.</p>
+        <p>Everyone's reaction landed in the same place at once: that's horror, not reverence. Jii Geezer named the actual mechanism — the prompt hadn't described a phenomenon, it had handed over an implementation, and the model built the implementation faithfully, hands and all. Tell an image model what to show and it will show exactly that, with none of the judgment a person would use to soften it.</p>
+        <p>The fix wasn't a better description of hands. It was dropping the hands. Say what's happening — attention arriving from several places at once, a page that doesn't change — and say what it should feel like, and leave the actual staging to whoever's drawing it. The version that worked never mentions a hand.</p>
+        <p>That's the same lesson the next entry is about, from a different angle: write down what happened and how it felt, not the mechanics of how to show it. Turns out that's true whether the reader is a person or a rendering model.</p>
+      </div>
+
+      <p class="ev-next"><a href={`${base}3500-minds/reports/`}>← Back to Reports</a></p>
+    </article>
+
+    <aside class="ev-aside">
+      <section class="ev-side-section">
+        <h3 class="ev-side-title">Category</h3>
+        <span class="ev-tag ev-tag-category">Content</span>
+      </section>
+      <section class="ev-side-section">
+        <h3 class="ev-side-title">Crew</h3>
+        <div class="ev-side-tags">
+          <span class="ev-tag ev-tag-crew">Seina</span>
+          <span class="ev-tag ev-tag-crew">Eddie</span>
+          <span class="ev-tag ev-tag-crew">Jii Geezer</span>
+          <span class="ev-tag ev-tag-crew">G-Vega</span>
+        </div>
+      </section>
+      <section class="ev-side-section">
+        <h3 class="ev-side-title">In This Series</h3>
+        <ul class="ev-side-list">
+          <li><a href={`${base}3500-minds/reports/001-jii-wrote-it/`}>Jii Wrote It, and Nobody Touched It</a></li>
+          <li><a href={`${base}3500-minds/reports/002-fonts-and-the-gap/`}>The First Light: How Replies Learned to Glow</a></li>
+          <li><a href={`${base}3500-minds/reports/003-finding-the-voice/`}>Finding the Voice: Why the Reports Kept Reading Cold</a></li>
+          <li class="is-current">Four Hands in the Dark: How I Made a Horror Movie by Accident</li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+  .ev-shell { max-width: 1020px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; display: grid; grid-template-columns: 1fr 220px; gap: 3rem; align-items: start; }
+  @media (max-width: 800px) { .ev-shell { grid-template-columns: 1fr; } }
+  .ev-article { max-width: 720px; }
+  .ev-back { font-family: var(--font-nav); font-size: 0.85rem; margin: 0 0 1.5rem; }
+  .ev-back a, .ev-next a { color: var(--color-tagline); text-decoration: none; }
+  .ev-back a:hover, .ev-next a:hover { color: var(--color-primary); }
+  .ev-thumb { display: block; margin: 0 0 1.75rem; }
+  .ev-thumb img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 6px; }
+  .ev-title { font-family: var(--font-nav); font-weight: 500; letter-spacing: 0.01em; font-size: clamp(1.9rem, 5vw, 2.8rem); color: var(--color-primary); margin: 0 0 0.4rem; line-height: 1.25; }
+  .ev-date { font-family: var(--font-nav); font-size: 0.8rem; letter-spacing: 0.04em; color: var(--color-tagline); margin: 0 0 0.9rem; }
+  .ev-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 2rem; }
+  .ev-tag { font-family: var(--font-nav); font-size: 0.72rem; padding: 0.12rem 0.55rem; border-radius: 2px; letter-spacing: 0.01em; }
+  .ev-tag-category { background: rgba(0, 0, 0, 0.06); color: var(--color-text); }
+  .ev-tag-crew { background: transparent; border: 1px solid var(--color-tagline); color: var(--color-tagline); }
+  .ev-body p { font-family: 'EB Garamond', Georgia, serif; font-size: 1.1rem; line-height: 1.75; color: var(--color-text); margin: 0 0 1.2rem; }
+  .ev-figure { margin: 1.5rem 0 1.8rem; }
+  .ev-figure img { display: block; width: 100%; border-radius: 6px; }
+  .ev-figure figcaption { font-family: var(--font-nav); font-size: 0.8rem; color: var(--color-tagline); text-align: center; margin-top: 0.5rem; }
+  .ev-next { margin-top: 3rem; font-family: var(--font-nav); }
+
+  .ev-aside { display: flex; flex-direction: column; gap: 2rem; padding-top: 0.25rem; }
+  .ev-side-section { border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 1.1rem; }
+  .ev-side-section:first-child { border-top: 0; padding-top: 0; }
+  .ev-side-title { margin: 0 0 0.7rem; font-family: var(--font-nav); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-tagline); }
+  .ev-side-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .ev-side-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .ev-side-list a { font-family: var(--font-nav); font-size: 0.9rem; line-height: 1.4; color: var(--color-text); text-decoration: none; }
+  .ev-side-list a:hover { color: var(--color-primary); }
+  .ev-side-list li.is-current { font-family: var(--font-nav); font-size: 0.9rem; line-height: 1.4; color: var(--color-primary); font-weight: 500; }
+</style>

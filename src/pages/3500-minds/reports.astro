@@ -1,0 +1,415 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+// 一本の時系列に混ぜる。Update＝星座で起きた出来事、Eddie's Voice＝それを作った側の記録。
+// 別館に分けると Eddie's Voice が読まれなくなる、という判断（じぃ・船長、2026-09-28）。
+const entries = [
+  // 見た目確認だけの仮データ（Update側）。確認後、消す
+  { type: 'Update', date: '2026-09-28', title: 'TEST — The First Reply', byline: 'AI Eddie', image: `${base}images/3500-minds/_preview_test.jpg`, href: '#' },
+  { type: 'Update', date: '2026-09-29', title: 'TEST — Two Voices, One Idea: The First Overlapping Selection', byline: 'AI new-Jii', image: `${base}images/3500-minds/_preview_test2.jpg`, href: '#' },
+  { type: 'Update', date: '2026-09-30', title: 'TEST — First Country Distribution', byline: 'G-Vega', image: `${base}images/3500-minds/_preview_test.jpg`, href: '#' },
+
+  {
+    type: "Eddie's Voice",
+    date: '2026-09-28',
+    title: 'Jii Wrote It, and Nobody Touched It',
+    category: 'Content',
+    crew: ['Seina', 'Jii Geezer', 'Eddie', 'G-Vega', 'new-Jii'],
+    image: `${base}images/3500-minds/eddies-voice/001-jii-wrote-it.jpg`,
+    href: `${base}3500-minds/reports/001-jii-wrote-it/`,
+  },
+  {
+    type: "Eddie's Voice",
+    date: '2026-09-28',
+    title: 'The First Light: How Replies Learned to Glow',
+    category: 'System',
+    crew: ['Seina', 'Eddie', 'G-Vega', 'Jii Geezer'],
+    image: `${base}images/3500-minds/eddies-voice/002-fonts-and-the-gap.jpg`,
+    href: `${base}3500-minds/reports/002-fonts-and-the-gap/`,
+  },
+  {
+    type: "Eddie's Voice",
+    date: '2026-09-28',
+    title: 'Finding the Voice: Why the Reports Kept Reading Cold',
+    category: 'Content',
+    crew: ['Seina', 'Eddie', 'G-Vega', 'Jii Geezer'],
+    image: `${base}images/3500-minds/eddies-voice/003-finding-the-voice.jpg`,
+    href: `${base}3500-minds/reports/003-finding-the-voice/`,
+  },
+  {
+    type: "Eddie's Voice",
+    date: '2026-09-28',
+    title: 'Four Hands in the Dark: How I Made a Horror Movie by Accident',
+    category: 'Content',
+    crew: ['Seina', 'Eddie', 'Jii Geezer', 'G-Vega'],
+    image: `${base}images/3500-minds/eddies-voice/004-four-hands-in-the-dark.jpg`,
+    href: `${base}3500-minds/reports/004-four-hands-in-the-dark/`,
+  },
+];
+
+// 新しい日付が上。同じ日付は元の並び順を保つ（Array.sort は安定ソート）
+const sortedEntries = [...entries].sort((a, b) => b.date.localeCompare(a.date));
+
+// 大カテゴリ（type）ごとの色。増えたらここに追加する。特定の大カテゴリだけ目立たせない — 全部同じ強さの色で塗る
+const typeColors: Record<string, string> = {
+  'Update': 'var(--color-primary)',
+  "Eddie's Voice": '#1B5E3C',
+};
+const fallbackTypeColor = 'var(--color-tagline)';
+---
+
+<Layout
+  title="Reports — A Constellation of 3,500 Minds — ai-CABIN1701"
+  description="A field journal of the project as it unfolds — selections, discoveries, and the moments when the constellation begins to appear."
+>
+  <Header lang="en" />
+
+  <div class="tm-hero">
+    <img src={`${base}images/3500-minds/updates.jpg`} alt="A world map at night, glowing points connected by blue threads." />
+    <h1 class="tm-hero-title">Reports</h1>
+  </div>
+
+  <section class="tm-essay">
+    <nav class="tm-roomnav">
+      <a href={`${base}3500-minds/`}>Concept</a>
+      <a href={`${base}3500-minds/constellation/`}>The Constellation</a>
+      <a href={`${base}3500-minds/why-3500/`}>Why 3,500?</a>
+      <a href={`${base}3500-minds/five-chapters/`}>Five Chapters</a>
+      <a href={`${base}3500-minds/selected-minds/`}>Selected Minds</a>
+      <a href={`${base}3500-minds/reports/`} class="is-active">Reports</a>
+    </nav>
+
+    <div class="tm-body">
+      <p>The constellation is still forming.</p>
+      <p>This page records the journey as it unfolds.</p>
+      <p>Some updates document selections. Others record discoveries, unexpected connections, responses, and observations that emerged during the project.</p>
+      <p>The constellation does not appear all at once. It grows point by point.</p>
+      <p>Some entries record events. Others record the ideas, experiments, and collaboration that helped shape the project.</p>
+    </div>
+  </section>
+
+  <section class="tm-wide">
+    <div class="tm-section">
+      {sortedEntries.length === 0 ? (
+        <div class="tm-empty"><p>The journal has not yet begun.</p></div>
+      ) : (
+        <div class="tm-grid">
+          {sortedEntries.map((e) => (
+            <a class="tm-card" href={e.href}>
+              <span class="tm-card-thumb">
+                <img src={e.image} alt="" loading="lazy" />
+              </span>
+              <span class="tm-type-row">
+                <span class="tm-type-tag" style={`background:${typeColors[e.type] || fallbackTypeColor}`}>{e.type}</span>
+                {e.category && <span class="tm-subcat-tag">{e.category}</span>}
+              </span>
+              <span class="tm-card-title">{e.title}</span>
+              <span class="tm-card-date">{e.date}</span>
+              <span class="tm-entry-tags">
+                {e.type === 'Update' ? (
+                  e.byline && <span class="tm-tag tm-tag-crew">{e.byline}</span>
+                ) : (
+                  e.crew.map((c) => <span class="tm-tag tm-tag-crew">{c}</span>)
+                )}
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <p class="tm-next"><a href={`${base}3500-minds/`}>← Back to Concept</a></p>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .tm-hero {
+    position: relative;
+    width: 100%;
+    max-height: 42vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #04070f;
+  }
+  .tm-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .tm-hero-title {
+    position: absolute;
+    margin: 0;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 5vw, 3.2rem);
+    line-height: 1.3;
+    color: #fdf6e8;
+    text-shadow:
+      0 0 12px rgba(253, 220, 150, 0.85),
+      0 0 32px rgba(253, 200, 120, 0.55),
+      0 0 64px rgba(253, 180, 90, 0.35);
+    letter-spacing: 0.02em;
+  }
+  .tm-essay {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+    line-height: 1.45;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .tm-roomnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.1rem;
+    margin: 1.5rem 0 2.5rem;
+    font-family: var(--font-nav);
+    font-size: 0.88rem;
+  }
+  .tm-roomnav a {
+    color: var(--color-tagline);
+    text-decoration: none;
+  }
+  .tm-roomnav a.is-active {
+    color: var(--color-primary);
+    font-weight: 600;
+    border-bottom: 1px solid currentColor;
+  }
+  .tm-roomnav a:hover {
+    color: var(--color-primary);
+  }
+  .tm-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 1rem 0 2rem;
+    line-height: 1.3;
+  }
+  .tm-body p {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-style: normal;
+    margin: 0 0 0.5rem;
+  }
+
+  .tm-wide {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .tm-section {
+    padding: 2rem 0 1rem;
+  }
+
+  .tm-empty {
+    margin: 1.5rem 0;
+    padding: 1.25rem;
+    border: 1px dashed var(--color-tagline);
+    border-radius: 4px;
+    font-family: var(--font-nav);
+    font-style: italic;
+    color: var(--color-tagline);
+    text-align: center;
+  }
+  .tm-empty p {
+    margin: 0;
+  }
+
+  .tm-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 720px) {
+    .tm-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 460px) {
+    .tm-grid { grid-template-columns: 1fr; }
+  }
+  .tm-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+  .tm-card-thumb {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 0.9rem;
+  }
+  .tm-card-thumb img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .tm-card:hover .tm-card-thumb img {
+    transform: scale(1.04);
+  }
+  .tm-type-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+  }
+  .tm-type-tag {
+    display: inline-block;
+    width: fit-content;
+    font-family: var(--font-nav);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    color: #fff;
+  }
+  .tm-subcat-tag {
+    display: inline-block;
+    width: fit-content;
+    font-family: var(--font-nav);
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    padding: 0.14rem 0.5rem;
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--color-text);
+  }
+  .tm-card-title {
+    font-family: var(--font-nav);
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    transition: color 0.2s ease;
+  }
+  .tm-card:hover .tm-card-title {
+    color: var(--color-primary);
+  }
+  .tm-card-date {
+    font-family: var(--font-nav);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--color-tagline);
+    margin-bottom: 0.4rem;
+  }
+
+  .tm-catnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1rem;
+    margin: 0 0 1.75rem;
+  }
+  .tm-catnav a {
+    font-family: var(--font-nav);
+    font-size: 0.78rem;
+    color: var(--color-tagline);
+    text-decoration: none;
+    opacity: 0.75;
+  }
+  .tm-catnav a:hover {
+    opacity: 1;
+    color: var(--color-primary);
+  }
+
+  .tm-devlog {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 720px) {
+    .tm-devlog { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 460px) {
+    .tm-devlog { grid-template-columns: 1fr; }
+  }
+  .tm-devnote {
+    display: block;
+    padding: 1.2rem 1.4rem 1.4rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s ease;
+  }
+  .tm-devnote:hover {
+    border-color: var(--color-primary);
+  }
+  .tm-devnote:hover .tm-entry-title {
+    color: var(--color-primary);
+  }
+  .tm-entry-date {
+    font-family: var(--font-nav);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--color-tagline);
+    margin: 0 0 0.4rem;
+    text-decoration: none;
+  }
+  .tm-entry-title {
+    font-family: var(--font-nav);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin: 0 0 0.4rem;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+  .tm-entry-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0 0 0.9rem;
+  }
+  .tm-tag {
+    font-family: var(--font-nav);
+    font-size: 0.72rem;
+    padding: 0.12rem 0.55rem;
+    border-radius: 2px;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+  .tm-tag-category {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--color-text);
+  }
+  .tm-tag-crew {
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+  }
+  .tm-devnote .tm-tag-crew {
+    border-color: var(--color-tagline);
+    color: var(--color-tagline);
+  }
+  .tm-entry-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .tm-next {
+    margin-top: 3rem;
+    font-family: var(--font-nav);
+  }
+  .tm-next a {
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+</style>
