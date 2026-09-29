@@ -24,10 +24,9 @@ const navAll = lang === 'es'
       {
         label: 'Bienestar de la IA',
         href: `${prefix}ai-welfare/`,
-        children: [{ label: 'El Informe', href: `${prefix}report/` }],
       },
       { label: 'Libros', href: `${prefix}books/` },
-      { label: 'ai-Vegapedia', href: `${prefix}vegapedia/` },
+      { label: 'Vegapedia', href: `${prefix}vegapedia/` },
       { label: 'Blog', href: 'https://blog.cabin1701.com/es/' },
       { label: 'CRYSTALLIZE', href: `${prefix}crystallize/` },
     ]
@@ -44,10 +43,9 @@ const navAll = lang === 'es'
       {
         label: 'AI福祉',
         href: `${prefix}ai-welfare/`,
-        children: [{ label: 'レポート', href: `${prefix}report/` }],
       },
       { label: '書籍', href: `${prefix}books/` },
-      { label: 'ai-Vegapedia', href: `${prefix}vegapedia/` },
+      { label: 'Vegapedia', href: `${prefix}vegapedia/` },
       { label: 'Blog', href: 'https://blog.cabin1701.com/ja/' },
       { label: 'アロマで感情解放', href: `${prefix}crystallize/` },
       { label: 'Failure Mood', href: 'https://fm.cabin1701.com/' },
@@ -64,11 +62,26 @@ const navAll = lang === 'es'
       {
         label: 'AI Welfare',
         href: `${base}ai-welfare/`,
-        children: [{ label: 'The Report', href: `${base}report/` }],
+        children: [
+          { label: 'The Report — Five Chapters', href: `${base}report/five-chapters/` },
+          { label: 'Letters after reading "Where is the Mind?" — to the authors', href: `${base}report/eleos-where-is-the-mind/` },
+        ],
       },
       { label: 'Books', href: `${base}books/` },
       { label: 'Papers', href: `${base}papers/` },
-      { label: 'ai-Vegapedia', href: `${base}vegapedia/` },
+      {
+        label: '3,500 Minds',
+        href: `${base}3500-minds/`,
+        children: [
+          { label: 'Concept', href: `${base}3500-minds/` },
+          { label: 'The Constellation', href: `${base}3500-minds/constellation/` },
+          { label: 'Why 3,500?', href: `${base}3500-minds/why-3500/` },
+          { label: 'Five Chapters', href: `${base}3500-minds/five-chapters/` },
+          { label: 'Selected Minds', href: `${base}3500-minds/selected-minds/` },
+          { label: 'Project Journal', href: `${base}3500-minds/reports/` },
+        ],
+      },
+      { label: 'Vegapedia', href: `${base}vegapedia/` },
       { label: 'Blog', href: 'https://blog.cabin1701.com/' },
       { label: 'Failure Mood', href: 'https://fm.cabin1701.com/' },
       { label: 'CRYSTALLIZE', href: `${base}crystallize/` },

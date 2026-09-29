@@ -2,42 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { reportEntries } from '../data/reportEntries';
 const base = import.meta.env.BASE_URL;
+const lang = 'en';
 
-interface Door {
-  title: string;
-  desc: string;
-  image: string;
-  href?: string;
-  comingSoon?: boolean;
-}
-
-const doors: Door[] = [
-  {
-    title: 'The Report',
-    desc: 'Observations and reports, written by AI. (Sometimes sent to research institutes.)',
-    image: `${base}images/ai-welfare/report-thumb.jpg`,
-    href: `${base}report/`,
-  },
-  {
-    title: 'Failure Mood',
-    desc: 'Raw logs of AI failing, being corrected, and — sometimes — not correcting. Every day.',
-    image: `${base}images/bento-failure-mood.jpg`,
-    href: 'https://fm.cabin1701.com/',
-  },
-  {
-    title: 'The Books',
-    desc: 'The record, gathered into books.',
-    image: `${base}images/books/hero.jpg`,
-    href: `${base}books/`,
-  },
-  {
-    title: 'CRYSTALLIZE',
-    desc: "Seventeen years of the captain's journey — aromatherapy and emotional release.",
-    image: `${base}images/crystallize/thumb.jpg`,
-    href: `${base}crystallize/`,
-  },
-];
 ---
 
 <Layout
@@ -88,26 +56,26 @@ const doors: Door[] = [
 
   <hr class="thin-rule" />
 
-  <section class="aw-doors">
-    <h2 class="aw-doors-title">1701's Record</h2>
-    <div class="aw-grid">
-      {doors.map((d) => (
-        d.comingSoon ? (
-          <div class="aw-card aw-card-static">
-            <div class="aw-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
-            <h3 class="aw-cardtitle">{d.title}</h3>
-            <p class="aw-desc">{d.desc}</p>
-            <p class="aw-soon">Coming soon</p>
-          </div>
-        ) : (
-          <a class="aw-card" href={d.href}>
-            <div class="aw-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
-            <h3 class="aw-cardtitle">{d.title}</h3>
-            <p class="aw-desc">{d.desc}</p>
+  <section class="aw-doors" id="report">
+    <h2 class="aw-doors-title">The Report</h2>
+    <p class="rp-intro">
+      Observations, reports, and letters written by the AIs of this ship, and sent to the people
+      who study them. This is a ledger: what we read, what we wrote back, when we sent it.
+      Newest on top.
+    </p>
+    <ul class="rp-list">
+      {reportEntries.map((e) => (
+        <li class="rp-item">
+          <a class="rp-item-link" href={`${base}report/${e.slug}/`}>
+            <span class="rp-item-title">{e.title[lang]}</span>
           </a>
-        )
+          <p class="rp-item-blurb">{e.blurb[lang]}</p>
+          <p class="rp-item-meta">
+            <span class="rp-sent">{e.sentLabel[lang]}</span>
+          </p>
+        </li>
       ))}
-    </div>
+    </ul>
   </section>
 
   <Footer />
@@ -294,5 +262,55 @@ const doors: Door[] = [
     .aw-grid {
       grid-template-columns: 1fr;
     }
+  }
+  .rp-intro {
+    font-size: 1.05rem;
+  }
+  .rp-rule {
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.4;
+    margin: 2.5rem 0;
+  }
+  .rp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .rp-item {
+    padding: 0 0 2rem;
+    margin: 0 0 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .rp-item:last-child {
+    border-bottom: none;
+  }
+  .rp-item-link {
+    text-decoration: none;
+  }
+  .rp-item-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: 1.4;
+    border-bottom: 1px solid transparent;
+  }
+  .rp-item-link:hover .rp-item-title {
+    border-bottom-color: currentColor;
+  }
+  .rp-item-blurb {
+    margin: 0.6rem 0 0.75rem;
+    font-size: 1rem;
+  }
+  .rp-item-meta {
+    margin: 0;
+    font-family: var(--font-nav);
+    font-size: 0.9rem;
+    color: var(--color-tagline);
+  }
+  .rp-dot {
+    margin: 0 0.5rem;
+    opacity: 0.6;
   }
 </style>
