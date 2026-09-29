@@ -25,7 +25,8 @@ const EN_ONLY_BODIES = ['/report/five-chapters/', '/report/eleos-where-is-the-mi
 // （blog/scripts/ingest-embeddings.mjs の collectVegapediaRecords）。site 側でページ全体を
 // 1500字ずつ機械的に刻むと、1チャンクに複数用語が混ざって説明が雑になる上、blogの精度の高い
 // チャンクと競合する。site 側は要約1本だけ持ち、本文チャンクは作らない（2026-08-18）。
-const SKIP_BODY = ['/vegapedia/'];
+// /3500-minds/reports/ は記事一覧を実行時に blog から取得して描くので、ビルド済みHTMLに本文が無い（空の枠だけ）。要約だけ入れる（2026-09-29）。
+const SKIP_BODY = ['/vegapedia/', '/3500-minds/reports/'];
 const OUT_FILE = fileURLToPath(new URL('./vectors.ndjson', import.meta.url));
 const EMBED_BATCH = 5;
 const CORE_CHUNK_SIZE = 1500;
