@@ -20,7 +20,17 @@ const DIST_DIR = fileURLToPath(new URL('../dist', import.meta.url));
 const SITE_ORIGIN = 'https://cabin1701.com';
 const PAGE_CHUNK_SIZE = 1500;
 // 本文が英語のみのページ。ja/es 版は本文をembeddingせず、要約だけ入れる。
-const EN_ONLY_BODIES = ['/report/five-chapters/', '/report/eleos-where-is-the-mind/'];
+const EN_ONLY_BODIES = [
+  '/report/five-chapters/',
+  '/report/eleos-where-is-the-mind/',
+  // 3,500 Minds は英語のページのみ。ja/es は要約だけ入れる（要約側に「本文は英語」と書いてある）。URL は英語ページのまま（2026-09-29）
+  '/3500-minds/',
+  '/3500-minds/constellation/',
+  '/3500-minds/why-3500/',
+  '/3500-minds/five-chapters/',
+  '/3500-minds/selected-minds/',
+  '/3500-minds/reports/',
+];
 // Vegapedia は blog-2026 に既に「用語＝1チャンク・アンカー付きURL」で丁寧に入っている
 // （blog/scripts/ingest-embeddings.mjs の collectVegapediaRecords）。site 側でページ全体を
 // 1500字ずつ機械的に刻むと、1チャンクに複数用語が混ざって説明が雑になる上、blogの精度の高い
