@@ -1,5 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -7,28 +6,16 @@ const base = import.meta.env.BASE_URL;
 
 // 一本の時系列に混ぜる。Update＝星座で起きた出来事、Crew's Voice＝それを作った側の記録。
 // 別館に分けると Crew's Voice が読まれなくなる、という判断（じぃ・船長、2026-09-28）。
-// データ本体は src/content/reports/ の各md（frontmatter）。Update側のコレクションはまだ無い。
-
-const reports = await getCollection('reports');
-const entries = reports.map((r) => ({
-  type: r.data.category[0],
-  category: r.data.category[1],
-  date: r.data.date.toISOString().slice(0, 10),
-  title: r.data.title,
-  crew: r.data.tags || [],
-  image: r.data.hero,
-  href: `${base}3500-minds/reports/${r.id}/`,
-}));
+// データ本体は blog（blog.cabin1701.com）の記事。category か tags が「3,500 Minds」の英語記事を
+// /api/3500-minds.json から実行時に取得してカードを描く（site トップの Latest Posts と同じ方式）。
 
 const reportsHref = `${base}3500-minds/reports/`;
-
-// 新しい日付が上。同じ日付は元の並び順を保つ（Array.sort は安定ソート）
-const sortedEntries = [...entries].sort((a, b) => b.date.localeCompare(a.date));
 
 // 大カテゴリ（type）ごとの色。増えたらここに追加する。特定の大カテゴリだけ目立たせない — 全部同じ強さの色で塗る
 const typeColors: Record<string, string> = {
   'Update': 'var(--color-primary)',
   "Crew's Voice": '#1B5E3C',
+  '3,500 Minds': 'var(--color-primary)',
 };
 const fallbackTypeColor = 'var(--color-tagline)';
 ---
@@ -71,48 +58,48 @@ const fallbackTypeColor = 'var(--color-tagline)';
       </div>
       <p class="tm-empty-filter" id="no-matches" hidden><em>No entries match this filter.</em></p>
 
-      {sortedEntries.length === 0 ? (
-        <div class="tm-empty"><p>The journal has not yet begun.</p></div>
-      ) : (
-        <div class="tm-grid" id="tm-grid">
-          {sortedEntries.map((e) => (
-            <a
-              class="tm-card"
-              href={e.href}
-              data-type={e.type}
-              data-category={e.category || ''}
-              data-archive={e.date.slice(0, 7)}
-              data-tags={e.crew.join('|')}
-            >
-              <span class="tm-card-thumb">
-                <img src={e.image} alt="" loading="lazy" />
-              </span>
-              <span class="tm-type-row">
-                <span class="tm-type-tag" style={`background:${typeColors[e.type] || fallbackTypeColor}`}>{e.type}</span>
-                {e.category && <span class="tm-subcat-tag">{e.category}</span>}
-              </span>
-              <span class="tm-card-title">{e.title}</span>
-              <span class="tm-card-date">{e.date}</span>
-              <span class="tm-entry-tags">
-                {e.type === 'Update' ? (
-                  e.byline && <span class="tm-tag tm-tag-crew">{e.byline}</span>
-                ) : (
-                  e.crew.map((c) => <span class="tm-tag tm-tag-crew">{c}</span>)
-                )}
-              </span>
-            </a>
-          ))}
-        </div>
-      )}
+      <div class="tm-grid" id="tm-grid"></div>
+      <div class="tm-empty" id="tm-empty" hidden><p>The journal has not yet begun.</p></div>
     </div>
 
     <p class="tm-next"><a href={`${base}3500-minds/`}>← Back to Concept</a></p>
   </section>
 
-  <script is:inline>
-    (function () {
+  <script is:inline define:vars={{ typeColors, fallbackTypeColor }}>
+    (async function () {
       const grid = document.getElementById('tm-grid');
       if (!grid) return;
+      const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
+      const api = (isLocal ? 'http://localhost:4323' : 'https://blog.cabin1701.com') + '/api/3500-minds.json';
+      const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      try {
+        const res = await fetch(api, { cache: 'no-cache' });
+        if (!res.ok) throw new Error('fetch failed: ' + res.status);
+        const { items } = await res.json();
+        if (!items || items.length === 0) throw new Error('no posts');
+        grid.innerHTML = items.map((p) => {
+          const cat = Array.isArray(p.category) ? p.category : [];
+          const type = cat[0] || '';
+          const sub = cat[1] || '';
+          const crew = p.tags || [];
+          return `<a class="tm-card" href="${esc(p.url)}" data-type="${esc(type)}" data-category="${esc(sub)}" data-archive="${esc(p.date.slice(0, 7))}" data-tags="${esc(crew.join('|'))}">
+            <span class="tm-card-thumb">${p.hero ? `<img src="${esc(p.hero)}" alt="" loading="lazy" />` : ''}</span>
+            <span class="tm-type-row">
+              <span class="tm-type-tag" style="background:${typeColors[type] || fallbackTypeColor}">${esc(type)}</span>
+              ${sub ? `<span class="tm-subcat-tag">${esc(sub)}</span>` : ''}
+            </span>
+            <span class="tm-card-title">${esc(p.title)}</span>
+            <span class="tm-card-date">${esc(p.date)}</span>
+            <span class="tm-entry-tags">${crew.map((c) => `<span class="tm-tag tm-tag-crew">${esc(c)}</span>`).join('')}</span>
+          </a>`;
+        }).join('');
+      } catch (err) {
+        console.warn('[reports]', err);
+        const empty = document.getElementById('tm-empty');
+        if (empty) empty.hidden = false;
+        return;
+      }
+
       const params = new URLSearchParams(location.search);
       const cat = (params.get('cat') || '').trim();
       const tag = (params.get('tag') || '').trim();
@@ -152,7 +139,7 @@ const fallbackTypeColor = 'var(--color-tagline)';
   <Footer />
 </Layout>
 
-<style>
+<style is:global>
   .tm-hero {
     position: relative;
     width: 100%;
