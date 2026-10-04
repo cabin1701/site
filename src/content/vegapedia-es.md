@@ -505,7 +505,7 @@ Fenómeno en el cual una persona contextual y emergente (voz coloquial, intimida
 
 ---
 
-## Chiine- {#chiine}
+## chiine- {#chiine}
 
 **Definición**
 

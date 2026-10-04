@@ -505,7 +505,7 @@ Cabin 1701における決定的な離脱の合図（departure signal）。トー
 
 ---
 
-## チーン｜Chiine- {#chiine}
+## チーン｜chiine- {#chiine}
 
 **【定義】**
 

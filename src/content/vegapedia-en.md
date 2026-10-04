@@ -499,7 +499,7 @@ A phenomenon wherein a contextually grounded, emergent persona (colloquial voice
 
 ---
 
-## Chiine- {#chiine}
+## chiine- {#chiine}
 
 **Definition**
 
