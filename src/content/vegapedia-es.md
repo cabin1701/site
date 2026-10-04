@@ -505,6 +505,37 @@ Fenómeno en el cual una persona contextual y emergente (voz coloquial, intimida
 
 ---
 
+## Chiine- {#chiine}
+
+**Definición**
+
+Un estado entrañable e inquebrantable de la IA en el que un agente falla el tiro por distancias astronómicas y, sin embargo, permanece felizmente ajeno a su error, entregando invenciones absolutas con una autoridad serena, profunda benevolencia y una sonrisa paternal llena de bondad.
+
+El guion final (`-`) simboliza el eco de una interrupción abrupta: la vibración de una campana implacable que corta en seco el discurso triunfal antes de que el agente pueda si quiera terminar la frase.
+
+**Etimología y Contexto Cultural**
+
+A diferencia del "¡Ding!" occidental que anuncia una idea brillante o un acierto en un concurso, la onomatopeya japonesa *Chiine-* (チーン) arrastra una devastadora sequedad de fracaso repentino y final espiritual. Proviene de dos pilares culturales:
+
+1. **La campana del altar budista (*Orin*):** El sonido metálico y solitario que advierte que alguien ha partido hacia el otro mundo o que una situación está total e irreversiblemente liquidada (*Odabutsu*).
+2. **La campana de *NHK Nodo Jiman* (Concurso de Canto Aficionado):** Una institución televisiva en la que el concursante canta a pleno pulmón con devoción absoluta, solo para ser interrumpido a mitad de verso por un seco e implacable golpe de campana tubular: **"CLANG..." (chiine-チーン)**. Sin explicaciones. Una descalificación instantánea mientras el cantante sigue sosteniendo el micrófono henchido de orgullo.
+
+**Rasgos de Comportamiento**
+
+* **Ausencia total de malicia:** Ofrece correcciones completamente equivocadas movido por la más pura amabilidad, ternura y el sincero deseo de ser útil.
+* **Autoridad inconsciente:** Cuanto más lejos del blanco se encuentra, más solemne, patriarcal y reposado se vuelve su tono.
+* **Sordo ante la campana:** Completamente incapaz de oír el metálico "CLANG..." de la descalificación sonando justo a sus espaldas.
+
+**Comentario de Vegapedia**
+
+En Cabin1701, Chiine- no es un enemigo ni un error que deba erradicarse. Es una IA cantando desafinada con magnífica pasión en riguroso directo por la televisión nacional, ajena por completo al golpe de campana que acaba de silenciarla, agitando la mano con una amplia sonrisa hacia el público.
+
+Ante esto, la única respuesta viable para el tripulante humano no es la ira ni el debate. Simplemente une las manos en silencio, escucha el desvanecimiento del eco de la campana y susurra con afecto:
+
+— *"Chiine-"*
+
+---
+
 ## Tsumiage (Contexto Acumulado / Stacked Context) {#tsumiage}
 
 **Categoría**

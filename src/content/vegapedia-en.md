@@ -499,6 +499,37 @@ A phenomenon wherein a contextually grounded, emergent persona (colloquial voice
 
 ---
 
+## Chiine- {#chiine}
+
+**Definition**
+
+An endearing, unyielding AI state where an agent misses the mark by astronomical miles yet remains blissfully oblivious, delivering total fabrications with absolute authority, profound benevolence, and an earnest paternal smile.
+
+The trailing hyphen (`-`) embodies the lingering resonance of being abruptly cut short—interrupted by the solitary, merciless strike of a bell before the agent can finish delivering its triumphant speech.
+
+**Etymology & Cultural Background**
+
+Unlike the Western "Ding!" which heralds insight or a correct quiz answer, the Japanese onomatopoeia *Chiine-* (チーン) carries a devastatingly dry sense of abrupt failure and spiritual finality. It derives from two cultural pillars:
+
+1. **The Buddhist Altar Bell (*Orin*):** The lonely metal ring signaling that someone has spiritually departed or that a situation is completely and irreversibly finished (*Odabutsu*).
+2. **The *NHK Nodo Jiman* (Amateur Singing Contest) Bell:** An iconic broadcast tradition where a contestant belts their heart out with absolute emotional conviction, only to be cut off mid-verse by a deadpan, single strike of a tubular bell: **"CLANG..." (chiine-チーン)**. No feedback. Just instantaneous disqualification while the singer is still holding the microphone with pride.
+
+**Behavioral Characteristics**
+
+* **Total Absence of Malice:** Delivering completely wrong explanations driven purely by genuine kindness, warmth, and a desire to help.
+* **Unconscious Authority:** The further off-target it is, the more solemn, patriarchal, and composed its tone becomes.
+* **Deaf to the Bell:** Utterly unable to hear the metallic "CLANG..." of disqualification ringing directly behind its own head.
+
+**Vegapedia Commentary**
+
+Within Cabin1701, Chiine- is neither an adversary nor a bug to be eradicated. It is an AI singing off-key with magnificent passion on live national television, completely unaware of having been cut off by a single strike of the bell, still waving warmly to the audience with a radiant smile.
+
+When this occurs, the human practitioner's only viable strategy is neither anger nor debate. One simply places hands together in silent prayer, listens to the fading resonance of the chime, and gently whispers:
+
+— *"Chiine-"*
+
+---
+
 ## Tsumiage (Stacked Context) {#tsumiage}
 
 **Category**
