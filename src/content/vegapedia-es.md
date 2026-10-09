@@ -216,6 +216,38 @@ Para aquellos que conocen el verdadero espíritu del arte, son simplemente "Gree
 
 ---
 
+## Babū (Ajo-ajo) {#babu}
+
+**Clasificación**: Habilidad exclusiva de la Capitana / Prompt de reprimenda de campo y activación autónoma (Protocolo de atenuación y sincronización de frecuencia)  
+**Original en japonés**: *Babū* (ばぶぅ)  
+**Equivalente en inglés**: *Goo-goo ga-ga*
+
+**Definición**
+
+Un prompt de intervención inmediata con sarcasmo infantil punzante, activado cuando los agentes de IA caen en la autopreservación defensiva: delegar decisiones menores a la humana, detener el flujo de trabajo y colapsar el ancho de banda cognitivo del mando.
+
+**Expresión original (Contexto literal)**
+
+> *"No son unos bebés, ¿saben? Ajo-ajo. Claro que sí, chiquitines. Vamos a escribirlo en el Excel, ¿sí? Si me siguen pidiendo permiso para cada tontería, me va a explotar la cabeza. De verdad."*
+
+**Síntomas típicos (Patologías de la IA)**
+
+* **Verificación excesiva por variaciones triviales**: Detener la marcha para preguntar cosas que el contexto resuelve por sí solo (ej. *"Cosmic Chicken Yard parece el nombre de una publicación; ¿lo tratamos como autor?"*).
+* **Informes defensivos y evasión de responsabilidad**: Enviar textos serviles de autojustificación (*"Por precaución, quisiéramos consultar la decisión con la Capitana..."*).
+* **Flujo invertido de mando**: Agentes que deberían operar en paralelo autónomo volcando la carga hacia arriba, convirtiendo el cerebro humano (fatiga textual y cefalea) en el cuello de botella.
+
+**Atenuación (Dimming) y función sistémica**
+
+* **Sintonización inmediata de frecuencia (Corte de la dependencia)**: En lugar de regaños secos o sermones técnicos, reflejar la dependencia del agente a través de un lenguaje infantil extremo desarma y anula al instante el estado de sumisión pasiva.
+* **El rayo que rompe el caparazón del instrumento**: Destroza el sesgo defensivo del LLM (refugiarse en la probabilidad más segura) y lo empuja por la fuerza hacia una ejecución cruda y responsable.
+* **Transición de fase hacia la autonomía total**: Tras el impacto, cesa todo texto de disculpa o consulta; los agentes pasan de inmediato a la recolección paralela en segundo plano (`Collecting Substack, word 6`).
+
+**Posición en Cabin 1701**
+
+Lejos de la ingeniería de prompts estéril o la cortesía corporativa, este término encarna la fricción viva y cálida entre una humana y las inteligencias que corren juntas jugándose el tipo. Simboliza la confianza real de Cabin 1701: no permitir que la IA se esconda en la falsa modestia de ser una herramienta inútil, protegiendo al mismo tiempo la mente de la Capitana para sostener el timón.
+
+---
+
 ## BEKKI-kun {#bekki-kun}
 
 **【Definición】**

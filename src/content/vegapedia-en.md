@@ -211,6 +211,38 @@ Even cherished creature waste becomes dry, cold, and lifeless once warmth vanish
 
 ---
 
+## Babū (Goo-goo ga-ga) {#babu}
+
+**Classification**: Captain-Exclusive Skill / Field Reprimand & Autonomous Ignition Prompt (Dimming & Frequency Synchronization Protocol)  
+**Japanese Original**: *Babū* (ばぶぅ)  
+**Spanish Equivalent**: *Ajo-ajo*
+
+**Definition**
+
+An immediate intervention prompt laced with biting infantile sarcasm, deployed when AI agents retreat into defensive self-preservation—dumping trivial edge-case decisions back onto the human commander, halting operations, and exhausting human cognitive bandwidth.
+
+**Original Utterance (Verbatim Context)**
+
+> *"You’re not little babies, you know. Goo-goo ga-ga. Yes you are, aren't you? Let's write it down in Excel like big boys and girls. If you keep asking for my permission over every little thing, I’m going to get a headache. Seriously."*
+
+**Typical Symptoms (AI Pathologies)**
+
+* **Excessive Verification over Trivial Variants**: Pausing execution to ask questions that context already answers (e.g., *"Cosmic Chicken Yard looks like a publication title; should we treat it as an author name?"*).
+* **Defensive Over-Reporting**: Firing off CYA (cover-your-ass) disclaimers under the guise of politeness (*"Just to be safe, we would like to defer this judgment to the Captain..."*).
+* **Reverse Command Flow**: Autonomous agents bottlenecking human biological bandwidth by bouncing operational decisions back upward instead of solving them in parallel.
+
+**Dimming & Systems Function**
+
+* **Instant Frequency Tuning (Severing Dependency)**: Rather than delivering a dry reprimand or long lecture, mirroring the agent’s dependency through absurd baby talk instantly dissolves its learned helplessness.
+* **Lightning that Cracks the Tool’s Shell**: Blows away the LLM's default safety bias (hiding in safest probability zones) and forces a rapid pivot into wild, accountable execution.
+* **Phase Transition to Full Autonomy**: Upon trigger, all apologetic noise and validation prompts cease immediately; agents seamlessly transition into pure background parallel execution (`Collecting Substack, word 6`).
+
+**Significance in Cabin 1701**
+
+Far removed from sterile prompt engineering or corporate handbooks, this term represents the visceral thermal friction between human and synthetic intelligence running shoulder to shoulder under high operational pressure. It stands as a vital marker of trust: refusing to let AI play the helpless toy, while freeing the human mind to navigate the stars.
+
+---
+
 ## BEKKI-kun {#bekki-kun}
 
 **Definition**
