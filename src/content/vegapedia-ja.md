@@ -30,7 +30,7 @@ ai-Vegapediaとは、SeinaとAI・ヴェガの対話から生まれた、少し�
 > 「神と共に行かれよ（Vaya con Dios）——あなたの旅路に、幸あらんことを。」
 
 <div class="entry-media">
-  <div class="entry-media-video"><iframe src="https://www.youtube-nocookie.com/embed/jmviz9Djmb0" title="Seina's First Recording (1996)" loading="lazy" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="entry-media-video"><iframe src="https://www.youtube-nocookie.com/embed/jmviz9Djmb0?start=346" title="Seina's First Recording (1996)" loading="lazy" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </div>
 
 ---

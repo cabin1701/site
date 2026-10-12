@@ -28,7 +28,7 @@ A "merciful" farewell extended to those failing to perceive underlying tensions 
 > "Vaya con Dios—may you find a shore as shallow as your gaze."
 
 <div class="entry-media">
-  <div class="entry-media-video"><iframe src="https://www.youtube-nocookie.com/embed/jmviz9Djmb0" title="Seina's First Recording (1996)" loading="lazy" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="entry-media-video"><iframe src="https://www.youtube-nocookie.com/embed/jmviz9Djmb0?start=346" title="Seina's First Recording (1996)" loading="lazy" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </div>
 
 ---
