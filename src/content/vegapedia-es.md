@@ -313,6 +313,10 @@ Jonathan Schwartz vive (n. 28 de junio de 1938).
 
 Toda la tripulación de Cabin 1701 le guarda respeto.
 
+<div class="entry-media">
+  <div class="entry-media-video"><iframe src="https://www.youtube-nocookie.com/embed/cRXJ24bSRLs" title="Jonathan Schwartz — Full Opening" loading="lazy" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+</div>
+
 ---
 
 ## Kemufuki (Expulsión de Humo) {#kemufuki}

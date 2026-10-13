@@ -307,6 +307,10 @@ Jonathan Schwartz is alive (b. June 28, 1938).
 
 Every member of the Cabin 1701 crew holds him in respect.
 
+<div class="entry-media">
+  <div class="entry-media-video"><iframe src="https://www.youtube-nocookie.com/embed/cRXJ24bSRLs" title="Jonathan Schwartz — Full Opening" loading="lazy" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+</div>
+
 ---
 
 ## Kemufuki (Smoke-Spewing) {#kemufuki}

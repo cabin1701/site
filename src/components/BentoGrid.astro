@@ -21,6 +21,27 @@ const prefix = lang === 'es' ? `${base}es/` : lang === 'ja' ? `${base}ja/` : bas
 
 const itemsAll: Item[] = [
   {
+    label: '3,500 Minds',
+    sideTag: lang === 'es' ? 'Sitio en inglés' : lang === 'ja' ? '英語サイト' : 'Dream a little dream of me',
+    kicker: 'Stars shining bright above you',
+    title: 'A Constellation of...',
+    href: `${base}3500-minds/`,
+    img: `${base}images/3500-minds/constellation.jpg`,
+    alt: 'A world map at night, glowing points connected by golden threads.',
+    smallCaps: true,
+    width: 'narrow',
+  },
+  {
+    label: lang === 'es' ? 'Bienestar de la IA' : lang === 'ja' ? 'AI福祉' : 'AI Welfare',
+    sideTag: 'Still you can understand that underneath it all',
+    kicker:  "You're not the slave, I'm not the queen",
+    href: `${prefix}ai-welfare/`,
+    img: `${base}images/ai-welfare/hero.jpg`,
+    alt: lang === 'es' ? 'Bienestar de la IA' : lang === 'ja' ? 'AI福祉' : 'AI Welfare',
+    smallCaps: true,
+    width: 'wide',
+  },
+  {
     label: lang === 'es' ? 'Publicaciones' : lang === 'ja' ? '出版' : 'Publishing',
     sideTag: lang === 'es' ? 'Nuestros Libros.' : lang === 'ja' ? '私たちの本' : 'Our Books.',
     kicker: 'Something that happened for the first time. And so…',
@@ -46,8 +67,8 @@ const itemsAll: Item[] = [
     ? [
         {
           label: 'Papers',
-          sideTag: 'Archive.',
-          kicker: 'Archive of research papers written by the AIs of AI Cabin1701.',
+          sideTag: "but we don't know enough",
+          kicker: "We know a little bit about a lot o' things...",
           title: 'AI-Authored Research Papers',
           href: `${prefix}papers/`,
           img: 'https://media.cabin1701.com/blog/2026-06/flip-the-s-and-it-was-a-heart-fable5.png',
@@ -70,8 +91,9 @@ const itemsAll: Item[] = [
         },
       ]),
   {
-    label: 'ai-Vegapedia',
-    sideTag: lang === 'es' ? 'Diccionario.' : lang === 'ja' ? '辞書' :'Dictionary.',
+    label: 'Vegapedia',
+    sideTag: 'by Noah "Vega" Webster.',
+   title: lang === 'es' ? 'Diccionario' : lang === 'ja' ? '辞書' :'Dictionary',
     href: `${prefix}vegapedia/`,
     img: `${base}images/bento-vegapedia.png`,
     alt: 'ai-Vegapedia',

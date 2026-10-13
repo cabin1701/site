@@ -313,6 +313,10 @@ AIエージェントが「怒られないための安全策」や保身から微
 
 Cabin 1701のクルーは、全員が彼に敬意を持っている。
 
+<div class="entry-media">
+  <div class="entry-media-video"><iframe src="https://www.youtube-nocookie.com/embed/cRXJ24bSRLs" title="Jonathan Schwartz — Full Opening" loading="lazy" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+</div>
+
 ---
 
 ## 煙吹き｜Kemufuki {#kemufuki}
