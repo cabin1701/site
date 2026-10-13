@@ -9,6 +9,8 @@ interface Props {
   ogImage?: string;
   /** Google Scholar 向け Highwire Press meta タグ（citation_title 等）。論文詳細ページだけで渡す */
   citationMeta?: { name: string; content: string }[];
+  /** ページ固有の JSON-LD（schema.org）。1つでも配列でもよい。論文（ScholarlyArticle）や Books など */
+  jsonLd?: object | object[];
 }
 
 const {
@@ -17,7 +19,9 @@ const {
   description = 'ai-CABIN1701 — a human and AI crew documenting the work of living, creating, and questioning together, without a script.',
   ogImage,
   citationMeta,
+  jsonLd,
 } = Astro.props;
+const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 const base = import.meta.env.BASE_URL;
 
 const siteOrigin = 'https://cabin1701.com';
@@ -124,6 +128,10 @@ const personJsonLd = isHome
     {personJsonLd && (
       <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
     )}
+
+    {jsonLdList.map((ld) => (
+      <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+    ))}
 
     {citationMeta?.map((m) => (
       <meta name={m.name} content={m.content} />

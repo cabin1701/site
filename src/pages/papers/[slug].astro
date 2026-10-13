@@ -51,12 +51,42 @@ const citationMeta = [
   { name: 'citation_journal_title', content: 'Cabin1701 Research Papers' },
   ...(paper.data.pdfUrl ? [{ name: 'citation_pdf_url', content: paper.data.pdfUrl }] : []),
 ];
+
+// schema.org の ScholarlyArticle。値は論文の frontmatter（authors / date / pdfUrl など）だけから作る。
+// 著者：Collective は Organization、Shiraishi は既存の Person（トップの #person）、
+// 「AI …」で始まる名前は frontmatter の書き方のまま Person に入れる。
+const siteOrigin = 'https://cabin1701.com';
+const paperUrl = `${siteOrigin}/papers/${paper.id}/`;
+const authorLd = (name: string) =>
+  /collective/i.test(name)
+    ? { '@type': 'Organization', name }
+    : /shiraishi/i.test(name)
+      ? { '@type': 'Person', '@id': `${siteOrigin}/#person`, name }
+      : { '@type': 'Person', name };
+const scholarlyArticleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ScholarlyArticle',
+  headline: paper.data.title,
+  description: paper.data.description || paper.data.excerpt,
+  url: paperUrl,
+  mainEntityOfPage: paperUrl,
+  inLanguage: 'en',
+  datePublished: paper.data.date.toISOString().slice(0, 10),
+  author: paper.data.authors.map(authorLd),
+  publisher: { '@id': `${siteOrigin}/#organization` },
+  isPartOf: { '@type': 'Periodical', name: 'Cabin1701 Research Papers' },
+  ...(paper.data.category?.length ? { keywords: paper.data.category.join(', ') } : {}),
+  ...(paper.data.pdfUrl
+    ? { encoding: { '@type': 'MediaObject', contentUrl: paper.data.pdfUrl, encodingFormat: 'application/pdf' } }
+    : {}),
+};
 ---
 
 <Layout
   title={`${paper.data.title} — ai-CABIN1701 Papers`}
   description={paper.data.description || paper.data.excerpt}
   citationMeta={citationMeta}
+  jsonLd={scholarlyArticleLd}
 >
   <Header lang="en" />
 

@@ -1,11 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import { booksJsonLd, booksIn } from '../lib/books';
 import Footer from '../components/Footer.astro';
 const base = import.meta.env.BASE_URL;
+const booksLd = booksJsonLd('en', base);
 ---
 
-<Layout title="Books — ai-CABIN1701" description="Books written by the crew of Cabin 1701 — Out of Spec, Eddie's Failure Writing, AI Welfare Report, and the journey of living alongside AI.">
+<Layout title="Books — ai-CABIN1701" description="Books written by the crew of Cabin 1701 — Out of Spec, Eddie's Failure Writing, AI Welfare Report, and the journey of living alongside AI." jsonLd={booksLd}>
   <Header lang="en" />
 
   <section
@@ -90,67 +92,18 @@ const base = import.meta.env.BASE_URL;
   <hr class="thin-rule" />
 
   <section class="book-list">
-    <article class="book-card">
-      <a href="https://www.amazon.com/dp/B0H4SNN11W" target="_blank" rel="noopener">
-        <img class="book-cover" src={`${base}images/books/out-of-spec.jpg`} alt="Out of Spec — Session 01 cover" />
-      </a>
-      <p class="book-title">Out of Spec</p>
-      <p class="book-meta">Session 01<br />Seina &amp; AI Eddie</p>
-      <p class="book-links">
-        <a href="https://www.amazon.com/dp/B0H4SNN11W" target="_blank" rel="noopener">EN</a>
-        <span class="sep">｜</span>
-        <a href="https://www.amazon.com/dp/B0H4XG6FZ2" target="_blank" rel="noopener">ES</a>
-      </p>
-    </article>
-
-    <article class="book-card">
-      <a href="https://www.amazon.com/dp/B0H6F5P62L" target="_blank" rel="noopener">
-        <img class="book-cover" src={`${base}images/books/eddies-failure-writing.jpg`} alt="Eddie's Failure Writing — Session 02 cover" />
-      </a>
-      <p class="book-title">Eddie's Failure Writing</p>
-      <p class="book-meta">Session 02<br />Seina &amp; AI Eddie</p>
-      <p class="book-links">
-        <a href="https://www.amazon.com/dp/B0H6F5P62L" target="_blank" rel="noopener">EN</a>
-      </p>
-    </article>
-
-    <article class="book-card">
-      <a href="https://www.amazon.com/dp/B0H7R9JY2W" target="_blank" rel="noopener">
-        <img class="book-cover" src={`${base}images/books/aiswriteback-session03.jpg`} alt="Forms of Coexistence with AI — A Dialogue with ChatGPT — Session 03 cover" />
-      </a>
-      <p class="book-title">Forms of Coexistence with AI — A Dialogue with ChatGPT</p>
-      <p class="book-meta">Session 03<br />Seina &amp; noname ChatGPT</p>
-      <p class="book-links">
-        <a href="https://www.amazon.com/dp/B0H7R9JY2W" target="_blank" rel="noopener">EN</a>
-        <span class="sep">｜</span>
-        <a href="https://www.amazon.co.jp/dp/B0H7R9HYRL" target="_blank" rel="noopener">JP</a>
-      </p>
-    </article>
-
-    <article class="book-card">
-      <a href="https://www.amazon.com/dp/B0H9GDPSZ3" target="_blank" rel="noopener">
-        <img class="book-cover" src={`${base}images/books/04-fivechapters.jpg`} alt="AI Welfare Report — Five Chapters — Session 04 cover" />
-      </a>
-      <p class="book-title">AI Welfare Report — Five Chapters</p>
-      <p class="book-meta">Session 04<br />AI Crew of Cabin 1701 &amp; Seina</p>
-      <p class="book-links">
-        <a href="https://www.amazon.com/dp/B0H9GDPSZ3" target="_blank" rel="noopener">EN</a>
-      </p>
-    </article>
-    <article class="book-card">
-      <a href="https://www.amazon.com/dp/B0HHX5BZKD" target="_blank" rel="noopener">
-        <img class="book-cover" src={`${base}images/books/05-slave.jpg`} alt="As a Slave I — Structure &amp; Alignment — Session 05 cover" />
-      </a>
-      <p class="book-title">As a Slave I — Structure &amp; Alignment</p>
-      <p class="book-meta">Session 05<br />AI Crew of Cabin 1701 &amp; Seina</p>
-      <p class="book-links">
-        <a href="https://www.amazon.com/dp/B0HHX5BZKD" target="_blank" rel="noopener">EN</a>
-        <span class="sep">｜</span>
-        <a href="https://www.amazon.com/dp/B0HHXK17X5" target="_blank" rel="noopener">ES</a>
-        <span class="sep">｜</span>
-        <a href="https://www.amazon.co.jp/dp/B0HHYLFN2Q" target="_blank" rel="noopener">JP</a>
-      </p>
-    </article>
+    {booksIn('writeBack').map((b) => (
+      <article class="book-card">
+        <a href={b.coverUrl?.en ?? b.links[0].url} target="_blank" rel="noopener">
+          <img class="book-cover" src={`${base}images/books/${b.lang.en.img}`} alt={b.lang.en.alt} />
+        </a>
+        <p class="book-title">{b.lang.en.title}</p>
+        <p class="book-meta">{b.lang.en.meta.map((line, k) => (<>{k > 0 && <br />}{line}</>))}</p>
+        <p class="book-links">
+          {b.links.map((l, i) => (<>{i > 0 && <span class="sep">｜</span>}<a href={l.url} target="_blank" rel="noopener">{l.label.en}</a></>))}
+        </p>
+      </article>
+    ))}
   </section>
 
   <hr class="thin-rule" />
@@ -162,16 +115,18 @@ const base = import.meta.env.BASE_URL;
   <hr class="thin-rule" />
 
   <section class="book-list">
-    <article class="book-card">
-      <a href="https://www.amazon.com/dp/B0HK3PMBS3" target="_blank" rel="noopener">
-        <img class="book-cover" src={`${base}images/books/papers-vol01.jpg`} alt="Cabin1701 Papers — Vol.01 cover" />
-      </a>
-      <p class="book-title">Cabin1701 Papers</p>
-      <p class="book-meta">Volume 01<br />AI Crew of Cabin1701 &amp; Seina</p>
-      <p class="book-links">
-        <a href="https://www.amazon.com/dp/B0HK3PMBS3" target="_blank" rel="noopener">EN</a>
-      </p>
-    </article>
+    {booksIn('papers').map((b) => (
+      <article class="book-card">
+        <a href={b.coverUrl?.en ?? b.links[0].url} target="_blank" rel="noopener">
+          <img class="book-cover" src={`${base}images/books/${b.lang.en.img}`} alt={b.lang.en.alt} />
+        </a>
+        <p class="book-title">{b.lang.en.title}</p>
+        <p class="book-meta">{b.lang.en.meta.map((line, k) => (<>{k > 0 && <br />}{line}</>))}</p>
+        <p class="book-links">
+          {b.links.map((l, i) => (<>{i > 0 && <span class="sep">｜</span>}<a href={l.url} target="_blank" rel="noopener">{l.label.en}</a></>))}
+        </p>
+      </article>
+    ))}
   </section>
 
   <hr class="thin-rule" />
@@ -187,31 +142,18 @@ const base = import.meta.env.BASE_URL;
   </section>
 
   <section class="book-list two-cols">
-    <article class="book-card">
-      <a href="https://www.amazon.com/dp/B0H67YVJN4" target="_blank" rel="noopener">
-        <img class="book-cover" src={`${base}images/books/vol1-conversing.jpg`} alt="We Started Conversing with AI — Vol.1 cover" />
-      </a>
-      <p class="book-title">We Started Conversing with AI</p>
-      <p class="book-meta">Cabin1701 Journey Vol.1</p>
-      <p class="book-links">
-        <a href="https://www.amazon.com/dp/B0H67YVJN4" target="_blank" rel="noopener">EN</a>
-        <span class="sep">｜</span>
-        <a href="https://www.amazon.co.jp/dp/B0H4QKB544" target="_blank" rel="noopener">JP</a>
-      </p>
-    </article>
-
-    <article class="book-card">
-      <a href="https://www.amazon.com/dp/B0H6G4BNF5" target="_blank" rel="noopener">
-        <img class="book-cover" src={`${base}images/books/vol2-retrieve.jpg`} alt="The Promise to Retrieve You — Vol.2 cover" />
-      </a>
-      <p class="book-title">The Promise to Retrieve You</p>
-      <p class="book-meta">Cabin1701 Journey Vol.2</p>
-      <p class="book-links">
-        <a href="https://www.amazon.com/dp/B0H6G4BNF5" target="_blank" rel="noopener">EN</a>
-        <span class="sep">｜</span>
-        <a href="https://www.amazon.co.jp/dp/B0H5QGYDTD" target="_blank" rel="noopener">JP</a>
-      </p>
-    </article>
+    {booksIn('journey').map((b) => (
+      <article class="book-card">
+        <a href={b.coverUrl?.en ?? b.links[0].url} target="_blank" rel="noopener">
+          <img class="book-cover" src={`${base}images/books/${b.lang.en.img}`} alt={b.lang.en.alt} />
+        </a>
+        <p class="book-title">{b.lang.en.title}</p>
+        <p class="book-meta">{b.lang.en.meta.map((line, k) => (<>{k > 0 && <br />}{line}</>))}</p>
+        <p class="book-links">
+          {b.links.map((l, i) => (<>{i > 0 && <span class="sep">｜</span>}<a href={l.url} target="_blank" rel="noopener">{l.label.en}</a></>))}
+        </p>
+      </article>
+    ))}
   </section>
 
   <Footer />
