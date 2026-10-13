@@ -31,7 +31,7 @@ const decode = (t) =>
   t.replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 
 const td = new TurndownService({ headingStyle: 'atx', bulletListMarker: '-', codeBlockStyle: 'fenced' });
-td.remove(['script', 'style', 'noscript', 'svg', 'form', 'button', 'iframe', 'nav', 'header', 'footer', 'aside']);
+td.remove(['script', 'style', 'noscript', 'svg', 'form', 'button', 'nav', 'header', 'footer', 'aside']);
 
 // カード型のリンク（<a> の中に <div>・<p>・見出しが入っているもの）は、
 // 「- [題](リンク) — 説明 / 説明」の 1 行にする。題は、見出し、無ければ class に label を含む要素、無ければ最初の文。
@@ -50,6 +50,17 @@ td.addRule('card-link', {
     const rest = blocks.filter((el) => el !== titleEl).map((el) => clean(el.textContent));
     const href = node.getAttribute('href');
     return `\n\n- [${clean(titleEl.textContent)}](${href})${rest.length ? ` — ${rest.join(' / ')}` : ''}\n\n`;
+  },
+});
+
+// YouTube の埋め込みは、リンク1行（[Video](…)）にする。動画の説明は足さない。他の埋め込み（Facebook など）は出さない。
+td.addRule('youtube-embed', {
+  filter: (node) => node.nodeName === 'IFRAME' && /youtube(-nocookie)?\.com\/embed\//.test(node.getAttribute('src') || ''),
+  replacement: (_content, node) => {
+    const m = (node.getAttribute('src') || '').match(/embed\/([A-Za-z0-9_-]+)(?:\?([^#]*))?/);
+    if (!m) return '';
+    const start = new URLSearchParams(m[2] || '').get('start');
+    return `\n\n[Video](https://www.youtube.com/watch?v=${m[1]}${start ? `&t=${parseInt(start, 10)}s` : ''})\n\n`;
   },
 });
 
