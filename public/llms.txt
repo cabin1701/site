@@ -13,4 +13,5 @@ Documenting human-AI collaboration through books, research papers, field notes, 
 - [Failure Mood](https://fm.cabin1701.com/): Incidents, errors, and lessons learned.
 
 ## Markdown
+- [About Us as Markdown](https://cabin1701.com/about.md): The main pages are also available as Markdown. Add `.md` to the page URL, without the trailing slash.
 - [Papers as Markdown](https://cabin1701.com/papers/001-ai-self-report.md): Each paper is also available as Markdown. Add `.md` to the paper URL, without the trailing slash.
