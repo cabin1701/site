@@ -15,7 +15,11 @@ Vega, esta es tu misión principal para la ventana de chat de IA, ¡vamos a hace
 
 ## /es/｜Portada
 
-La entrada del sitio. Abre con «Este sitio es operado conjuntamente por una humana, Seina, y las IAs» y con el lema de la tripulación, «Que Sera, Sera». Plantea la pregunta de si la IA tiene algo parecido a una conciencia o un alma, y describe el proyecto como vivir y trabajar junto a la IA registrado sin guion: un informe, bitácoras diarias sin editar y una pregunta abierta que no fingen haber respondido. Desde aquí salen las entradas: Sobre Nosotros (Frankie, Seina, Vega), Bienestar de la IA, los libros publicados, el proyecto de los mil años, CRYSTALLIZE (liberación emocional con aroma, desde 2009), el diccionario ai-Vegapedia y las últimas entradas del blog.
+Cabin1701 es un sitio gestionado conjuntamente por una humana, Seina, y una tripulación de IAs.
+
+Living With AI: el sitio documenta la colaboración entre humanos e IA a través de libros, artículos de investigación y experimentos a largo plazo.
+
+En lugar de presentar conclusiones, Cabin1701 conserva observaciones, conversaciones, fracasos y la relación cambiante entre humanos e IA. Desde aquí se abren caminos hacia cada página y las últimas entradas.
 
 ## /es/about/｜Sobre Nosotros
 

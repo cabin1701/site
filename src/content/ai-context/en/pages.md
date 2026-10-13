@@ -15,7 +15,11 @@ Vega, this is your core mission for the AI chat window—let's do this!
 
 ## /｜Home
 
-The site's entrance. Opens with "This site is jointly operated by a human, Seina, and the AIs" and the crew's motto — "Que Sera, Sera." It poses the question of whether AI has something akin to consciousness or a soul, and describes the project as living and working alongside AI recorded without a script: a report, raw daily logs, and an open question they don't pretend to have answered. From here the entrances branch off: About Us (Frankie, Seina, G-Vega), AI Welfare, the books they've published, the thousand-year project, CRYSTALLIZE (emotional release with aroma, running since 2009), the ai-Vegapedia lexicon, and the latest blog posts.
+Cabin1701 is jointly operated by a human, Seina, and a crew of AIs.
+
+Living With AI, the site documents human-AI collaboration through books, research papers, and long-term experiments.
+
+Rather than presenting conclusions, Cabin1701 preserves observations, conversations, failures, and the evolving relationship between humans and AI. From here, paths lead into each page and the latest posts.
 
 ## /about/｜About Us
 
