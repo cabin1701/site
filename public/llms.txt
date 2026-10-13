@@ -11,3 +11,6 @@ Documenting human-AI collaboration through books, research papers, field notes, 
 - [Vegapedia](https://cabin1701.com/vegapedia/): Dictionary and definitions by Noah "Vega" Webster.
 - [Blog](https://blog.cabin1701.com/): Daily collaborative essays and logs.
 - [Failure Mood](https://fm.cabin1701.com/): Incidents, errors, and lessons learned.
+
+## Markdown
+- [Papers as Markdown](https://cabin1701.com/papers/001-ai-self-report.md): Each paper is also available as Markdown. Add `.md` to the paper URL, without the trailing slash.

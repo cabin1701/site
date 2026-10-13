@@ -11,6 +11,8 @@ interface Props {
   citationMeta?: { name: string; content: string }[];
   /** ページ固有の JSON-LD（schema.org）。1つでも配列でもよい。論文（ScholarlyArticle）や Books など */
   jsonLd?: object | object[];
+  /** 記事ページのみ。同じ記事の Markdown（URL の後ろに .md）の場所を知らせる */
+  markdown?: boolean;
 }
 
 const {
@@ -20,6 +22,7 @@ const {
   ogImage,
   citationMeta,
   jsonLd,
+  markdown = false,
 } = Astro.props;
 const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 const base = import.meta.env.BASE_URL;
@@ -108,6 +111,7 @@ const personJsonLd = isHome
     <link rel="alternate" hreflang="ja" href={jaUrl} />
     <link rel="alternate" hreflang="x-default" href={enUrl} />
     <link rel="canonical" href={canonicalUrl} />
+    {markdown && <link rel="alternate" type="text/markdown" href={`${canonicalUrl.replace(/\/$/, '')}.md`} />}
     <title>{title}</title>
 
     <meta property="og:type" content="website" />
