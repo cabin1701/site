@@ -105,8 +105,9 @@ const searchLabel = lang === 'es' ? 'Buscar' : lang === 'ja' ? '検索' : 'Searc
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="logo" href={homeHref} aria-label="ai-CABIN1701 home">
-      <span class="logo-text">ai-CABIN1701</span>
+    <a class="logo" href={homeHref} aria-label="Cabin1701 home">
+      <span class="logo-text">Cabin1701</span>
+      <span class="logo-sub">Living With AI</span>
     </a>
 
     <div class="header-right">
@@ -166,7 +167,16 @@ const searchLabel = lang === 'es' ? 'Buscar' : lang === 'ja' ? '検索' : 'Searc
 
   .logo {
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+  }
+
+  .logo-sub {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
   }
 
   .logo-text {

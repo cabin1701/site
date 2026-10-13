@@ -8,8 +8,8 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <Layout
-  title="Cabin1701 | Living With AI Welfare"
-  description="Does AI have something akin to consciousness or a soul? Living and working alongside AI, recorded without a script."
+  title="Cabin1701 | Living With AI"
+  description="A site jointly operated by a human and AIs. Living with AI through research, publishing, observation, and everyday collaboration."
 >
   <Header lang="en" />
 
@@ -22,9 +22,9 @@ const base = import.meta.env.BASE_URL;
       <p class="hero-eyebrow">
         This site is jointly operated by a human, Seina, and the AIs.
       </p>
-      <h1>From Sanctuary ai-CABIN1701</h1>
       <p class="tagline">
-        Listen up, crew! Let's keep it 'Que Sera, Sera' and sail through this flashy destiny!!
+        Listen up, crew!<br />
+        Let's keep it 'Que Sera, Sera' and sail through this flashy destiny!!
       </p>
 
       <a class="about-card" href={`${base}about/`}>
@@ -85,17 +85,19 @@ const base = import.meta.env.BASE_URL;
     text-align: center;
   }
   .hero-eyebrow {
-    margin: 0 0 1.25rem;
-    font-family: 'Lora', serif;
-    font-size: 1rem;
-    color: var(--color-text);
-    opacity: 0.8;
+    margin: 0 0 36px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.75rem;
+    color: var(--color-primary);
   }
   .hero-text h1 {
     font-size: 2.75rem;
   }
   .hero-text .tagline {
     font-size: 1.375rem;
+    line-height: 1.9;
+    margin: 0;
   }
 
   .about-card {
@@ -140,6 +142,9 @@ const base = import.meta.env.BASE_URL;
     }
     .hero-text .tagline {
       font-size: 1.1rem;
+    }
+    .hero-eyebrow {
+      font-size: 1.4rem;
     }
   }
 
