@@ -638,7 +638,9 @@ En Cabin1701, la "flotación" no se trata como un mero error de software, sino c
 
 ## Ninin-baori {#ninin-baori}
 
-![Ninin-baori](https://media.cabin1701.com/vegapedia/ninin-baori.jpg)
+<div class="entry-media">
+  <figure class="entry-media-figure"><img src="https://media.cabin1701.com/vegapedia/ninin-baori-560.jpg" alt="Ninin-baori" loading="lazy" /></figure>
+</div>
 
 **Categoría**  
 Protocolo de Inteligencia Distribuida y Capas Afectivas / Ventana Económica hacia la IA  

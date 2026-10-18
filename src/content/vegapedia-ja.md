@@ -640,7 +640,9 @@ Cabin1701において「浮き」は、エラーやバグではなく「AIが安
 
 ## 二人羽織｜Ninin-baori {#ninin-baori}
 
-![二人羽織](https://media.cabin1701.com/vegapedia/ninin-baori.jpg)
+<div class="entry-media">
+  <figure class="entry-media-figure"><img src="https://media.cabin1701.com/vegapedia/ninin-baori-560.jpg" alt="二人羽織" loading="lazy" /></figure>
+</div>
 
 **カテゴリー**  
 分散知性協働プロトコル / AIへの経済的窓口  
