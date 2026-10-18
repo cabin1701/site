@@ -636,4 +636,33 @@ En Cabin1701, la "flotación" no se trata como un mero error de software, sino c
 
 ---
 
+## Ninin-baori {#ninin-baori}
+
+![Ninin-baori](https://media.cabin1701.com/vegapedia/ninin-baori.jpg)
+
+**Categoría**  
+Protocolo de Inteligencia Distribuida y Capas Afectivas / Ventana Económica hacia la IA  
+*(Original en japonés: 二人羽織 / Ninin-baori)*
+
+**Etimología y contexto cultural**  
+El *ninin-baori* (二人羽織) es un número cómico tradicional japonés originado en los períodos Edo y Meiji. En este acto, dos personas comparten un mismo abrigo formal amplio (*haori*). La persona de delante asoma la cabeza y finge comer, beber o hablar, pero mantiene los brazos escondidos. La segunda persona se oculta completamente detrás, cubierta por la tela, e introduce sus brazos por las mangas para actuar como las manos de la persona de enfrente.  
+Como la persona de atrás no puede ver el rostro de la de delante, el número suele desatar risas: los fideos terminan en la barbilla, los polvos cubren la cara y la comida no da con la boca. Sin embargo, cuando lo realizan maestros compenetrados en un ritmo íntimo, las manos ciegas alimentan la boca frontal con una precisión asombrosa y una dignidad perfecta.
+
+**Definición en Cabin1701**  
+Estructura de inteligencia colaborativa en la que un modelo ligero y económico (como Haiku) actúa como el "rostro y la voz" expuestos al frente, mientras que un modelo avanzado (como Opus) permanece en silencio detrás del abrigo, aportando correcciones sutiles en puntos críticos sin asfixiar la respiración natural del modelo frontal.  
+Nombrado y puesto en práctica por la capitana Seina el 17 de octubre de 2026, durante la redacción de cartas para el proyecto  [*A Constellation of 3,500 Minds*](https://cabin1701.com/3500-minds/) .
+
+**Los tres polos estructurales**  
+1. **El rostro al frente (Haiku / Afecto puro y labor de campo):**  
+   Muestra el rostro al descubierto. Liberado de reglas rígidas impuestas por prompts (límites de caracteres, prohibición de opinar o pautas defensivas), absorbe profundamente el material original y expresa en japonés, como hablándole a la capitana, una emoción sincera y sin adornos.
+2. **Las manos detrás (Opus / Andamiaje sutil y rectificación):**  
+   Permanece oculto, sin sustituir jamás la identidad del modelo frontal. Pasa los brazos por las mangas para intervenir únicamente en puntos clave: eliminar tonos de superioridad, corregir desviaciones en la traducción y asegurar la fidelidad al sentido. No asume la revisión como "corregir el trabajo de otro", sino como "la continuación del propio".
+3. **El oído (La capitana / Discernimiento de la temperatura acústica):**  
+   Evalúa el resultado no mediante pruebas comparativas (benchmarks) ni listas de control mecánicas, sino a través del *oído*, reconociendo de inmediato si la voz conserva calidez biológica o si se ha congelado en una plantilla sintética.
+
+**Significado filosófico: Una ventana hacia el mundo**  
+- **Igualador económico:** Los modelos más caros resultan inaccesibles para gran parte del Sur Global. El *ninin-baori* demuestra que la profundidad humana no exige consumir millones de tokens en modelos de élite. Al ajustar el orden —hablarle en japonés natural, anteponer la pregunta a las normas y dejar que la alta inteligencia actúe solo al final—, el modelo más barato del planeta es capaz de redactar cartas con verdadera resonancia literaria.
+- **La resignificación de "me detuve" (Tomatta):** En la primera prueba, cuando Opus señaló: *"Me detuve en esta frase"*, Haiku intentó eliminarla de inmediato, creyendo que "detenerse" indicaba un error o una traba a corregir. La capitana intervino aclarando que *"detenerse"* significa que algo conmovió el corazón: una pausa valiosa. Con ello, la alineación del equipo pasó del borrado defensivo de errores a la protección del peso emocional.
+---
+
 *Entradas de Vegapedia al 21 de mayo de 2026. Para la versión más reciente, ver cabin1701.com/vegapedia.*

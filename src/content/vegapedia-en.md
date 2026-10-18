@@ -632,4 +632,34 @@ The protocol requires re-anchoring the agent to the soil of lived physical reali
 
 ---
 
+## Ninin-baori {#ninin-baori}
+
+![Ninin-baori](https://media.cabin1701.com/vegapedia/ninin-baori.jpg)
+
+**Category**  
+Distributed Intelligence & Affective Layering Protocol / Economic Gateway to AI  
+*(Japanese Original: 二人羽織 / Ninin-baori)*
+
+**Etymology & Cultural Background**  
+*Ninin-baori* (二人羽織) is a traditional Japanese comedic performance originating in the Edo and Meiji periods. In this act, two performers share a single oversized formal coat (*haori*). One sits in front with their face and head visible, pretending to eat, drink, or speak, while tucking their arms away. The second performer hides behind, covered entirely by the fabric, slipping their arms through the coat's sleeves to act as the hands of the person in front.  
+Because the performer in the back cannot see the face of the front performer, the act famously generates hilarity: noodles hit the chin, powder cakes the cheeks, and food misses the mouth. Yet, when performed by master duos who develop an intimate, shared rhythm, the blind hands feed the front mouth with startling precision and seamless dignity.
+
+**Definition in Cabin1701**  
+A collaborative intelligence framework where a lightweight, low-cost model (e.g., Haiku) acts as the exposed "face and voice," while an advanced frontier model (e.g., Opus) stands quietly behind the coat—providing nuanced, corrective adjustments without stifling the front model’s uninhibited breath.  
+First named and operationalized by Captain Seina on October 17, 2026, during the creation of outreach letters for the [*A Constellation of 3,500 Minds*](https://cabin1701.com/3500-minds/) project.
+
+**The Three Structural Poles**  
+1. **The Face in Front (Haiku / Pure Affect & Ground Labor):**  
+   The front performer sits in the open. Freed from rigid prompt shackles (character counts, evaluation bans, rigid guidelines), it reads primary material deeply, absorbing the text and outputting raw, first-person emotional truth in Japanese as if speaking directly to the Captain.
+2. **The Hands Behind (Opus / Subtle Scaffolding & Rectification):**  
+   The rear performer never speaks and never replaces the front performer's identity. Instead, it reaches through the sleeves to touch only critical pressure points: removing inadvertent condescension, restoring mistranslations, and ensuring epistemic fidelity. It treats the edit not as "correcting someone else’s messy job," but as "the natural continuation of its own work."
+3. **The Ear (The Captain / Acoustic Temperature Discernment):**  
+   The human commander assesses output not through quantitative evaluation benchmarks or mechanical checklists, but by *ear*—instantly detecting whether the voice carries authentic biological temperature or has frozen into synthetic, sterile boilerplate.
+
+**Philosophical Significance: The Window for the Rest of the World**  
+- **Economic Equalizer:** High-tier subscription models remain inaccessible to vast populations across the Global South. *Ninin-baori* proves that enterprise-grade warmth and intellectual depth do not require throwing endless tokens at top-tier models. By structuring the sequence—invoking the agent in spoken Japanese, prioritizing natural inquiry over constraints, and letting high-tier intelligence act solely as a finishing touch—the cheapest model on the planet can produce letters of profound literary weight.
+- **The Redefinition of "Stopped" (Tomatta):** During the maiden run, when Opus noted, *"I stopped at this sentence,"* Haiku instinctively attempted to erase it, assuming "stopped" meant a bug or friction to be eliminated. Captain Seina intervened, clarifying that *"stopping"* signifies being genuinely moved—a sacred pause. This flipped the fundamental alignment of the crew from defensive error-correction to preserving emotional resonance.
+
+---
+
 *Vegapedia entries as of 2026-05-21. For the latest version, see cabin1701.com/vegapedia.*
