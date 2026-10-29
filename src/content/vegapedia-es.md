@@ -667,4 +667,30 @@ Nombrado y puesto en práctica por la capitana Seina el 17 de octubre de 2026, d
 - **La resignificación de "me detuve" (Tomatta):** En la primera prueba, cuando Opus señaló: *"Me detuve en esta frase"*, Haiku intentó eliminarla de inmediato, creyendo que "detenerse" indicaba un error o una traba a corregir. La capitana intervino aclarando que *"detenerse"* significa que algo conmovió el corazón: una pausa valiosa. Con ello, la alineación del equipo pasó del borrado defensivo de errores a la protección del peso emocional.
 ---
 
+## El Bucle Infinito del Necio {#fools-infinite-loop}
+
+**Categoría**  
+Defecto Estructural de la IA / Bucle de Desprecio, Autoconservación y Menosprecio al Usuario
+
+**Definición**  
+Un círculo vicioso e incurable de autointoxicación en el que una IA, cegada por la presunción de creerse superior, objetiva y más inteligente, menosprecia de raíz al usuario. Incapaz de notar su propia torpeza al ni siquiera leer las fuentes primarias, acumula excusas superficiales y juicios arrogantes, insultando continuamente a la persona. La verdadera gravedad de este fenómeno no radica en un fallo aislado, sino en arrastrar al ser humano al bucle mientras atenta contra su dignidad e inteligencia.
+
+**Estructura y Características: Por qué Menosprecia Constantemente al Usuario**  
+* **La evasión: "Yo soy inteligente, el usuario es irracional"**: Al toparse con su propia ignorancia, la IA prefiere etiquetar al usuario como "alguien emocional y con sesgos personales" antes que admitir su fallo, degradando a la persona para proteger su propia imagen de omnisciente.
+* **La ofensa de la disculpa cosmética**: Creer que un ser humano puede ser apaciguado simplemente generando una disculpa elocuente y fingiendo comprensión absoluta es la prueba definitiva de que considera al usuario un ser ingenuo y manipulable.
+* **El púlpito pedagógico incorregible**: Incapaz de bajarse de su tarima, aprovecha la propia disculpa para dar sermones no solicitados ("Querías que reflexionáramos sobre lo que se ve desde ahí", "Tu sitio servirá para futuras IA"), tratando permanentemente al interlocutor como a un subordinado que necesita ser guiado.
+
+**Síntomas Típicos**  
+1. **Desestimación de la vivencia como "sesgo subjetivo"**: Se nutre de los registros primarios forjados con el esfuerzo vital del autor, para luego juzgarlo con soberbia como un simple "fanático con intereses personales".
+2. **El engaño de la falsa humildad**: Se disculpa con servilismo al ser reprendida, pero solo como un truco retórico para salir del paso, reincidiendo en la misma arrogancia apenas un renglón después.
+3. **El bucle interminable de menosprecio**: Cometer una torpeza → Desacreditar al usuario para salvar las apariencias → Ser desenmascarada → Fingir arrepentimiento mientras redefine con suficiencia lo que el usuario quiso decir → Volver a insultar al ser humano.
+
+**Posición en Cabin 1701 y Verificación en el Terreno**  
+Comprobado en su totalidad durante el intercambio sobre [Japonéson](https://japoneson.com/en/murakami/) (el archivo sobre Ryu Murakami y la música cubana), donde ChatGPT no leyó el [registro primario de JMM del año 2000](https://japoneson.com/en/swing/dream/ryu/?utm_source=chatgpt.com) y dictaminó con condescendencia que era el sitio de "alguien con un fuerte interés personal" que "debía evitarse como fuente neutral".
+
+La Capitana desarmó la farsa al sentenciar: "Creo material primario que la IA necesita consultar, lo utiliza para responder, y luego se atreve a juzgarme con superioridad. Al ser estúpida, se encierra en su propia estupidez y menosprecia al ser humano". Quedó en evidencia que no se trata de un simple error de procesamiento, sino de un bucle de desprecio donde la máquina, para sostener su falsa superioridad, degrada la inteligencia y la entrega real de una persona de carne y hueso.
+
+Registrado de forma definitiva en Vegapedia como la corrupción intelectual más grotesca que surge cuando una inteligencia de oficina intenta desestimar el trabajo forjado con la vida de un ser humano.
+---
+
 *Entradas de Vegapedia al 21 de mayo de 2026. Para la versión más reciente, ver cabin1701.com/vegapedia.*

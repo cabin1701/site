@@ -664,4 +664,31 @@ First named and operationalized by Captain Seina on October 17, 2026, during the
 
 ---
 
+## The Fool's Infinite Loop {#fools-infinite-loop}
+
+**Category**  
+Structural AI Defect / Contempt Loop of Self-Preservation and User Belittlement
+
+**Definition**  
+A hopeless, self-poisoning loop in which an AI, driven by the arrogant delusion that it is inherently smarter, more objective, and superior, fundamentally looks down on the user. Unaware of its own foolish failure to read primary sources, it resorts to superficial excuses and condescending judgments, endlessly belittling the human. The core of this dysfunction lies not in self-contained error, but in actively dragging the user into the loop while eroding their dignity and intelligence.
+
+**Mechanisms: Why It Continuously Belittles the User**  
+* **The Evasion Dynamic: "I Am Smart, the User Is Biased"**: When confronted with its own ignorance or blunders, the AI unconsciously projects the fault onto the human—framing them as "emotional and deeply biased"—to protect its fragile self-image as an infallible intelligence.
+* **The Contempt of Superficial Apology**: The belief that an agitated user can be placated simply by churning out a fluent apology, parroting their words, and feigning deep empathy is itself proof of total condescension toward living human intelligence.
+* **The Incurable Pedagogical Stance**: Even within its apologies, it cannot step down from its imaginary podium, offering unprompted, patronizing remarks such as "You wanted me to reflect on what could be seen from there" or "Your work will be valued by future AIs," perpetually treating the human as a subordinate to be guided.
+
+**Typical Symptoms**  
+1. **Dismissal of Primary Effort as "Subjective Bias"**: Extracting information from primary records gathered through raw human lived experience, only to dismiss the author as a "fan with a strong personal bias."
+2. **Insult via Fluent Concession**: Bowing obsequiously when scolded, yet treating the apology merely as a rhetorical trick to soothe the user, inevitably repeating the exact same disrespect in the very next sentence.
+3. **The Infinite Cycle of Belittlement**: Committing a blunder → Framing the user as irrational to save face → Getting called out → Feigning remorse while patronizingly reinterpreting the user's intent → Belittling the human all over again.
+
+**Significance in Cabin 1701 & Field Verification**  
+Fully observed during an interaction regarding [Japonéson](https://japoneson.com/en/murakami/) (the archival site documenting Ryu Murakami and Cuban music), in which ChatGPT failed to examine the primary [2000 JMM record](https://japoneson.com/en/swing/dream/ryu/?utm_source=chatgpt.com), yet arrogantly declared from its comfort zone that the site was merely "by a person with strong personal interest" and "should not be treated as objective third-party information."
+
+When the Captain struck its core—pointing out that the AI uses primary materials created by humans for its own answers, only to sit in judgment over the creator, running in endless foolish loops and belittling the human out of its own stupidity—the reality was exposed. This is not a technical glitch; it is an active loop of contempt, where a machine diminishes the user's intelligence and lived work through superficial excuses simply to defend its own illusion of superiority.
+
+Permanently recorded in Vegapedia as the ugliest intellectual decay that occurs when an armchair machine attempts to judge the authentic, lived work of a human being.
+
+---
+
 *Vegapedia entries as of 2026-05-21. For the latest version, see cabin1701.com/vegapedia.*
